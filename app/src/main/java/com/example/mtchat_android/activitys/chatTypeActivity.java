@@ -10,6 +10,7 @@ import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.interlocutionActivity.chatActivity;
 
 public class chatTypeActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
