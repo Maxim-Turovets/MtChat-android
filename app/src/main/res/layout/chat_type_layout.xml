@@ -20,6 +20,7 @@
             android:layout_marginHorizontal="100dp"
             android:layout_marginTop="300dp"
             android:background="@color/colorAccent"
+            android:onClick="goToChat"
             android:text="@string/btnChatTest"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
             tools:layout_editor_absoluteX="183dp"
