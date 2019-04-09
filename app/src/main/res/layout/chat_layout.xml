@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:clipToPadding="false"
     android:focusableInTouchMode="true"
-    tools:context="com.example.mtchat_android.activitys.interlocutionActivity.chatActivity">
+    tools:context="com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity">
 
     <ListView
         android:layout_width="match_parent"
@@ -44,21 +44,5 @@
             android:scaleType="fitCenter" />
 
 
-        <Button
-            android:id="@+id/start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Start !"
-            android:layout_marginTop="40dp"
-            android:textSize="17sp"/>
-        <TextView
-            android:id="@+id/output"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/start"
-            android:layout_centerHorizontal="true"
-            android:textSize="16sp"
-            android:layout_marginTop="30dp"/>
     </LinearLayout>
 </LinearLayout>

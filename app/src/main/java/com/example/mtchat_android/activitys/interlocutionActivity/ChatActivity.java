@@ -5,13 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+
+
 import com.example.mtchat_android.models.*;
 import com.example.mtchat_android.models.Message;
 import com.example.mtchat_android.models.MessageAdapter;
 import com.example.mtchat_android.R;
 
 
-public class chatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity {
 
 
     private EditText editText;
@@ -30,6 +32,7 @@ public class chatActivity extends AppCompatActivity {
         messagesView.setAdapter(messageAdapter);
 
 
+
     }
 
 
@@ -44,6 +47,7 @@ public class chatActivity extends AppCompatActivity {
                     messageAdapter.add(ms);
                     messagesView.setSelection(messagesView.getCount() - 1);
                     editText.setText("");
+                    ResponseServer.webSocket.send(message);
 
         }
     }

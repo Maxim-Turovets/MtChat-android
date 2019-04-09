@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.mtchat_android.R;
-import com.example.mtchat_android.activitys.interlocutionActivity.chatActivity;
+import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 
 public class chatTypeActivity extends AppCompatActivity {
 
@@ -20,7 +20,7 @@ public class chatTypeActivity extends AppCompatActivity {
 
     public  void goToChat(View view)
     {
-        Intent intent = new Intent(this, chatActivity.class);
+        Intent intent = new Intent(this, ChatActivity.class);
         startActivity(intent);
     }
 }

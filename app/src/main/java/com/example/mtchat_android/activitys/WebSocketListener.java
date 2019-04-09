@@ -1,18 +1,18 @@
-package com.example.mtchat_android.socket;
+package com.example.mtchat_android.activitys;
+
+import com.example.mtchat_android.models.ResponseServer;
 
 import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 import okio.ByteString;
 
-class EchoWebSocketListener extends WebSocketListener {
+ class EchoWebSocketListener extends WebSocketListener {
     private static final int NORMAL_CLOSURE_STATUS = 1000;
+
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
-        webSocket.send("Hello, it's SSaurel !");
-        webSocket.send("What's up ?");
-        webSocket.send(ByteString.decodeHex("deadbeef"));
-        webSocket.close(NORMAL_CLOSURE_STATUS, "Goodbye !");
+
     }
 
     @Override
