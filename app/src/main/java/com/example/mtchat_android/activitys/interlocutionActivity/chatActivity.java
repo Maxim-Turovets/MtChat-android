@@ -1,22 +1,23 @@
-package com.example.mtchat_android;
+package com.example.mtchat_android.activitys.interlocutionActivity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import com.example.mtchat_android.models.*;
+import com.example.mtchat_android.models.Message;
+import com.example.mtchat_android.models.MessageAdapter;
+import com.example.mtchat_android.R;
+
 
 public class chatActivity extends AppCompatActivity {
 
 
-
-    private String channelID = "CHANNEL_ID_FROM_YOUR_SCALEDRONE_DASHBOARD";
-    private String roomName = "observable-room";
     private EditText editText;
     private MessageAdapter messageAdapter;
     private ListView messagesView;
+
 
 
     @Override
@@ -27,6 +28,7 @@ public class chatActivity extends AppCompatActivity {
         messageAdapter = new MessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.messages_view);
         messagesView.setAdapter(messageAdapter);
+
 
     }
 
@@ -39,17 +41,22 @@ public class chatActivity extends AppCompatActivity {
             MemberData data = new MemberData("Max","FF963A3A");
             boolean belongsToCurrentUser = false;
             final Message ms = new Message(message, data, belongsToCurrentUser);
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
                     messageAdapter.add(ms);
                     messagesView.setSelection(messagesView.getCount() - 1);
                     editText.setText("");
-                }
-            });
+
         }
     }
 
 
 
+
+
+
+
 }
+
+
+
+
+

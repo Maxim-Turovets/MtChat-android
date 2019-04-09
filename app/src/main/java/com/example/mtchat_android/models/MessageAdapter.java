@@ -1,14 +1,15 @@
-package com.example.mtchat_android;
+package com.example.mtchat_android.models;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.mtchat_android.R;
 
 import java.util.ArrayList;
 import java.util.List;

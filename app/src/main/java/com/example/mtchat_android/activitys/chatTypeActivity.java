@@ -1,10 +1,13 @@
-package com.example.mtchat_android;
+package com.example.mtchat_android.activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import com.example.mtchat_android.R;
+import com.example.mtchat_android.activitys.interlocutionActivity.chatActivity;
 
 public class chatTypeActivity extends AppCompatActivity {
     @Override
@@ -16,7 +19,7 @@ public class chatTypeActivity extends AppCompatActivity {
 
     public  void goToChat(View view)
     {
-        Intent intent = new Intent(this,chatActivity.class);
+        Intent intent = new Intent(this, chatActivity.class);
         startActivity(intent);
     }
 }

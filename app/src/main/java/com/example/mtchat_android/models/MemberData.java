@@ -1,6 +1,6 @@
-package com.example.mtchat_android;
+package com.example.mtchat_android.models;
 
-class MemberData {
+public  class MemberData {
     private String name;
     private String color;
 

@@ -1,4 +1,6 @@
-package com.example.mtchat_android;
+package com.example.mtchat_android.models;
+
+import com.example.mtchat_android.models.MemberData;
 
 // Message.java
 public class Message {
