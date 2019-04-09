@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MtChat-android</string>
+    <string name="btnChatTest">Chat Test</string>
 </resources>
