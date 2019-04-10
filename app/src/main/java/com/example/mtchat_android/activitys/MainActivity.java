@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.mtchat_android.R;
+import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.ResponseServer;
 import com.example.mtchat_android.serverobjects.ConnectInfo;
 import com.example.mtchat_android.serverobjects.InterlocutorInfo;
@@ -47,6 +48,7 @@ public class  MainActivity extends AppCompatActivity {
         ConnectInfo connectInfo = new ConnectInfo();
         connectInfo.setObjectType("ConnectInfo");
         connectInfo.setChatType("pair");
+        ResponseServer.webSocket.send(ObjectType.getJson(connectInfo));
 
         UserInfo userInfo = new UserInfo();
         userInfo.setObjectType("UserInfo");
@@ -54,12 +56,14 @@ public class  MainActivity extends AppCompatActivity {
         userInfo.setGender("male");
         userInfo.setName("User Test");
         userInfo.setVoiceMessage(false);
+        ResponseServer.webSocket.send(ObjectType.getJson(userInfo));
 
         InterlocutorInfo info = new InterlocutorInfo();
         info.setAgeFrom("1");
         info.setAgeTo("100");
         info.setGender("male");
         info.setObjectType("InterlocutorInfo");
+        ResponseServer.webSocket.send(ObjectType.getJson(info));
 
 
 
