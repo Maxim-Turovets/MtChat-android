@@ -1,12 +1,7 @@
 package com.example.mtchat_android.serverobjects;
 
-import lombok.Builder;
-import lombok.Data;
 
-import java.util.Date;
 
-//@Data
-//@Builder
 public class Message {
 
     private  String objectType;

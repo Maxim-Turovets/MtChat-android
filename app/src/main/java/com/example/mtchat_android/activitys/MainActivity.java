@@ -6,6 +6,9 @@ import android.os.Bundle;
 
 import com.example.mtchat_android.R;
 import com.example.mtchat_android.models.ResponseServer;
+import com.example.mtchat_android.serverobjects.ConnectInfo;
+import com.example.mtchat_android.serverobjects.InterlocutorInfo;
+import com.example.mtchat_android.serverobjects.UserInfo;
 
 
 import okhttp3.OkHttpClient;
@@ -28,6 +31,8 @@ public class  MainActivity extends AppCompatActivity {
         startActivity(intent);
 
         startSocketConnection();
+
+
     }
 
     private void startSocketConnection() {
@@ -35,6 +40,29 @@ public class  MainActivity extends AppCompatActivity {
         EchoWebSocketListener listener = new EchoWebSocketListener();
         ResponseServer.webSocket = client.newWebSocket(request, listener);
         client.dispatcher().executorService().shutdown();
+    }
+
+
+    private void sendTestJson(){
+        ConnectInfo connectInfo = new ConnectInfo();
+        connectInfo.setObjectType("ConnectInfo");
+        connectInfo.setChatType("pair");
+
+        UserInfo userInfo = new UserInfo();
+        userInfo.setObjectType("UserInfo");
+        userInfo.setAge("1");
+        userInfo.setGender("male");
+        userInfo.setName("User Test");
+        userInfo.setVoiceMessage(false);
+
+        InterlocutorInfo info = new InterlocutorInfo();
+        info.setAgeFrom("1");
+        info.setAgeTo("100");
+        info.setGender("male");
+        info.setObjectType("InterlocutorInfo");
+
+
+
     }
 
 

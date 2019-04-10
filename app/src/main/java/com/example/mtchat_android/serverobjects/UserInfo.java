@@ -7,6 +7,14 @@ public class UserInfo {
     private String  age;
     private boolean voiceMessage;
 
+    public String getObjectType() {
+        return objectType;
+    }
+
+    public void setObjectType(String objectType) {
+        this.objectType = objectType;
+    }
+
     public String getName() {
         return name;
     }
