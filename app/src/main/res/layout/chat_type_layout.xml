@@ -28,8 +28,8 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="129dp"
-            android:layout_height="51dp"
+            android:layout_width="match_parent"
+            android:layout_height="149dp"
             android:text="TextView" />
 
 

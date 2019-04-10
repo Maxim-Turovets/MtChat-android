@@ -35,7 +35,7 @@ public class  MainActivity extends AppCompatActivity {
     }
 
     private void startSocketConnection() {
-        Request request = new Request.Builder().url("ws://192.168.129.185:8080/sock/chat").build();
+        Request request = new Request.Builder().url("ws://77.47.224.135:8080/sock/chat").build();
         EchoWebSocketListener listener = new EchoWebSocketListener();
         ResponseServer.webSocket = client.newWebSocket(request, listener);
         client.dispatcher().executorService().shutdown();
