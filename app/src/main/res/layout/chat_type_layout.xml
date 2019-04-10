@@ -26,9 +26,11 @@
             tools:layout_editor_absoluteX="183dp"
             tools:layout_editor_absoluteY="287dp" />
 
-
-
-
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="129dp"
+            android:layout_height="51dp"
+            android:text="TextView" />
 
 
     </RelativeLayout>
