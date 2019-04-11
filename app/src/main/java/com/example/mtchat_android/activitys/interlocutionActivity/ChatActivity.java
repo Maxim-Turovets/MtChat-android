@@ -49,23 +49,24 @@ public class ChatActivity extends AppCompatActivity {
 
     public void sendMessage(View view) {
 
-        Message myMessage = new Message();
-        myMessage.setName("Android");
-        myMessage.setObjectType("Message");
-        myMessage.setText(editText.getText().toString()+"  "+ChatActivity.mList.size()+"  "+ResponseServer.getResponseServerString());
-        myMessage.setTime("00:00");
+//        Message myMessage = new Message();
+//        myMessage.setName("Android");
+//        myMessage.setObjectType("Message");
+//        myMessage.setText(editText.getText().toString()+"  "+ChatActivity.mList.size()+"  "+ResponseServer.getResponseServerString());
+//        myMessage.setTime("00:00");
+//
+//        mList.add(myMessage);
 
-        mList.add(myMessage);
+//         final String message = editText.getText().toString();
+//        if (message.length() > 0) {
+//          //  MemberData data = new MemberData("Max","FF963A3A");
+//            boolean belongsToCurrentUser = false;
+//          //  final Message ms = new Message(message, data, belongsToCurrentUser);
+//                    messageAdapter.add(myMessage);
+//                    messagesView.setSelection(messagesView.getCount() - 1);
+//                    editText.setText("");
+//                    ResponseServer.webSocket.send(ObjectType.getJson(myMessage));
 
-         final String message = editText.getText().toString();
-        if (message.length() > 0) {
-          //  MemberData data = new MemberData("Max","FF963A3A");
-            boolean belongsToCurrentUser = false;
-          //  final Message ms = new Message(message, data, belongsToCurrentUser);
-                    messageAdapter.add(myMessage);
-                    messagesView.setSelection(messagesView.getCount() - 1);
-                    editText.setText("");
-                    ResponseServer.webSocket.send(ObjectType.getJson(myMessage));
 
         }
     }
@@ -76,7 +77,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
 
-}
+//}
 
 
 

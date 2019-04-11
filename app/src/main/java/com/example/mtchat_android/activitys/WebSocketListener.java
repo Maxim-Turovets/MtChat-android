@@ -1,15 +1,8 @@
 package com.example.mtchat_android.activitys;
 
-import android.widget.ListView;
-import android.widget.Toast;
-
-import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.MessageAdapter;
-import com.example.mtchat_android.models.ResponseServer;
-import com.example.mtchat_android.serverobjects.IfRoomCreated;
-import com.example.mtchat_android.serverobjects.IfRoomDeleted;
 import com.example.mtchat_android.serverobjects.Message;
 
 import okhttp3.Response;
@@ -32,15 +25,15 @@ import okio.ByteString;
 
 
 
-
-       if(objectInfo(text).toString().equals("Message"))
-       {
-           Message tempMessage = new Message();
-           tempMessage = (Message)ObjectType.getObject(text,tempMessage);
-         //  ChatActivity.messageAdapter.add(tempMessage);
-           ChatActivity.mList.add(tempMessage);
-           ResponseServer.setResponseServerString(objectInfo(text).toString());
-       }
+//
+//       if(objectInfo(text).toString().equals("Message"))
+//       {
+//           Message tempMessage = new Message();
+//           tempMessage = (Message)ObjectType.getObject(text,tempMessage);
+//         //  ChatActivity.messageAdapter.add(tempMessage);
+//           ChatActivity.mList.add(tempMessage);
+//           //StartSocketConnection.setResponseServerString(objectInfo(text).toString());
+//       }
 
     }
     @Override
