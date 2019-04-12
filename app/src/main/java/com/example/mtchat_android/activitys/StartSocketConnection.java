@@ -21,7 +21,7 @@ public class StartSocketConnection {
 
     public static void startSocketConnection() {
         client = new OkHttpClient();
-        request = new Request.Builder().url("ws://77.47.224.135:8080/sock/chat").build();
+        request = new Request.Builder().url("ws://77.47.224.70:8080/sock/chat").build();
         listener = new EchoWebSocketListener();
         webSocket = client.newWebSocket(request, listener);
         client.dispatcher().executorService().shutdown();

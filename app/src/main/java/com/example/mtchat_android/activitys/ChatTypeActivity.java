@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
-import com.example.mtchat_android.staticclasses.ResponseServer;
 
 public class ChatTypeActivity extends AppCompatActivity {
 
@@ -22,8 +21,8 @@ public class ChatTypeActivity extends AppCompatActivity {
 
 
 //        String str = ResponseServer.responseServerString;
-        text = (TextView) findViewById(R.id.textView);
-        text.setText(ResponseServer.getResponseString());
+     //   text = (TextView) findViewById(R.id.textView);
+      //  text.setText(ResponseServer.getResponseString());
         //text.setText("aaa");
     }
 

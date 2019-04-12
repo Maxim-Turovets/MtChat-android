@@ -1,6 +1,5 @@
 package com.example.mtchat_android.activitys.interlocutionActivity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,23 +12,19 @@ import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.serverobjects.Message;
 
 
-import com.example.mtchat_android.models.*;
 //import com.example.mtchat_android.models.Message;
 import com.example.mtchat_android.models.MessageAdapter;
 import com.example.mtchat_android.R;
-import com.example.mtchat_android.staticclasses.ResponseServer;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class ChatActivity extends AppCompatActivity {
 
 
     public static ArrayList<Message> mList;
-
     private EditText editText;
-    public static MessageAdapter messageAdapter;
+    private MessageAdapter messageAdapter;
     private ListView messagesView;
 
 
@@ -84,6 +79,8 @@ public class ChatActivity extends AppCompatActivity {
                 editText.setText("");
             }
         });
+
+
 
       //  messageAdapter.add(message);
        // messagesView.setSelection(messagesView.getCount() - 1);

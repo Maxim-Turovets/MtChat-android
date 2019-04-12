@@ -2,16 +2,13 @@ package com.example.mtchat_android.activitys;
 
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
-import com.example.mtchat_android.models.MessageAdapter;
 import com.example.mtchat_android.serverobjects.Message;
-import com.example.mtchat_android.staticclasses.ResponseServer;
 
 import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 import okio.ByteString;
 
-import static com.example.mtchat_android.staticclasses.ResponseServer.messageAdapter;
 
 public  class EchoWebSocketListener extends WebSocketListener {
     private static final int NORMAL_CLOSURE_STATUS = 1000;
@@ -26,7 +23,6 @@ public  class EchoWebSocketListener extends WebSocketListener {
     @Override
     public void onMessage(WebSocket webSocket, String text) {
 
-        ResponseServer.setResponseString(text.toString());
 
 
        if(objectInfo(text).toString().equals("Message"))
