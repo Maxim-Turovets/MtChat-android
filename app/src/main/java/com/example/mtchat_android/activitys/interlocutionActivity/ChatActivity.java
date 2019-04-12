@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.mtchat_android.activitys.EchoWebSocketListener;
+import com.example.mtchat_android.activitys.StartSocketConnection;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.serverobjects.Message;
 
@@ -15,6 +17,7 @@ import com.example.mtchat_android.models.*;
 //import com.example.mtchat_android.models.Message;
 import com.example.mtchat_android.models.MessageAdapter;
 import com.example.mtchat_android.R;
+import com.example.mtchat_android.staticclasses.ResponseServer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +42,7 @@ public class ChatActivity extends AppCompatActivity {
         messageAdapter = new MessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.messages_view);
         messagesView.setAdapter(messageAdapter);
-
+        EchoWebSocketListener.chatActivity=this;
         mList = new ArrayList<>();
 
 
@@ -49,37 +52,46 @@ public class ChatActivity extends AppCompatActivity {
 
     public void sendMessage(View view) {
 
-//        Message myMessage = new Message();
-//        myMessage.setName("Android");
-//        myMessage.setObjectType("Message");
-//        myMessage.setText(editText.getText().toString()+"  "+ChatActivity.mList.size()+"  "+ResponseServer.getResponseServerString());
-//        myMessage.setTime("00:00");
-//
-//        mList.add(myMessage);
+        Message myMessage = new Message();
+        myMessage.setName("Android");
+        myMessage.setObjectType("Message");
+        myMessage.setText(editText.getText().toString()+"  ");
+        myMessage.setTime("00:00");
 
-//         final String message = editText.getText().toString();
-//        if (message.length() > 0) {
-//          //  MemberData data = new MemberData("Max","FF963A3A");
-//            boolean belongsToCurrentUser = false;
-//          //  final Message ms = new Message(message, data, belongsToCurrentUser);
-//                    messageAdapter.add(myMessage);
-//                    messagesView.setSelection(messagesView.getCount() - 1);
-//                    editText.setText("");
-//                    ResponseServer.webSocket.send(ObjectType.getJson(myMessage));
+        mList.add(myMessage);
 
+        final String message = editText.getText().toString();
+        if (message.length() > 0) {
+            //  MemberData data = new MemberData("Max","FF963A3A");
+            boolean belongsToCurrentUser = false;
+            //  final Message ms = new Message(message, data, belongsToCurrentUser);
+//            messageAdapter.add(myMessage);
+//            messagesView.setSelection(messagesView.getCount() - 1);
+//            editText.setText("");
+            onMessage(myMessage);
+            StartSocketConnection.webSocket.send(ObjectType.getJson(myMessage));
 
         }
+    }
+
+    public  void  onMessage (final Message message)
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                messageAdapter.add(message);
+                messagesView.setSelection(messagesView.getCount() - 1);
+                editText.setText("");
+            }
+        });
+
+      //  messageAdapter.add(message);
+       // messagesView.setSelection(messagesView.getCount() - 1);
+
     }
 
 
 
 
 
-
-
-//}
-
-
-
-
-
+}

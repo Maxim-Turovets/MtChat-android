@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activitys.chatTypeActivity">
+        <activity android:name=".activitys.ChatTypeActivity">
         </activity>
 
         <activity android:name=".activitys.interlocutionActivity.ChatActivity"></activity>

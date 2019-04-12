@@ -5,10 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.mtchat_android.R;
-import com.example.mtchat_android.jsonservises.ObjectType;
-import com.example.mtchat_android.serverobjects.ConnectInfo;
-import com.example.mtchat_android.serverobjects.InterlocutorInfo;
-import com.example.mtchat_android.serverobjects.UserInfo;
 
 
 public class  MainActivity extends AppCompatActivity {
@@ -21,11 +17,11 @@ public class  MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-//        Intent intent = new Intent(this, chatTypeActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, ChatTypeActivity.class);
+        startActivity(intent);
 
-       StartSocketConnection.startSocketConnection();
-        sendTestJson();
+        StartSocketConnection.startSocketConnection();
+        StartSocketConnection.sendTestJson();
     }
 
 //    private void startSocketConnection() {
@@ -36,30 +32,7 @@ public class  MainActivity extends AppCompatActivity {
 //    }
 
 
-    private void sendTestJson(){
-        ConnectInfo connectInfo = new ConnectInfo();
-        connectInfo.setObjectType("ConnectInfo");
-        connectInfo.setChatType("pair");
-        StartSocketConnection.webSocket.send(ObjectType.getJson(connectInfo));
 
-        UserInfo userInfo = new UserInfo();
-        userInfo.setObjectType("UserInfo");
-        userInfo.setAge("1");
-        userInfo.setGender("male");
-        userInfo.setName("User Test");
-        userInfo.setVoiceMessage(false);
-        StartSocketConnection.webSocket.send(ObjectType.getJson(userInfo));
-
-        InterlocutorInfo info = new InterlocutorInfo();
-        info.setAgeFrom("1");
-        info.setAgeTo("100");
-        info.setGender("male");
-        info.setObjectType("InterlocutorInfo");
-        StartSocketConnection.webSocket.send(ObjectType.getJson(info));
-
-
-
-    }
 
 
 }

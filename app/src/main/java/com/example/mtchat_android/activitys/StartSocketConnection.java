@@ -1,6 +1,13 @@
 package com.example.mtchat_android.activitys;
 
 
+import com.example.mtchat_android.jsonservises.ObjectType;
+import com.example.mtchat_android.serverobjects.ConnectInfo;
+import com.example.mtchat_android.serverobjects.InterlocutorInfo;
+import com.example.mtchat_android.serverobjects.UserInfo;
+
+import com.example.mtchat_android.activitys.MainActivity;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.WebSocket;
@@ -18,6 +25,29 @@ public class StartSocketConnection {
         listener = new EchoWebSocketListener();
         webSocket = client.newWebSocket(request, listener);
         client.dispatcher().executorService().shutdown();
+    }
+
+    public static void sendTestJson(){
+        ConnectInfo connectInfo = new ConnectInfo();
+        connectInfo.setObjectType("ConnectInfo");
+        connectInfo.setChatType("pair");
+        StartSocketConnection.webSocket.send(ObjectType.getJson(connectInfo));
+
+        UserInfo userInfo = new UserInfo();
+        userInfo.setObjectType("UserInfo");
+        userInfo.setAge("1");
+        userInfo.setGender("male");
+        userInfo.setName("User Test");
+        userInfo.setVoiceMessage(false);
+        StartSocketConnection.webSocket.send(ObjectType.getJson(userInfo));
+
+        InterlocutorInfo info = new InterlocutorInfo();
+        info.setAgeFrom("1");
+        info.setAgeTo("100");
+        info.setGender("male");
+        info.setObjectType("InterlocutorInfo");
+        StartSocketConnection.webSocket.send(ObjectType.getJson(info));
+
     }
 
 

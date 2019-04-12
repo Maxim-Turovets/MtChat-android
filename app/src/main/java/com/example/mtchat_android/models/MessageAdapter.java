@@ -11,11 +11,14 @@ import android.widget.TextView;
 
 import com.example.mtchat_android.R;
 import com.example.mtchat_android.serverobjects.Message;
+import com.example.mtchat_android.staticclasses.ResponseServer;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // MessageAdapter.java
 public class MessageAdapter extends BaseAdapter {
+
 
     List<Message> messages = new ArrayList<Message>();
     Context context;
@@ -23,6 +26,7 @@ public class MessageAdapter extends BaseAdapter {
     public MessageAdapter(Context context) {
         this.context = context;
     }
+
 
     public void add(Message message) {
         this.messages.add(message);
@@ -70,6 +74,10 @@ public class MessageAdapter extends BaseAdapter {
         //}
 
         return convertView;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
     public int getSize(){

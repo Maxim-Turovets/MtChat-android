@@ -9,8 +9,9 @@ import android.widget.TextView;
 
 import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
+import com.example.mtchat_android.staticclasses.ResponseServer;
 
-public class chatTypeActivity extends AppCompatActivity {
+public class ChatTypeActivity extends AppCompatActivity {
 
     TextView text;
     @Override
@@ -19,10 +20,11 @@ public class chatTypeActivity extends AppCompatActivity {
         setContentView(R.layout.chat_type_layout);
 
 
+
 //        String str = ResponseServer.responseServerString;
-//        text = (TextView) findViewById(R.id.textView);
-//        text.setText(str);
-//        //text.setText("aaa");
+        text = (TextView) findViewById(R.id.textView);
+        text.setText(ResponseServer.getResponseString());
+        //text.setText("aaa");
     }
 
 
