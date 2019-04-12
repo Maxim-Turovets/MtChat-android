@@ -1,12 +1,11 @@
-package com.example.mtchat_android.activitys;
+package com.example.mtchat_android.models;
 
 
+import com.example.mtchat_android.activitys.EchoWebSocketListener;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.serverobjects.ConnectInfo;
 import com.example.mtchat_android.serverobjects.InterlocutorInfo;
 import com.example.mtchat_android.serverobjects.UserInfo;
-
-import com.example.mtchat_android.activitys.MainActivity;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -18,10 +17,11 @@ public class StartSocketConnection {
     public static EchoWebSocketListener listener;
     public static OkHttpClient client;
     public static WebSocket webSocket;
+    public static String interlocutorName;
 
     public static void startSocketConnection() {
         client = new OkHttpClient();
-        request = new Request.Builder().url("ws://77.47.224.70:8080/sock/chat").build();
+        request = new Request.Builder().url("ws://77.47.224.135:8080/sock/chat").build();
         listener = new EchoWebSocketListener();
         webSocket = client.newWebSocket(request, listener);
         client.dispatcher().executorService().shutdown();

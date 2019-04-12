@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
+import com.example.mtchat_android.models.StartSocketConnection;
 
 public class ChatTypeActivity extends AppCompatActivity {
 
@@ -18,17 +19,14 @@ public class ChatTypeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_type_layout);
 
-
-
-//        String str = ResponseServer.responseServerString;
-     //   text = (TextView) findViewById(R.id.textView);
-      //  text.setText(ResponseServer.getResponseString());
-        //text.setText("aaa");
     }
 
 
     public  void goToChat(View view)
     {
+        StartSocketConnection.startSocketConnection();
+        StartSocketConnection.sendTestJson();
+
         Intent intent = new Intent(this, ChatActivity.class);
         startActivity(intent);
     }

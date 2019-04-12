@@ -2,6 +2,8 @@ package com.example.mtchat_android.activitys;
 
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
+import com.example.mtchat_android.models.StartSocketConnection;
+import com.example.mtchat_android.serverobjects.IfRoomCreated;
 import com.example.mtchat_android.serverobjects.Message;
 
 import okhttp3.Response;
@@ -24,6 +26,25 @@ public  class EchoWebSocketListener extends WebSocketListener {
     public void onMessage(WebSocket webSocket, String text) {
 
 
+        if(objectInfo(text).toString().equals("IfRoomCreated"))
+        {
+            IfRoomCreated ifRoomCreated = new IfRoomCreated("z");
+            ifRoomCreated = (IfRoomCreated) ObjectType.getObject(text,ifRoomCreated);
+            StartSocketConnection.interlocutorName = ifRoomCreated.getNameInterlocutor();
+
+            Message myMessage = new Message();
+            myMessage.setName("fict");
+            myMessage.setObjectType("Message");
+            myMessage.setText(ifRoomCreated.getNameInterlocutor());
+            myMessage.setTime("");
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+              chatActivity.onMessage(myMessage);
+
+        }
 
        if(objectInfo(text).toString().equals("Message"))
        {

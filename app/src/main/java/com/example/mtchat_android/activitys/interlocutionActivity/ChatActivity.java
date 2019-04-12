@@ -7,22 +7,20 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.mtchat_android.activitys.EchoWebSocketListener;
-import com.example.mtchat_android.activitys.StartSocketConnection;
+import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.serverobjects.Message;
 
 
-//import com.example.mtchat_android.models.Message;
 import com.example.mtchat_android.models.MessageAdapter;
 import com.example.mtchat_android.R;
 
-import java.util.ArrayList;
+
 
 
 public class ChatActivity extends AppCompatActivity {
 
 
-    public static ArrayList<Message> mList;
     private EditText editText;
     private MessageAdapter messageAdapter;
     private ListView messagesView;
@@ -38,8 +36,6 @@ public class ChatActivity extends AppCompatActivity {
         messagesView = (ListView) findViewById(R.id.messages_view);
         messagesView.setAdapter(messageAdapter);
         EchoWebSocketListener.chatActivity=this;
-        mList = new ArrayList<>();
-
 
     }
 
@@ -53,19 +49,11 @@ public class ChatActivity extends AppCompatActivity {
         myMessage.setText(editText.getText().toString()+"  ");
         myMessage.setTime("00:00");
 
-        mList.add(myMessage);
 
         final String message = editText.getText().toString();
         if (message.length() > 0) {
-            //  MemberData data = new MemberData("Max","FF963A3A");
-            boolean belongsToCurrentUser = false;
-            //  final Message ms = new Message(message, data, belongsToCurrentUser);
-//            messageAdapter.add(myMessage);
-//            messagesView.setSelection(messagesView.getCount() - 1);
-//            editText.setText("");
             onMessage(myMessage);
             StartSocketConnection.webSocket.send(ObjectType.getJson(myMessage));
-
         }
     }
 
@@ -80,14 +68,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-
-
-      //  messageAdapter.add(message);
-       // messagesView.setSelection(messagesView.getCount() - 1);
-
     }
-
-
 
 
 

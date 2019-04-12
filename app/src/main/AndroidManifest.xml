@@ -22,6 +22,7 @@
         </activity>
 
         <activity android:name=".activitys.interlocutionActivity.ChatActivity"></activity>
+
     </application>
 
 </manifest>
