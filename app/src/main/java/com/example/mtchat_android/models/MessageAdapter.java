@@ -74,8 +74,7 @@ public class MessageAdapter extends BaseAdapter {
             holder.name.setText(StaticModels.ifRoomCreated.getNameInterlocutor());
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
-
-            holder.messageBody.setText(message.getText());
+            holder.messageBody.setText(message.getText()+"\n"+StaticModels.messageTime);
 
         }
 

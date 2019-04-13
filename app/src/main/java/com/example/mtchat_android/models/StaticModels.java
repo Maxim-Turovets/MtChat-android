@@ -7,4 +7,5 @@ public class StaticModels {
 
     public  static UserInfo userInfo;
     public  static IfRoomCreated ifRoomCreated;
+    public  static String messageTime;
 }

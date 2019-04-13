@@ -53,6 +53,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
             Message tempMessage = new Message();
             tempMessage = (Message)ObjectType.getObject(text,tempMessage);
             chatActivity.onMessage(tempMessage);
+            StaticModels.messageTime=tempMessage.getTime();
        }
 
     }
