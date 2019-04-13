@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.example.mtchat_android.activitys.EchoWebSocketListener;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.jsonservises.ObjectType;
+import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.Message;
 
 

@@ -35,7 +35,7 @@ public class SetYourNameActivity extends AppCompatActivity {
         StaticModels.userInfo.setObjectType("UserInfo");
         StaticModels.userInfo.setName(text.getText().toString());
 
-        Intent intent = new Intent(this, ChatActivity.class);
+        Intent intent = new Intent(this, SetYourGenderLayout.class);
         startActivity(intent);
     }
 }

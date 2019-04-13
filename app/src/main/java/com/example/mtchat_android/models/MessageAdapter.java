@@ -55,29 +55,28 @@ public class MessageAdapter extends BaseAdapter {
         LayoutInflater messageInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         Message message = messages.get(i);
 
-        if (message.getName().equals("Android")) { // this message was sent by us so let's create a basic chat bubble on the right
+        if(message.getName().equals("fict"))
+        {
+            convertView = messageInflater.inflate(R.layout.new_uset_layout, null);
+            holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
+            convertView.setTag(holder);
+            holder.messageBody.setText(message.getText()+" joined the chat");
+        }
+        else if (message.getName().toString().equals("Android")) { // this message was sent by us so let's create a basic chat bubble on the right
             convertView = messageInflater.inflate(R.layout.my_message, null);
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
             holder.messageBody.setText(message.getText());
 
-//                        convertView = messageInflater.inflate(R.layout.new_uset_layout, null);
-//            holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
-//            convertView.setTag(holder);
-//            holder.messageBody.setText(message.getText());
-
         } else { // this message was sent by someone else so let's create an advanced chat bubble on the left
             convertView = messageInflater.inflate(R.layout.their_message, null);
-            holder.avatar = (View) convertView.findViewById(R.id.avatar);
             holder.name = (TextView) convertView.findViewById(R.id.name);
-            holder.name.setText("Maxim");
+            holder.name.setText(StaticModels.ifRoomCreated.getNameInterlocutor());
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
 
-            //holder.name.setText(message.getMemberData().getName());
             holder.messageBody.setText(message.getText());
-            GradientDrawable drawable = (GradientDrawable) holder.avatar.getBackground();
-            drawable.setColor(Color.parseColor("#FF963A3A"));
+
         }
 
 

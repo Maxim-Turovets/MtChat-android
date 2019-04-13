@@ -3,6 +3,7 @@ package com.example.mtchat_android.activitys;
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StartSocketConnection;
+import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.IfRoomCreated;
 import com.example.mtchat_android.serverobjects.Message;
 
@@ -28,14 +29,15 @@ public  class EchoWebSocketListener extends WebSocketListener {
 
         if(objectInfo(text).toString().equals("IfRoomCreated"))
         {
-            IfRoomCreated ifRoomCreated = new IfRoomCreated("z");
-            ifRoomCreated = (IfRoomCreated) ObjectType.getObject(text,ifRoomCreated);
-            StartSocketConnection.interlocutorName = ifRoomCreated.getNameInterlocutor();
+            StaticModels.ifRoomCreated = new IfRoomCreated("z");
+            StaticModels.ifRoomCreated = (IfRoomCreated) ObjectType.getObject(text,StaticModels.ifRoomCreated);
+            StartSocketConnection.interlocutorName = StaticModels.ifRoomCreated.getNameInterlocutor();
+
 
             Message myMessage = new Message();
             myMessage.setName("fict");
             myMessage.setObjectType("Message");
-            myMessage.setText(ifRoomCreated.getNameInterlocutor());
+            myMessage.setText(StaticModels.ifRoomCreated.getNameInterlocutor());
             myMessage.setTime("");
             try {
                 Thread.sleep(100);
@@ -48,15 +50,9 @@ public  class EchoWebSocketListener extends WebSocketListener {
 
        if(objectInfo(text).toString().equals("Message"))
        {
-          //  messageAdapter = new MessageAdapter()
             Message tempMessage = new Message();
             tempMessage = (Message)ObjectType.getObject(text,tempMessage);
-//            ResponseServer.addMessageToList(tempMessage);
-//            messageAdapter.add(tempMessage);
-
             chatActivity.onMessage(tempMessage);
-          // ChatActivity.messageAdapter.add(tempMessage);
-           //StartSocketConnection.setResponseServerString(objectInfo(text).toString());
        }
 
     }
