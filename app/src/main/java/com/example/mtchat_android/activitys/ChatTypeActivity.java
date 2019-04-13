@@ -30,4 +30,10 @@ public class ChatTypeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ChatActivity.class);
         startActivity(intent);
     }
+
+    public  void goToSetName(View view)
+    {
+        Intent intent = new Intent(this, SetYourNameActivity.class);
+        startActivity(intent);
+    }
 }

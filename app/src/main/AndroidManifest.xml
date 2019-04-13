@@ -11,17 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activitys.MainActivity">
+        <activity android:name=".activitys.MainActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".activitys.ChatTypeActivity">
-        </activity>
-
-        <activity android:name=".activitys.interlocutionActivity.ChatActivity"></activity>
+        <activity android:name=".activitys.ChatTypeActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activitys.interlocutionActivity.ChatActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:screenOrientation="portrait" />
+        <activity android:name=".activitys.SetYourNameActivity" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
     </application>
 

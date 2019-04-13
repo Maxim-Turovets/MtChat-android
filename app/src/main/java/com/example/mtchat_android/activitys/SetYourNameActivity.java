@@ -11,6 +11,8 @@ import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StartSocketConnection;
+import com.example.mtchat_android.models.StaticModels;
+import com.example.mtchat_android.serverobjects.UserInfo;
 
 public class SetYourNameActivity extends AppCompatActivity {
 
@@ -22,14 +24,16 @@ public class SetYourNameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_your_name_layout);
 
-        text = findViewById(R.id.inpSetName);
+        text = (TextView)findViewById(R.id.inpSetName);
 
     }
 
 
     public  void goToSetGender(View view)
     {
-
+        StaticModels.userInfo = new UserInfo();
+        StaticModels.userInfo.setObjectType("UserInfo");
+        StaticModels.userInfo.setName(text.getText().toString());
 
         Intent intent = new Intent(this, ChatActivity.class);
         startActivity(intent);

@@ -40,6 +40,7 @@
             android:layout_marginTop="282dp"
             android:layout_marginRight="100dp"
             android:background="@drawable/chat_type_button"
+            android:onClick="goToSetName"
             android:text="Private" />
 
         <Button
