@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">MtChat-android</string>
     <string name="btnChatTest">Chat Test</string>
+    <string name="switch_text">zz</string>
+    <string name="button_label_enabled">zz</string>
+    <string name="button_label_disabled">zzz</string>
+    <string name="unelevated_button_label_enabled">zzzz</string>
 </resources>
