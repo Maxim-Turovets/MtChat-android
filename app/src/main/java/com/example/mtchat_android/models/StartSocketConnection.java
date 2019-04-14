@@ -28,6 +28,8 @@ public class StartSocketConnection {
     }
 
     public static void sendTestJson(){
+        StaticModels.userInfo = new UserInfo();
+        StaticModels.userInfo.setName("Android");
         ConnectInfo connectInfo = new ConnectInfo();
         connectInfo.setObjectType("ConnectInfo");
         connectInfo.setChatType("pair");

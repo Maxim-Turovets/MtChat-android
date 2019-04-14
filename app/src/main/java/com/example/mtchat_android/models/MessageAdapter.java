@@ -62,7 +62,7 @@ public class MessageAdapter extends BaseAdapter {
             convertView.setTag(holder);
             holder.messageBody.setText(message.getText()+" joined the chat");
         }
-        else if (message.getName().toString().equals("Android")) { // this message was sent by us so let's create a basic chat bubble on the right
+        else if (message.getName().toString().equals(StaticModels.userInfo.getName())) { // this message was sent by us so let's create a basic chat bubble on the right
             convertView = messageInflater.inflate(R.layout.my_message, null);
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);

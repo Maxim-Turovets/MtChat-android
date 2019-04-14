@@ -39,6 +39,8 @@ public class SetPartnerAgeActivity extends AppCompatActivity {
         StaticModels.interlocutorInfo.setAgeFrom(from.getText().toString());
         StaticModels.interlocutorInfo.setAgeTo(to.getText().toString());
         StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.interlocutorInfo));
+        Intent intent = new Intent(this, Loading_animation_activity.class);
+        startActivity(intent);
     }
 
     public void goToChat()

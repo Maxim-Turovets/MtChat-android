@@ -26,6 +26,7 @@
         <activity android:name=".activitys.SetYourAgeActivity" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".activitys.SetPartnerGenderActivity" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".activitys.SetPartnerAgeActivity" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activitys.Loading_animation_activity" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
     </application>
 

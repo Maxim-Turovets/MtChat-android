@@ -46,9 +46,9 @@ public class ChatActivity extends AppCompatActivity {
     public void sendMessage(View view) {
 
         Message myMessage = new Message();
-        myMessage.setName("Android");
+        myMessage.setName(StaticModels.userInfo.getName());
         myMessage.setObjectType("Message");
-        myMessage.setText(editText.getText().toString()+"  ");
+        myMessage.setText(editText.getText().toString());
         myMessage.setTime("00:00");
 
 
@@ -66,6 +66,7 @@ public class ChatActivity extends AppCompatActivity {
             public void run() {
                 messageAdapter.add(message);
                 messagesView.setSelection(messagesView.getCount() - 1);
+                if(message.getName().equals(StaticModels.userInfo.getName()))
                 editText.setText("");
             }
         });

@@ -49,6 +49,7 @@
             android:layout_marginTop="342dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/chat_type_button"
+            android:onClick="goToAnimation"
             android:text="General" />
 
         <ImageView

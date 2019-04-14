@@ -41,4 +41,10 @@ public class ChatTypeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SetYourNameActivity.class);
         startActivity(intent);
     }
+
+    public void goToAnimation(View view)
+    {
+        Intent intent = new Intent(this, Loading_animation_activity.class);
+        startActivity(intent);
+    }
 }
