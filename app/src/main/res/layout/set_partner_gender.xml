@@ -28,6 +28,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="232dp"
             android:background="@drawable/chat_type_button"
+            android:onClick="goToSetPartnerAgeMale"
             android:text="Male" />
 
         <Button
@@ -38,6 +39,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="292dp"
             android:background="@drawable/gender_female_drawable"
+            android:onClick="goToSetPartnerAgeFemale"
             android:text="Female" />
 
         <ImageView

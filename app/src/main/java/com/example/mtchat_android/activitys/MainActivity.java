@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.mtchat_android.R;
+import com.example.mtchat_android.models.StartSocketConnection;
 
 
 public class  MainActivity extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class  MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ChatTypeActivity.class);
         startActivity(intent);
 
+        StartSocketConnection.startSocketConnection();
 
     }
 

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+
+
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="0dp">
+
+
+        <Button
+            android:id="@+id/btnSetPartnerAgeSearch"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="142dp"
+            android:background="@drawable/chat_type_button"
+            android:onClick="sendInfoToServer"
+            android:text="Search" />
+
+
+        <EditText
+            android:id="@+id/inpSetPartnerAgeFrom"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="81dp"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="5"
+            android:background="@drawable/border_drawable"
+            android:elevation="2dp"
+            android:layout_marginLeft="60dp"
+            android:ems="20"
+            android:hint="From"
+            android:inputType="number"
+            android:paddingHorizontal="15dp"
+            android:text=""
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/inpSetPartnerAgeTo"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="81dp"
+            android:layout_weight="5"
+            android:background="@drawable/border_drawable"
+            android:elevation="2dp"
+            android:ems="20"
+            android:hint="To"
+            android:inputType="number"
+            android:paddingHorizontal="15dp"
+            android:text=""
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>

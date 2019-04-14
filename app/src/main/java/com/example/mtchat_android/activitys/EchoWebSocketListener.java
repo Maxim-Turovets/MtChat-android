@@ -17,6 +17,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
     private static final int NORMAL_CLOSURE_STATUS = 1000;
 
     public static ChatActivity chatActivity;
+    public static SetPartnerAgeActivity setPartnerAgeActivity;
 
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
@@ -29,6 +30,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
 
         if(objectInfo(text).toString().equals("IfRoomCreated"))
         {
+            setPartnerAgeActivity.goToChat();
             StaticModels.ifRoomCreated = new IfRoomCreated("z");
             StaticModels.ifRoomCreated = (IfRoomCreated) ObjectType.getObject(text,StaticModels.ifRoomCreated);
             StartSocketConnection.interlocutorName = StaticModels.ifRoomCreated.getNameInterlocutor();

@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
+import com.example.mtchat_android.jsonservises.ObjectType;
+import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.UserInfo;
 
@@ -29,8 +31,9 @@ public class SetYourAgeActivity extends AppCompatActivity {
     public  void goToSetPartnerGender(View view)
     {
         StaticModels.userInfo.setAge(text.getText().toString());
+        StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.userInfo));
 
-        Intent intent = new Intent(this, ChatActivity.class);
+        Intent intent = new Intent(this, SetPartnerGenderActivity.class);
         startActivity(intent);
     }
 }
