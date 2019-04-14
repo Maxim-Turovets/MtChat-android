@@ -6,5 +6,7 @@
     <color name="black">#000000</color>
     <color name="border_color">#99FFFFFF</color>
     <color name="their_name">#ffd1cc</color>
+    <color name="their_fone">#99FFCFF8</color>
     <color name="my_message">#F2E7F3</color>
+    <color name="their_text">#0C680C</color>
 </resources>

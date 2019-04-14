@@ -30,7 +30,7 @@ public class SetPartnerAgeActivity extends AppCompatActivity {
         search = (Button) findViewById(R.id.btnSetPartnerAgeSearch);
         from = (EditText) findViewById(R.id.inpSetPartnerAgeFrom);
         to = (EditText) findViewById(R.id.inpSetPartnerAgeTo);
-        EchoWebSocketListener.setPartnerAgeActivity =this;
+        EchoWebSocketListener.setPartnerAgeActivity = this;
     }
 
 

@@ -26,6 +26,7 @@ public class ChatTypeActivity extends AppCompatActivity {
 
     public  void goToChat(View view)
     {
+        StartSocketConnection.startSocketConnection();
         StartSocketConnection.sendTestJson();
 
         Intent intent = new Intent(this, ChatActivity.class);

@@ -30,7 +30,6 @@ public  class EchoWebSocketListener extends WebSocketListener {
 
         if(objectInfo(text).toString().equals("IfRoomCreated"))
         {
-            setPartnerAgeActivity.goToChat();
             StaticModels.ifRoomCreated = new IfRoomCreated("z");
             StaticModels.ifRoomCreated = (IfRoomCreated) ObjectType.getObject(text,StaticModels.ifRoomCreated);
             StartSocketConnection.interlocutorName = StaticModels.ifRoomCreated.getNameInterlocutor();
@@ -47,6 +46,8 @@ public  class EchoWebSocketListener extends WebSocketListener {
                 e.printStackTrace();
             }
               chatActivity.onMessage(myMessage);
+            if(setPartnerAgeActivity!=null)
+              setPartnerAgeActivity.goToChat();
 
         }
 

@@ -21,7 +21,7 @@ public class  MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ChatTypeActivity.class);
         startActivity(intent);
 
-        StartSocketConnection.startSocketConnection();
+
 
     }
 
