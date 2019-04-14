@@ -23,6 +23,7 @@
         <activity android:name=".activitys.interlocutionActivity.ChatActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:screenOrientation="portrait" />
         <activity android:name=".activitys.SetYourNameActivity" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".activitys.SetYourGenderLayout" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activitys.SetYourAgeActivity" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
     </application>
 

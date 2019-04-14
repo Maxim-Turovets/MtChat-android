@@ -29,7 +29,7 @@
             android:layout_marginTop="142dp"
 
             android:background="@drawable/chat_type_button"
-            android:onClick="goToSetGender"
+            android:onClick="goToSetPartnerGender"
             android:text="Next" />
 
 
@@ -43,7 +43,7 @@
             android:background="@drawable/border_drawable"
             android:elevation="2dp"
             android:ems="20"
-            android:hint="Enter your name"
+            android:hint="Enter your age"
             android:inputType="number"
             android:paddingHorizontal="15dp"
 

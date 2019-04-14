@@ -33,14 +33,14 @@ public class SetYourGenderLayout extends AppCompatActivity {
     public  void goToSetAgeMale(View view)
     {
         StaticModels.userInfo.setGender("male");
-        Intent intent = new Intent(this, ChatActivity.class);
+        Intent intent = new Intent(this, SetYourAgeActivity.class);
         startActivity(intent);
     }
 
     public  void goToSetAgeFemale(View view)
     {
         StaticModels.userInfo.setGender("female");
-        Intent intent = new Intent(this, ChatActivity.class);
+        Intent intent = new Intent(this, SetYourAgeActivity.class);
         startActivity(intent);
     }
 }
