@@ -62,7 +62,8 @@ public  class EchoWebSocketListener extends WebSocketListener {
     }
     @Override
     public void onMessage(WebSocket webSocket, ByteString bytes) {
-        System.out.print("Receiving bytes : " + bytes.hex());
+
+
     }
     @Override
     public void onClosing(WebSocket webSocket, int code, String reason) {
