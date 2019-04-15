@@ -6,16 +6,22 @@
     android:layout_height="wrap_content"
     android:paddingVertical="10dp"
     android:paddingRight="15dp"
-    android:paddingLeft="60dp"
+    android:paddingLeft="15dp"
     android:clipToPadding="false">
 
 
-    <ImageView
-        android:id="@+id/imageMessageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerHorizontal="true"
-        tools:srcCompat="@tools:sample/avatars[0]"
-        android:src="@color/design_default_color_primary"/>
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp">
+
+        <ImageView
+            android:id="@+id/imageMessageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            tools:srcCompat="@tools:sample/avatars[0]" />
+    </android.support.v7.widget.CardView>
+
+
 </RelativeLayout>

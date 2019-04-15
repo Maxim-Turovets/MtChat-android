@@ -46,23 +46,23 @@ public class ImageMessageAdapter extends BaseAdapter {
         return i;
     }
 
-    // This is the backbone of the class, it handles the creation of single ListView row (chat bubble)
+
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
 
         MessageViewHolder2 holder = new MessageViewHolder2();
         LayoutInflater messageInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         ImageMessage message = imageMessages.get(i);
-
-
-        // Convert bytes data into a Bitmap
         Bitmap bmp = BitmapFactory.decodeByteArray(message.getByteArray(), 0, message.getByteArray().length);
-        convertView = messageInflater.inflate(R.layout.image_message_layout, null);
-        holder.messageBody = (ImageView) convertView.findViewById(R.id.imageMessageView);
 
 
-        convertView.setTag(holder);
-        holder.messageBody.setImageBitmap(bmp);
+        if(message.isFromMe()) {
+            // Convert bytes data into a Bitmap
+            convertView = messageInflater.inflate(R.layout.image_message_layout, null);
+            holder.messageBody = (ImageView) convertView.findViewById(R.id.imageMessageView);
+            convertView.setTag(holder);
+            holder.messageBody.setImageBitmap(bmp);
+        }
 
       return convertView;
     }

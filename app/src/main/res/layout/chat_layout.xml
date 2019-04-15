@@ -29,7 +29,7 @@
             android:layout_gravity="center"
             android:layout_marginHorizontal="0dp"
             android:background="@drawable/icon"
-            android:onClick="sendMessage"
+            android:onClick="openGallery"
             android:padding="20dp"
             android:scaleType="fitCenter" />
 
