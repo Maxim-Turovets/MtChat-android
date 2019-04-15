@@ -2,10 +2,13 @@ package com.example.mtchat_android.models;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mtchat_android.R;
@@ -16,24 +19,26 @@ import java.util.List;
 
 public class ImageMessageAdapter extends BaseAdapter {
 
-    List<Message> messages = new ArrayList<Message>();
+    ArrayList<ImageMessage> imageMessages = new ArrayList<>();
     Context context;
 
+    public ImageMessageAdapter(Context context) {
+        this.context = context;
+    }
 
-
-    public void add(Message message) {
-        this.messages.add(message);
+    public void add(ImageMessage message) {
+        this.imageMessages.add(message);
         notifyDataSetChanged(); // to render the list we need to notify
     }
 
     @Override
     public int getCount() {
-        return messages.size();
+        return imageMessages.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return messages.get(i);
+        return imageMessages.get(i);
     }
 
     @Override
@@ -44,42 +49,27 @@ public class ImageMessageAdapter extends BaseAdapter {
     // This is the backbone of the class, it handles the creation of single ListView row (chat bubble)
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
-        MessageViewHolder holder = new MessageViewHolder();
+
+        MessageViewHolder2 holder = new MessageViewHolder2();
         LayoutInflater messageInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        Message message = messages.get(i);
-
-        if(message.getName().equals("fict"))
-        {
-            convertView = messageInflater.inflate(R.layout.new_uset_layout, null);
-            holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
-            convertView.setTag(holder);
-            holder.messageBody.setText(message.getText()+" joined the chat");
-        }
-        else if (message.getName().toString().equals(StaticModels.userInfo.getName())) { // this message was sent by us so let's create a basic chat bubble on the right
-            convertView = messageInflater.inflate(R.layout.my_message, null);
-            holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
-            convertView.setTag(holder);
-            holder.messageBody.setText(message.getText());
-
-        } else { // this message was sent by someone else so let's create an advanced chat bubble on the left
-            convertView = messageInflater.inflate(R.layout.their_message, null);
-            holder.name = (TextView) convertView.findViewById(R.id.name);
-            holder.name.setText(StaticModels.ifRoomCreated.getNameInterlocutor());
-            holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
-            convertView.setTag(holder);
-            holder.messageBody.setText(message.getText()+"\n"+StaticModels.messageTime);
-        }
+        ImageMessage message = imageMessages.get(i);
 
 
+        // Convert bytes data into a Bitmap
+        Bitmap bmp = BitmapFactory.decodeByteArray(message.getByteArray(), 0, message.getByteArray().length);
+        convertView = messageInflater.inflate(R.layout.image_message_layout, null);
+        holder.messageBody = (ImageView) convertView.findViewById(R.id.imageMessageView);
 
-        return convertView;
+
+        convertView.setTag(holder);
+        holder.messageBody.setImageBitmap(bmp);
+
+      return convertView;
     }
 
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
 
-    public int getSize() {
-        return messages.size();
-    }
+}
+
+class MessageViewHolder2 {
+    public ImageView messageBody;
 }

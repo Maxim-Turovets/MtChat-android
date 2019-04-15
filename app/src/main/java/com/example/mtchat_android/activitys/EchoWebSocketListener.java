@@ -2,6 +2,7 @@ package com.example.mtchat_android.activitys;
 
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
+import com.example.mtchat_android.models.ImageMessage;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.IfRoomCreated;
@@ -28,28 +29,28 @@ public  class EchoWebSocketListener extends WebSocketListener {
     public void onMessage(WebSocket webSocket, String text) {
 
 
-        if(objectInfo(text).toString().equals("IfRoomCreated"))
-        {
-            StaticModels.ifRoomCreated = new IfRoomCreated("z");
-            StaticModels.ifRoomCreated = (IfRoomCreated) ObjectType.getObject(text,StaticModels.ifRoomCreated);
-            StartSocketConnection.interlocutorName = StaticModels.ifRoomCreated.getNameInterlocutor();
-
-
-            Message myMessage = new Message();
-            myMessage.setName("fict");
-            myMessage.setObjectType("Message");
-            myMessage.setText(StaticModels.ifRoomCreated.getNameInterlocutor());
-            myMessage.setTime("");
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-              chatActivity.onMessage(myMessage);
-            if(setPartnerAgeActivity!=null)
-              setPartnerAgeActivity.goToChat();
-
-        }
+//        if(objectInfo(text).toString().equals("IfRoomCreated"))
+//        {
+//            StaticModels.ifRoomCreated = new IfRoomCreated("z");
+//            StaticModels.ifRoomCreated = (IfRoomCreated) ObjectType.getObject(text,StaticModels.ifRoomCreated);
+//            StartSocketConnection.interlocutorName = StaticModels.ifRoomCreated.getNameInterlocutor();
+//
+//
+//            Message myMessage = new Message();
+//            myMessage.setName("fict");
+//            myMessage.setObjectType("Message");
+//            myMessage.setText(StaticModels.ifRoomCreated.getNameInterlocutor());
+//            myMessage.setTime("");
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//              chatActivity.onMessage(myMessage);
+//            if(setPartnerAgeActivity!=null)
+//              setPartnerAgeActivity.goToChat();
+//
+//        }
 
        if(objectInfo(text).toString().equals("Message"))
        {
@@ -63,7 +64,9 @@ public  class EchoWebSocketListener extends WebSocketListener {
     @Override
     public void onMessage(WebSocket webSocket, ByteString bytes) {
 
-
+        ImageMessage imageMessage = new ImageMessage(bytes.toByteArray());
+        imageMessage.setByteArray(bytes.toByteArray());
+        chatActivity.onImageMessage(imageMessage);
     }
     @Override
     public void onClosing(WebSocket webSocket, int code, String reason) {

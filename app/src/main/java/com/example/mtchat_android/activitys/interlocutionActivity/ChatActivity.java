@@ -7,6 +7,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.mtchat_android.activitys.EchoWebSocketListener;
+import com.example.mtchat_android.models.ImageMessage;
+import com.example.mtchat_android.models.ImageMessageAdapter;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StaticModels;
@@ -16,7 +18,8 @@ import com.example.mtchat_android.serverobjects.Message;
 import com.example.mtchat_android.models.MessageAdapter;
 import com.example.mtchat_android.R;
 
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ChatActivity extends AppCompatActivity {
@@ -24,6 +27,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private EditText editText;
     private MessageAdapter messageAdapter;
+    private ImageMessageAdapter imageMessageAdapter;
     private ListView messagesView;
 
 
@@ -35,8 +39,10 @@ public class ChatActivity extends AppCompatActivity {
 
         editText = (EditText) findViewById(R.id.editText);
         messageAdapter = new MessageAdapter(this);
+        imageMessageAdapter = new ImageMessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.messages_view);
-        messagesView.setAdapter(messageAdapter);
+//        messagesView.setAdapter(messageAdapter);
+        messagesView.setAdapter(imageMessageAdapter);
         EchoWebSocketListener.chatActivity=this;
 
     }
@@ -68,6 +74,18 @@ public class ChatActivity extends AppCompatActivity {
                 messagesView.setSelection(messagesView.getCount() - 1);
                 if(message.getName().equals(StaticModels.userInfo.getName()))
                 editText.setText("");
+            }
+        });
+
+    }
+
+    public  void  onImageMessage (final ImageMessage message)
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                imageMessageAdapter.add(message);
+                messagesView.setSelection(messagesView.getCount() - 1);
             }
         });
 

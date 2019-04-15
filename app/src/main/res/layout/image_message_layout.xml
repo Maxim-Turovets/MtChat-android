@@ -12,9 +12,10 @@
 
     <ImageView
         android:id="@+id/imageMessageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
-        tools:srcCompat="@tools:sample/avatars[0]" />
+        tools:srcCompat="@tools:sample/avatars[0]"
+        android:src="@color/design_default_color_primary"/>
 </RelativeLayout>

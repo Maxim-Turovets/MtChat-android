@@ -38,6 +38,7 @@ public class ImageLoad extends AppCompatActivity {
                 openGal();
             }
         });
+
     }
 
 
