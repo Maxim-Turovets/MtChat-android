@@ -9,13 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.mtchat_android.R;
-import com.example.mtchat_android.serverobjects.Message;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ImageMessageAdapter extends BaseAdapter {
 
@@ -58,7 +55,7 @@ public class ImageMessageAdapter extends BaseAdapter {
 
         if(message.isFromMe()) {
             // Convert bytes data into a Bitmap
-            convertView = messageInflater.inflate(R.layout.image_message_layout, null);
+            convertView = messageInflater.inflate(R.layout.image_their_message_layout, null);
             holder.messageBody = (ImageView) convertView.findViewById(R.id.imageMessageView);
             convertView.setTag(holder);
             holder.messageBody.setImageBitmap(bmp);
