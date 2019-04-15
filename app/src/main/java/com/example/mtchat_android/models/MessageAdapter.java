@@ -75,7 +75,6 @@ public class MessageAdapter extends BaseAdapter {
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
             holder.messageBody.setText(message.getText()+"\n"+StaticModels.messageTime);
-
         }
 
 
@@ -94,7 +93,6 @@ public class MessageAdapter extends BaseAdapter {
 }
 
 class MessageViewHolder {
-    public View avatar;
     public TextView name;
     public TextView messageBody;
 }
