@@ -3,6 +3,7 @@ package com.example.mtchat_android.activitys;
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.ImageMessage;
+import com.example.mtchat_android.models.MergedMessage;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.IfRoomCreated;
@@ -41,12 +42,13 @@ public  class EchoWebSocketListener extends WebSocketListener {
             myMessage.setObjectType("Message");
             myMessage.setText(StaticModels.ifRoomCreated.getNameInterlocutor());
             myMessage.setTime("");
+            MergedMessage mergedMessage = new MergedMessage(myMessage);
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-              chatActivity.onMessage(myMessage);
+              chatActivity.onMessage(mergedMessage);
             if(setPartnerAgeActivity!=null)
               setPartnerAgeActivity.goToChat();
 
@@ -56,7 +58,8 @@ public  class EchoWebSocketListener extends WebSocketListener {
        {
             Message tempMessage = new Message();
             tempMessage = (Message)ObjectType.getObject(text,tempMessage);
-            chatActivity.onMessage(tempMessage);
+           MergedMessage mergedMessage = new MergedMessage(tempMessage);
+            chatActivity.onMessage(mergedMessage);
             StaticModels.messageTime=tempMessage.getTime();
        }
 
@@ -66,7 +69,8 @@ public  class EchoWebSocketListener extends WebSocketListener {
 
         ImageMessage imageMessage = new ImageMessage(bytes.toByteArray(), false);
         imageMessage.setByteArray(bytes.toByteArray());
-        chatActivity.onImageMessage(imageMessage);
+        MergedMessage mergedMessage = new MergedMessage(imageMessage);
+        chatActivity.onMessage(mergedMessage);
     }
     @Override
     public void onClosing(WebSocket webSocket, int code, String reason) {

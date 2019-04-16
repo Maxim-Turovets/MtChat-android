@@ -14,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.mtchat_android.activitys.EchoWebSocketListener;
+import com.example.mtchat_android.models.AdapterMessage;
 import com.example.mtchat_android.models.ImageMessage;
 import com.example.mtchat_android.models.ImageMessageAdapter;
+import com.example.mtchat_android.models.MergedMessage;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StaticModels;
@@ -34,6 +36,7 @@ public class ChatActivity extends AppCompatActivity {
     private EditText editText;
     private MessageAdapter messageAdapter;
     private ImageMessageAdapter imageMessageAdapter;
+    private AdapterMessage adapterMessage;
     private ListView messagesView;
 
     private  static  final  int PICK_IMAGE =100;
@@ -43,6 +46,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_layout);
+        adapterMessage = new AdapterMessage(this);
 
         editText = (EditText) findViewById(R.id.editText);
         messageAdapter = new MessageAdapter(this);
@@ -50,6 +54,7 @@ public class ChatActivity extends AppCompatActivity {
         messagesView = (ListView) findViewById(R.id.messages_view);
        // messagesView.setAdapter(messageAdapter);
      //   messagesView.setAdapter(imageMessageAdapter);
+          messagesView.setAdapter(adapterMessage);
         EchoWebSocketListener.chatActivity=this;
 
 
@@ -64,42 +69,58 @@ public class ChatActivity extends AppCompatActivity {
         myMessage.setObjectType("Message");
         myMessage.setText(editText.getText().toString());
         myMessage.setTime("00:00");
+        MergedMessage mergedMessage = new MergedMessage(myMessage);
 
 
         final String message = editText.getText().toString();
         if (message.length() > 0) {
-            onMessage(myMessage);
+            onMessage(mergedMessage);
             StartSocketConnection.webSocket.send(ObjectType.getJson(myMessage));
         }
     }
 
-    public  void  onMessage (final Message message)
-    {
-        messagesView.setAdapter(messageAdapter);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                messageAdapter.add(message);
-                messagesView.setSelection(messagesView.getCount() - 1);
-                if(message.getName().equals(StaticModels.userInfo.getName()))
-                editText.setText("");
-            }
-        });
+        public  void  onMessage (final MergedMessage message) {
 
-    }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    adapterMessage.add(message);
+                    messagesView.setSelection(messagesView.getCount() - 1);
+                    if(message.getTextMessage()!=null)
+                    if (message.getTextMessage().getName().equals(StaticModels.userInfo.getName()))
+                        editText.setText("");
+                }
+            });
+        }
 
-    public  void  onImageMessage (final ImageMessage message)
-    {
-         messagesView.setAdapter(imageMessageAdapter);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                imageMessageAdapter.add(message);
-                messagesView.setSelection(messagesView.getCount() - 1);
-            }
-        });
 
-    }
+//    public  void  onMessage (final Message message)
+//    {
+//        messagesView.setAdapter(messageAdapter);
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                messageAdapter.add(message);
+//                messagesView.setSelection(messagesView.getCount() - 1);
+//                if(message.getName().equals(StaticModels.userInfo.getName()))
+//                editText.setText("");
+//            }
+//        });
+//
+//    }
+//
+//    public  void  onImageMessage (final ImageMessage message)
+//    {
+//         messagesView.setAdapter(imageMessageAdapter);
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                imageMessageAdapter.add(message);
+//                messagesView.setSelection(messagesView.getCount() - 1);
+//            }
+//        });
+//
+//    }
 
 
     public   void openGallery(View view){
@@ -128,7 +149,9 @@ public class ChatActivity extends AppCompatActivity {
         byte[] imageInByte = baos.toByteArray();
 
         ImageMessage myImageMessage = new ImageMessage(imageInByte, true);
-        onImageMessage(myImageMessage);
+        //onImageMessage(myImageMessage);
+        MergedMessage mergedMessage = new MergedMessage(myImageMessage);
+        onMessage(mergedMessage);
        // layout.addView(imageView);
 //        BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
 //        Bitmap bitmap = drawable.getBitmap();
