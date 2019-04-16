@@ -55,9 +55,20 @@ public class ImageMessageAdapter extends BaseAdapter {
 
         if(message.isFromMe()) {
             // Convert bytes data into a Bitmap
+            convertView = messageInflater.inflate(R.layout.image_my_message_layout, null);
+            holder.messageBody = (ImageView) convertView.findViewById(R.id.imageMessageView);
+            holder.messageBody.setMaxHeight(100);
+            holder.messageBody.setMaxWidth(100);
+            convertView.setTag(holder);
+            holder.messageBody.setImageBitmap(bmp);
+        }
+        else{
+            // Convert bytes data into a Bitmap
             convertView = messageInflater.inflate(R.layout.image_their_message_layout, null);
             holder.messageBody = (ImageView) convertView.findViewById(R.id.imageMessageView);
             convertView.setTag(holder);
+            holder.messageBody.setMaxHeight(100);
+            holder.messageBody.setMaxWidth(100);
             holder.messageBody.setImageBitmap(bmp);
         }
 

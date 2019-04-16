@@ -9,8 +9,6 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -26,6 +24,8 @@ import com.example.mtchat_android.serverobjects.Message;
 
 import com.example.mtchat_android.models.MessageAdapter;
 import com.example.mtchat_android.R;
+
+import java.io.ByteArrayOutputStream;
 
 
 public class ChatActivity extends AppCompatActivity {
@@ -48,8 +48,8 @@ public class ChatActivity extends AppCompatActivity {
         messageAdapter = new MessageAdapter(this);
         imageMessageAdapter = new ImageMessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.messages_view);
-        messagesView.setAdapter(messageAdapter);
-        messagesView.setAdapter(imageMessageAdapter);
+       // messagesView.setAdapter(messageAdapter);
+     //   messagesView.setAdapter(imageMessageAdapter);
         EchoWebSocketListener.chatActivity=this;
 
 
@@ -75,6 +75,7 @@ public class ChatActivity extends AppCompatActivity {
 
     public  void  onMessage (final Message message)
     {
+        messagesView.setAdapter(messageAdapter);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -89,6 +90,7 @@ public class ChatActivity extends AppCompatActivity {
 
     public  void  onImageMessage (final ImageMessage message)
     {
+         messagesView.setAdapter(imageMessageAdapter);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -120,7 +122,13 @@ public class ChatActivity extends AppCompatActivity {
 
         imageView.setImageURI(imageUrl);
 
-        ViewGroup layout = (ViewGroup) findViewById(android.R.id.content);
+        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageInByte = baos.toByteArray();
+
+        ImageMessage myImageMessage = new ImageMessage(imageInByte, true);
+        onImageMessage(myImageMessage);
        // layout.addView(imageView);
 //        BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
 //        Bitmap bitmap = drawable.getBitmap();
