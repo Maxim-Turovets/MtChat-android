@@ -73,7 +73,7 @@ public class MessageAdapter extends BaseAdapter {
 
         } else { // this message was sent by someone else so let's create an advanced chat bubble on the left
             convertView = messageInflater.inflate(R.layout.their_message, null);
-            holder.name = (TextView) convertView.findViewById(R.id.name);holder.name.setText(StaticModels.ifRoomCreated.getNameInterlocutor());
+            holder.name = (TextView) convertView.findViewById(R.id.name);holder.name.setText(StaticModels.interlocutorName);
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
             holder.messageBody.setText(message.getText()+"\n"+StaticModels.messageTime);

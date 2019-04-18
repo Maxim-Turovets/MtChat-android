@@ -28,7 +28,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="232dp"
             android:background="@drawable/reconnect_button_drawable"
-            android:onClick="goToSetAgeMale"
+            android:onClick="reconnectButtonPress"
             android:text="Reconnect" />
 
         <Button
@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="292dp"
+            android:onClick="goToMainMenu"
             android:background="@drawable/gender_female_drawable"
             android:text="Go to main menu" />
 

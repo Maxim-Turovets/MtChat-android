@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.mtchat_android.activitys.ChatCloseActivity;
+import com.example.mtchat_android.activitys.ChatTypeActivity;
 import com.example.mtchat_android.activitys.EchoWebSocketListener;
 import com.example.mtchat_android.models.AdapterMessage;
 import com.example.mtchat_android.models.ImageMessage;
@@ -165,6 +167,11 @@ public class ChatActivity extends AppCompatActivity {
 //        BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
 //        Bitmap bitmap = drawable.getBitmap();
 
+    }
+
+    public void  goToChatClose(){
+        Intent intent = new Intent(this, ChatCloseActivity.class);
+        startActivity(intent);
     }
 }
 

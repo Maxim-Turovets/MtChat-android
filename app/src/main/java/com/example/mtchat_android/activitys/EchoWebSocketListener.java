@@ -29,18 +29,22 @@ public  class EchoWebSocketListener extends WebSocketListener {
     @Override
     public void onMessage(WebSocket webSocket, String text) {
 
+        if(objectInfo(text).toString().equals("IfRoomDeleted"))
+        {
+            chatActivity.goToChatClose();
+        }
 
         if(objectInfo(text).toString().equals("IfRoomCreated"))
         {
-            StaticModels.ifRoomCreated = new IfRoomCreated("z");
-            StaticModels.ifRoomCreated = (IfRoomCreated) ObjectType.getObject(text,StaticModels.ifRoomCreated);
-            StartSocketConnection.interlocutorName = StaticModels.ifRoomCreated.getNameInterlocutor();
+            IfRoomCreated ifRoomCreated = new IfRoomCreated("z");
+            ifRoomCreated = (IfRoomCreated) ObjectType.getObject(text,ifRoomCreated);
+            StaticModels.interlocutorName = ifRoomCreated.getNameInterlocutor();
 
 
             Message myMessage = new Message();
             myMessage.setName("fict");
             myMessage.setObjectType("Message");
-            myMessage.setText(StaticModels.ifRoomCreated.getNameInterlocutor());
+            myMessage.setText(StaticModels.interlocutorName);
             myMessage.setTime("");
             MergedMessage mergedMessage = new MergedMessage(myMessage);
             try {

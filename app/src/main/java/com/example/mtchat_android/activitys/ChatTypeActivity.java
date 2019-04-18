@@ -11,6 +11,7 @@ import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StartSocketConnection;
+import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.ConnectInfo;
 
 public class ChatTypeActivity extends AppCompatActivity {
@@ -36,17 +37,12 @@ public class ChatTypeActivity extends AppCompatActivity {
     public  void goToSetName(View view)
     {
         StartSocketConnection.startSocketConnection();
-        ConnectInfo connectInfo = new ConnectInfo();
-        connectInfo.setObjectType("ConnectInfo");
-        connectInfo.setChatType("pair");
-        StartSocketConnection.webSocket.send(ObjectType.getJson(connectInfo));
+        StaticModels.connectInfo = new ConnectInfo();
+        StaticModels.connectInfo.setObjectType("ConnectInfo");
+        StaticModels.connectInfo.setChatType("pair");
+        StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.connectInfo));
         Intent intent = new Intent(this, SetYourNameActivity.class);
         startActivity(intent);
     }
 
-//    public void goToAnimation(View view)
-//    {
-//        Intent intent = new Intent(this, ImageLoad.class);
-//        startActivity(intent);
-//    }
 }

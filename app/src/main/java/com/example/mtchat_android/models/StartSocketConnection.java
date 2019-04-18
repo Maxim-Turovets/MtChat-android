@@ -20,7 +20,7 @@ public class StartSocketConnection {
     public static EchoWebSocketListener listener;
     public static OkHttpClient client;
     public static WebSocket webSocket;
-    public static String interlocutorName;
+
 
     public static void startSocketConnection() {
         client = new OkHttpClient();
