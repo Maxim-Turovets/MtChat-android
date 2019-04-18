@@ -23,6 +23,7 @@ import com.example.mtchat_android.models.MergedMessage;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StaticModels;
+import com.example.mtchat_android.models.TypeWriter;
 import com.example.mtchat_android.serverobjects.Message;
 
 
@@ -46,6 +47,7 @@ public class ChatActivity extends AppCompatActivity {
     private  static  final  int PICK_IMAGE =100;
     private Uri imageUrl;
 
+    TypeWriter tw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,26 +63,28 @@ public class ChatActivity extends AppCompatActivity {
           messagesView.setAdapter(adapterMessage);
         EchoWebSocketListener.chatActivity=this;
 
-
+        tw = (TypeWriter) findViewById(R.id.tv);
+         tw.setVisibility(View.GONE);
     }
 
 
 
     public void sendMessage(View view) {
 
-        Message myMessage = new Message();
-        myMessage.setName(StaticModels.userInfo.getName());
-        myMessage.setObjectType("Message");
-        myMessage.setText(editText.getText().toString());
-        myMessage.setTime("00:00");
-        MergedMessage mergedMessage = new MergedMessage(myMessage);
 
-
-        final String message = editText.getText().toString();
-        if (message.length() > 0) {
-            onMessage(mergedMessage);
-            StartSocketConnection.webSocket.send(ObjectType.getJson(myMessage));
-        }
+//        Message myMessage = new Message();
+//        myMessage.setName(StaticModels.userInfo.getName());
+//        myMessage.setObjectType("Message");
+//        myMessage.setText(editText.getText().toString());
+//        myMessage.setTime("00:00");
+//        MergedMessage mergedMessage = new MergedMessage(myMessage);
+//
+//
+//        final String message = editText.getText().toString();
+//        if (message.length() > 0) {
+//            onMessage(mergedMessage);
+//            StartSocketConnection.webSocket.send(ObjectType.getJson(myMessage));
+//        }
     }
 
         public  void  onMessage (final MergedMessage message) {
@@ -172,6 +176,29 @@ public class ChatActivity extends AppCompatActivity {
     public void  goToChatClose(){
         Intent intent = new Intent(this, ChatCloseActivity.class);
         startActivity(intent);
+    }
+
+    public void showPersonTyping()
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tw.setVisibility(View.VISIBLE);
+                tw.setText("");
+                tw.setCharacterDelay(150);
+                tw.animateText(StaticModels.interlocutorName+"  typing ✍ ... ");
+            }
+        });
+    }
+
+
+    public void hidePersonTyping(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tw.setVisibility(View.GONE);
+            }
+        });
     }
 }
 

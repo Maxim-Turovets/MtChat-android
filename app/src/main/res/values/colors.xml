@@ -11,4 +11,5 @@
     <color name="their_text">#0C680C</color>
     <color name="chat_edit_text">#A6FFFFFF</color>
     <color name="reconnect">#CCF0702E</color>
+    <color name="icon_color">#99281CD0</color>
 </resources>

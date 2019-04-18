@@ -7,6 +7,7 @@ import com.example.mtchat_android.models.MergedMessage;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.IfRoomCreated;
+import com.example.mtchat_android.serverobjects.InterlocutorTyping;
 import com.example.mtchat_android.serverobjects.Message;
 
 import okhttp3.Response;
@@ -29,6 +30,18 @@ public  class EchoWebSocketListener extends WebSocketListener {
     @Override
     public void onMessage(WebSocket webSocket, String text) {
 
+        if(objectInfo(text).toString().equals("InterlocutorTyping"))
+        {
+            InterlocutorTyping interlocutorTyping = new InterlocutorTyping();
+            interlocutorTyping =(InterlocutorTyping)ObjectType.getObject(text, interlocutorTyping);
+
+            if(interlocutorTyping.isTyping())
+            chatActivity.showPersonTyping();
+
+            if(interlocutorTyping.isTyping()==false)
+                chatActivity.hidePersonTyping();
+
+        }
         if(objectInfo(text).toString().equals("IfRoomDeleted"))
         {
             chatActivity.goToChatClose();
