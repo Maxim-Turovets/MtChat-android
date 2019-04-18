@@ -24,7 +24,7 @@ public class StartSocketConnection {
         request = new Request.Builder().url("ws://77.47.224.135:8080/sock/chat").build();
         listener = new EchoWebSocketListener();
         webSocket = client.newWebSocket(request, listener);
-        client.dispatcher().executorService().shutdown();
+       // client.dispatcher().executorService().shutdown();
     }
 
     public static void sendTestJson(){

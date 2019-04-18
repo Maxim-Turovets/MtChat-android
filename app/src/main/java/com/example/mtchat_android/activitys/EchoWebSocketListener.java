@@ -42,15 +42,21 @@ public  class EchoWebSocketListener extends WebSocketListener {
             myMessage.setObjectType("Message");
             myMessage.setText(StaticModels.ifRoomCreated.getNameInterlocutor());
             myMessage.setTime("");
-            MergedMessage mergedMessage = new MergedMessage(myMessage);
+        //    MergedMessage mergedMessage = new MergedMessage(myMessage);
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-              chatActivity.onMessage(mergedMessage);
             if(setPartnerAgeActivity!=null)
-              setPartnerAgeActivity.goToChat();
+                setPartnerAgeActivity.goToChat();
+            try {
+                Thread.sleep(600);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+              chatActivity.onMessage(myMessage);
+
 
         }
 
@@ -58,8 +64,8 @@ public  class EchoWebSocketListener extends WebSocketListener {
        {
             Message tempMessage = new Message();
             tempMessage = (Message)ObjectType.getObject(text,tempMessage);
-           MergedMessage mergedMessage = new MergedMessage(tempMessage);
-            chatActivity.onMessage(mergedMessage);
+         //  MergedMessage mergedMessage = new MergedMessage(tempMessage);
+            chatActivity.onMessage(tempMessage);
             StaticModels.messageTime=tempMessage.getTime();
        }
 
@@ -67,10 +73,10 @@ public  class EchoWebSocketListener extends WebSocketListener {
     @Override
     public void onMessage(WebSocket webSocket, ByteString bytes) {
 
-        ImageMessage imageMessage = new ImageMessage(bytes.toByteArray(), false);
-        imageMessage.setByteArray(bytes.toByteArray());
-        MergedMessage mergedMessage = new MergedMessage(imageMessage);
-        chatActivity.onMessage(mergedMessage);
+//        ImageMessage imageMessage = new ImageMessage(bytes.toByteArray(), false);
+//        imageMessage.setByteArray(bytes.toByteArray());
+//        MergedMessage mergedMessage = new MergedMessage(imageMessage);
+//        chatActivity.onMessage(imageMessage);
     }
     @Override
     public void onClosing(WebSocket webSocket, int code, String reason) {

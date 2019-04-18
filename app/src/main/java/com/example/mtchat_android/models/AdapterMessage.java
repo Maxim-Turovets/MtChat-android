@@ -88,7 +88,6 @@ public class AdapterMessage extends BaseAdapter {
                 convertView = messageInflater.inflate(R.layout.image_my_message_layout, null);
                 holder.messageBody = (ImageView) convertView.findViewById(R.id.imageMessageView);
 
-
                 // Вычисляем ширину и высоту изображения
                 int width = bmp.getWidth();
                 int height = bmp.getHeight();
@@ -126,10 +125,45 @@ public class AdapterMessage extends BaseAdapter {
                 convertView = messageInflater.inflate(R.layout.image_their_message_layout, null);
                 holder.messageBody = (ImageView) convertView.findViewById(R.id.imageMessageView);
                 convertView.setTag(holder);
-                holder.messageBody.setMaxHeight(100);
-                holder.messageBody.setMaxWidth(100);
-                holder.messageBody.setImageBitmap(bmp);
+                // Вычисляем ширину и высоту изображения
+                int width = bmp.getWidth();
+                int height = bmp.getHeight();
+
+                if (width>1000) {
+                    if (width > height) {
+                        int temp_int = width;
+                        width = height;
+                        height = temp_int;
+
+                        if (width > 1000) {
+                            if (height > width) {
+                                int t = width / 1000;
+                                width =1000;
+                                height = height/ t;
+                                Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, height,
+                                        width, false);
+                                holder.messageBody.setImageBitmap(bmHalf);
+                            }
+
+                        }
+                        holder.messageBody.setRotation(90);
+                    }else {
+                        int t = width - 1000;
+                        Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, 1000, height - t, false);
+                        holder.messageBody.setImageBitmap(bmHalf);
+
+                    }
+                } else {
+                    holder.messageBody.setImageBitmap(bmp);
+                }
             }
+
+            holder.messageBody.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.setRotation(90);
+                }
+            });
         }
 
 

@@ -35,6 +35,7 @@ public class ChatTypeActivity extends AppCompatActivity {
 
     public  void goToSetName(View view)
     {
+        StartSocketConnection.startSocketConnection();
         ConnectInfo connectInfo = new ConnectInfo();
         connectInfo.setObjectType("ConnectInfo");
         connectInfo.setChatType("pair");
