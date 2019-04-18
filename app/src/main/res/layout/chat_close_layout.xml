@@ -1,6 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+
+
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="0dp">
+
+
+        <Button
+            android:id="@+id/btnChatCloseReconnect"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="232dp"
+            android:background="@drawable/reconnect_button_drawable"
+            android:onClick="goToSetAgeMale"
+            android:text="Reconnect" />
+
+        <Button
+            android:id="@+id/btnChatCloseGoToMainMenu"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="292dp"
+            android:background="@drawable/gender_female_drawable"
+            android:text="Go to main menu" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="189dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="-17dp"
+            android:background="@drawable/border_drawable" />
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="204dp"
+            android:lineSpacingExtra="24sp"
+            android:text="User has disconnected"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.Compat.Notification.Time"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
 
 </android.support.constraint.ConstraintLayout>

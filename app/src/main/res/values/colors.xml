@@ -10,4 +10,5 @@
     <color name="my_message">#F2E7F3</color>
     <color name="their_text">#0C680C</color>
     <color name="chat_edit_text">#A6FFFFFF</color>
+    <color name="reconnect">#CCF0702E</color>
 </resources>
