@@ -7,6 +7,9 @@ import com.example.mtchat_android.serverobjects.ConnectInfo;
 import com.example.mtchat_android.serverobjects.InterlocutorInfo;
 import com.example.mtchat_android.serverobjects.UserInfo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.WebSocket;
@@ -37,14 +40,14 @@ public class StartSocketConnection {
         userInfo.setObjectType("UserInfo");
         userInfo.setAge("1");
         userInfo.setGender("male");
-        userInfo.setName("User Test");
+        userInfo.setName(getRandomMane());
         userInfo.setVoiceMessage(false);
 
         StaticModels.userInfo = new UserInfo();
         StaticModels.userInfo.setObjectType("UserInfo");
         StaticModels.userInfo.setAge("1");
         StaticModels.userInfo.setGender("male");
-        StaticModels.userInfo.setName("User Test");
+        StaticModels.userInfo.setName(getRandomMane());
         StaticModels.userInfo.setVoiceMessage(false);
 
         StartSocketConnection.webSocket.send(ObjectType.getJson(userInfo));
@@ -65,6 +68,25 @@ public class StartSocketConnection {
         StartSocketConnection.webSocket.send(ObjectType.getJson(info));
 
 
+
+    }
+
+    private  static String getRandomMane()
+    {
+        List <String> nameList = new ArrayList<>();
+        nameList.add("Снежный барс");
+        nameList.add("Леопард");
+        nameList.add("Лев");
+        nameList.add("Тигр");
+        nameList.add("Гепард");
+        nameList.add("Пума");
+        nameList.add("Пантера");
+        nameList.add("Рысь");
+        nameList.add("Ягуар");
+        nameList.add("java иди на***");
+
+        double item = Math.random()*(nameList.size()+1);
+        return nameList.get((int)item);
 
     }
 

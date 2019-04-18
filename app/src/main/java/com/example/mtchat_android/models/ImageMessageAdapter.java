@@ -1,3 +1,6 @@
+/***
+ * Obsolete class
+ */
 package com.example.mtchat_android.models;
 
 import android.app.Activity;

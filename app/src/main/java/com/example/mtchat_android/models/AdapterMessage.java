@@ -1,9 +1,11 @@
 package com.example.mtchat_android.models;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 import com.example.mtchat_android.R;
 import com.example.mtchat_android.serverobjects.Message;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,6 +86,14 @@ public class AdapterMessage extends BaseAdapter {
             LayoutInflater messageInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             Bitmap bmp = BitmapFactory.decodeByteArray(message.getImageMessage().getByteArray(), 0, message.getImageMessage().getByteArray().length);
 
+
+
+
+              ByteArrayOutputStream out = new ByteArrayOutputStream();
+              bmp.compress(Bitmap.CompressFormat.JPEG, 10, out);
+            byte[] byteArray = out.toByteArray();
+
+          //  bmp = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
 
             if (message.getImageMessage().isFromMe()) {
                 // Convert bytes data into a Bitmap
@@ -168,6 +180,15 @@ public class AdapterMessage extends BaseAdapter {
 
 
         return convertView;
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
+    protected int sizeOf(Bitmap data) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR1) {
+            return data.getRowBytes() * data.getHeight();
+        } else {
+            return data.getByteCount();
+        }
     }
 
     //    public void setMessages(List<Message> messages) {

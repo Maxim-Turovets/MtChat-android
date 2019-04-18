@@ -36,9 +36,9 @@ public class ChatActivity extends AppCompatActivity {
 
 
     private EditText editText;
-    private MessageAdapter messageAdapter;
+    //private MessageAdapter messageAdapter;
   //  private ImageMessageAdapter imageMessageAdapter;
-  //  private AdapterMessage adapterMessage;
+    private AdapterMessage adapterMessage;
     private ListView messagesView;
 
     private  static  final  int PICK_IMAGE =100;
@@ -48,15 +48,15 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_layout);
-     //   adapterMessage = new AdapterMessage(this);
+        adapterMessage = new AdapterMessage(this);
 
         editText = (EditText) findViewById(R.id.editText);
-        messageAdapter = new MessageAdapter(this);
+      //  messageAdapter = new MessageAdapter(this);
       //  imageMessageAdapter = new ImageMessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.messages_view);
-        messagesView.setAdapter(messageAdapter);
+      //  messagesView.setAdapter(messageAdapter);
      //   messagesView.setAdapter(imageMessageAdapter);
-       //   messagesView.setAdapter(adapterMessage);
+          messagesView.setAdapter(adapterMessage);
         EchoWebSocketListener.chatActivity=this;
 
 
@@ -71,45 +71,45 @@ public class ChatActivity extends AppCompatActivity {
         myMessage.setObjectType("Message");
         myMessage.setText(editText.getText().toString());
         myMessage.setTime("00:00");
-     //   MergedMessage mergedMessage = new MergedMessage(myMessage);
+        MergedMessage mergedMessage = new MergedMessage(myMessage);
 
 
         final String message = editText.getText().toString();
         if (message.length() > 0) {
-            onMessage(myMessage);
+            onMessage(mergedMessage);
             StartSocketConnection.webSocket.send(ObjectType.getJson(myMessage));
         }
     }
+
+        public  void  onMessage (final MergedMessage message) {
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    adapterMessage.add(message);
+                    messagesView.setSelection(messagesView.getCount() - 1);
+                    if(message.getTextMessage()!=null)
+                    if (message.getTextMessage().getName().equals(StaticModels.userInfo.getName()))
+                        editText.setText("");
+                }
+            });
+        }
+
+
+//    public  void  onMessage (final Message message)
+//    {
 //
-//        public  void  onMessage (final MergedMessage message) {
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                messageAdapter.add(message);
+//                messagesView.setSelection(messagesView.getCount() - 1);
+//                if(message.getName().equals(StaticModels.userInfo.getName()))
+//                editText.setText("");
+//            }
+//        });
 //
-//            runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    adapterMessage.add(message);
-//                    messagesView.setSelection(messagesView.getCount() - 1);
-//                    if(message.getTextMessage()!=null)
-//                    if (message.getTextMessage().getName().equals(StaticModels.userInfo.getName()))
-//                        editText.setText("");
-//                }
-//            });
-//        }
-
-
-    public  void  onMessage (final Message message)
-    {
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                messageAdapter.add(message);
-                messagesView.setSelection(messagesView.getCount() - 1);
-                if(message.getName().equals(StaticModels.userInfo.getName()))
-                editText.setText("");
-            }
-        });
-
-    }
+//    }
 //
 //    public  void  onImageMessage (final ImageMessage message)
 //    {
@@ -134,37 +134,37 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        ImageView imageView = new ImageView(this);
-//
-//        if(resultCode==RESULT_OK&& requestCode==PICK_IMAGE)
-//            imageUrl = data.getData();
-//
-//        imageView.setImageURI(imageUrl);
-//
-//        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-//        byte[] imageInByte = baos.toByteArray();
-//        byte[] one_bit = new byte[1];
-//
-//        ByteString byteString = ByteString.of(imageInByte);
-//        ByteString byteString2 = ByteString.of(one_bit);
-//
-//        StartSocketConnection.webSocket.send(byteString);
-//        StartSocketConnection.webSocket.send(byteString2);
-//
-//        ImageMessage myImageMessage = new ImageMessage(imageInByte, true);
-//        //onImageMessage(myImageMessage);
-//        MergedMessage mergedMessage = new MergedMessage(myImageMessage);
-//        onMessage(myImageMessage);
-//       // layout.addView(imageView);
-////        BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
-////        Bitmap bitmap = drawable.getBitmap();
-//
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        ImageView imageView = new ImageView(this);
+
+        if(resultCode==RESULT_OK&& requestCode==PICK_IMAGE)
+            imageUrl = data.getData();
+
+        imageView.setImageURI(imageUrl);
+
+        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageInByte = baos.toByteArray();
+        byte[] one_bit = new byte[1];
+
+        ByteString byteString = ByteString.of(imageInByte);
+        ByteString byteString2 = ByteString.of(one_bit);
+
+        StartSocketConnection.webSocket.send(byteString);
+        StartSocketConnection.webSocket.send(byteString2);
+
+        ImageMessage myImageMessage = new ImageMessage(imageInByte, true);
+        //onImageMessage(myImageMessage);
+        MergedMessage mergedMessage = new MergedMessage(myImageMessage);
+        onMessage(mergedMessage);
+       // layout.addView(imageView);
+//        BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
+//        Bitmap bitmap = drawable.getBitmap();
+
+    }
 }
 
