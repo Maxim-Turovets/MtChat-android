@@ -1,16 +1,24 @@
 package com.example.mtchat_android.serverobjects;
 
 public class InterlocutorTyping {
-    private String chatType;
+    private String objectType = "InterlocutorTyping";
     boolean typing;
     private String name;
 
-    public String getChatType() {
-        return chatType;
+    public String getObjectType() {
+        return objectType;
     }
 
-    public void setChatType(String chatType) {
-        this.chatType = chatType;
+    public void setObjectType(String objectType) {
+        this.objectType = objectType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean isTyping() {

@@ -8,29 +8,28 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.ChatCloseActivity;
-import com.example.mtchat_android.activitys.ChatTypeActivity;
 import com.example.mtchat_android.activitys.EchoWebSocketListener;
+import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.AdapterMessage;
 import com.example.mtchat_android.models.ImageMessage;
-import com.example.mtchat_android.models.ImageMessageAdapter;
 import com.example.mtchat_android.models.MergedMessage;
 import com.example.mtchat_android.models.StartSocketConnection;
-import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.models.TypeWriter;
+import com.example.mtchat_android.serverobjects.InterlocutorTyping;
 import com.example.mtchat_android.serverobjects.Message;
 
-
-import com.example.mtchat_android.models.MessageAdapter;
-import com.example.mtchat_android.R;
-
 import java.io.ByteArrayOutputStream;
+
 
 import okio.ByteString;
 
@@ -46,6 +45,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private  static  final  int PICK_IMAGE =100;
     private Uri imageUrl;
+    int maxim = 0;
 
     TypeWriter tw;
     @Override
@@ -65,6 +65,44 @@ public class ChatActivity extends AppCompatActivity {
 
         tw = (TypeWriter) findViewById(R.id.tv);
          tw.setVisibility(View.GONE);
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int size = editText.getText().length();
+
+                if(size>0)
+                    if(maxim==0)
+                    {
+                        InterlocutorTyping interlocutorTyping = new InterlocutorTyping();
+                        interlocutorTyping.setTyping(true);
+                        interlocutorTyping.setName(StaticModels.userInfo.getName());
+                        StartSocketConnection.webSocket.send(ObjectType.getJson(interlocutorTyping));
+                        maxim++;
+                    }
+                if(size==0)
+                {
+                    maxim=0;
+                    InterlocutorTyping interlocutorTyping = new InterlocutorTyping();
+                    interlocutorTyping.setTyping(false);
+                    StartSocketConnection.webSocket.send(ObjectType.getJson(interlocutorTyping));
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                System.out.print("dsgfh");
+
+            }
+        });
+
+
     }
 
 
@@ -72,19 +110,19 @@ public class ChatActivity extends AppCompatActivity {
     public void sendMessage(View view) {
 
 
-//        Message myMessage = new Message();
-//        myMessage.setName(StaticModels.userInfo.getName());
-//        myMessage.setObjectType("Message");
-//        myMessage.setText(editText.getText().toString());
-//        myMessage.setTime("00:00");
-//        MergedMessage mergedMessage = new MergedMessage(myMessage);
-//
-//
-//        final String message = editText.getText().toString();
-//        if (message.length() > 0) {
-//            onMessage(mergedMessage);
-//            StartSocketConnection.webSocket.send(ObjectType.getJson(myMessage));
-//        }
+        Message myMessage = new Message();
+        myMessage.setName(StaticModels.userInfo.getName());
+        myMessage.setObjectType("Message");
+        myMessage.setText(editText.getText().toString());
+        myMessage.setTime("00:00");
+        MergedMessage mergedMessage = new MergedMessage(myMessage);
+
+
+        final String message = editText.getText().toString();
+        if (message.length() > 0) {
+            onMessage(mergedMessage);
+            StartSocketConnection.webSocket.send(ObjectType.getJson(myMessage));
+        }
     }
 
         public  void  onMessage (final MergedMessage message) {
@@ -200,5 +238,8 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 }
 
