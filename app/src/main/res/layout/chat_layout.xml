@@ -1,76 +1,242 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.mxn.soul.flowingdrawer_core.FlowingDrawer
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:clipChildren="false"
     android:clipToPadding="false"
-    android:focusableInTouchMode="true"
-    android:background="@drawable/gradient_background"
-    tools:context=".activitys.interlocutionActivity.ChatActivity">
+    tools:openDrawer="start"
+    app:edPosition="1"
+    app:edMenuSize="260dp"
+    app:edMenuBackground="@color/transparent_color">
 
-
-
-    <ListView
-        android:id="@+id/messages_view"
+    <!--content-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:divider="#fff" />
-
-    <com.example.mtchat_android.models.TypeWriter
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#0C0C64"
-        android:textSize="15sp"
-        android:textStyle="bold|italic"
-        app:fontFamily="sans-serif"
-        app:textAllCaps="false"
-        android:textAlignment="center"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:clipToPadding="false"
+        android:focusableInTouchMode="true"
+        android:background="@drawable/gradient_background">
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/chat_edit_text"
-        android:orientation="horizontal">
 
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="0dp"
-            android:background="@drawable/icon"
-            android:onClick="openGallery"
-            android:padding="20dp"
-            android:scaleType="fitCenter" />
-
-
-        <EditText
-            android:id="@+id/editText"
+        <ListView
+            android:id="@+id/messages_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:ems="10"
-            android:hint="Write a message"
-            android:inputType="text"
-            android:paddingHorizontal="10dp"
-            android:text="" />
+            android:divider="#fff" />
 
-        <ImageButton
+        <com.example.mtchat_android.models.TypeWriter
+            android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="10dp"
-            android:background="@drawable/ic_send_black_24dp"
-            android:onClick="sendMessage"
-            android:padding="20dp"
-            android:scaleType="fitCenter" />
+            android:textColor="#0C0C64"
+            android:textSize="15sp"
+            android:textStyle="bold|italic"
+            app:fontFamily="sans-serif"
+            app:textAllCaps="false"
+            android:textAlignment="center"/>
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/chat_edit_text"
+            android:orientation="horizontal">
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="0dp"
+                android:background="@drawable/icon"
+                android:onClick="openGallery"
+                android:padding="20dp"
+                android:scaleType="fitCenter" />
+
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:ems="10"
+                android:hint="Write a message"
+                android:inputType="text"
+                android:paddingHorizontal="10dp"
+                android:text="" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/ic_send_black_24dp"
+                android:onClick="sendMessage"
+                android:padding="20dp"
+                android:scaleType="fitCenter" />
 
 
 
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+    <!--menu-->
+    <com.mxn.soul.flowingdrawer_core.FlowingMenuLayout
+        android:id="@+id/menulayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/id_container_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/blur_background_drawable"/>
+
+        <!--MENU-->
+
+        <!--LOGO-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteY="0dp">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="133dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@mipmap/logo" />
+
+        </RelativeLayout>
+
+        <!--LINE-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteY="0dp"
+            android:layout_marginTop="150dp">
+
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginBottom="-17dp"
+                android:background="@color/border_color" />
+
+        </RelativeLayout>
+
+        <!--1 ELEMENT-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteY="0dp"
+            android:layout_marginTop="165dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="Allow me to send image"
+                android:layout_marginLeft="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textColor="@color/my_message"
+                android:textSize="18sp"
+                app:fontFamily="@font/abril_fatface" />
+
+            <Switch
+                android:id="@+id/switch2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="8dp" />
+
+        </RelativeLayout>
+
+        <!--LINE-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteY="0dp"
+            android:layout_marginTop="225dp">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginBottom="-17dp"
+                android:background="@color/border_color" />
+
+        </RelativeLayout>
+
+        <!--2 ELEMENT-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteY="0dp"
+            android:layout_marginTop="240dp">
+
+            <TextView
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="Find a new interlocutor"
+                android:layout_marginLeft="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textColor="@color/my_message"
+                android:textSize="18sp"
+                app:fontFamily="@font/abril_fatface" />
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="37dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/border_drawable" />
+
+            <Button
+                android:layout_width="45dp"
+                android:layout_height="37dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/ic_power_24" />
+
+
+        </RelativeLayout>
+
+
+        <!--===END====-->
+    </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
+
+</com.mxn.soul.flowingdrawer_core.FlowingDrawer>

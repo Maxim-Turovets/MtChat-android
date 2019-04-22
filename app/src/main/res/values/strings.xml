@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MtChat-android</string>
+    <string name="app_name">MtChat</string>
     <string name="btnChatTest">Chat Test</string>
     <string name="switch_text">zz</string>
     <string name="button_label_enabled">zz</string>
