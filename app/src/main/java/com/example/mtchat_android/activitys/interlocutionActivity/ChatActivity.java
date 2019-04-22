@@ -46,8 +46,6 @@ public class ChatActivity extends AppCompatActivity  {
 
     private FlowingDrawer mDrawer;
     private EditText editText;
-    //private MessageAdapter messageAdapter;
-  //  private ImageMessageAdapter imageMessageAdapter;
     private AdapterMessage adapterMessage;
     private ListView messagesView;
 
@@ -67,11 +65,7 @@ public class ChatActivity extends AppCompatActivity  {
         adapterMessage = new AdapterMessage(this);
 
         editText = (EditText) findViewById(R.id.editText);
-      //  messageAdapter = new MessageAdapter(this);
-      //  imageMessageAdapter = new ImageMessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.messages_view);
-      //  messagesView.setAdapter(messageAdapter);
-     //   messagesView.setAdapter(imageMessageAdapter);
           messagesView.setAdapter(adapterMessage);
         EchoWebSocketListener.chatActivity=this;
 
@@ -119,7 +113,6 @@ public class ChatActivity extends AppCompatActivity  {
         /////
         mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
         mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_BEZEL);
-//        mDrawer.getBackground().setAlpha(100);
         mDrawer.setOnDrawerStateChangeListener(new ElasticDrawer.OnDrawerStateChangeListener() {
             @Override
             public void onDrawerStateChange(int oldState, int newState) {
@@ -157,7 +150,7 @@ public class ChatActivity extends AppCompatActivity  {
         }
     }
 
-        public  void  onMessage (final MergedMessage message) {
+    public  void  onMessage (final MergedMessage message) {
 
             runOnUiThread(new Runnable() {
                 @Override
@@ -170,36 +163,6 @@ public class ChatActivity extends AppCompatActivity  {
                 }
             });
         }
-
-
-//    public  void  onMessage (final Message message)
-//    {
-//
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                messageAdapter.add(message);
-//                messagesView.setSelection(messagesView.getCount() - 1);
-//                if(message.getName().equals(StaticModels.userInfo.getName()))
-//                editText.setText("");
-//            }
-//        });
-//
-//    }
-//
-//    public  void  onImageMessage (final ImageMessage message)
-//    {
-//         messagesView.setAdapter(imageMessageAdapter);
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                imageMessageAdapter.add(message);
-//                messagesView.setSelection(messagesView.getCount() - 1);
-//            }
-//        });
-//
-//    }
-
 
     public   void openGallery(View view){
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
