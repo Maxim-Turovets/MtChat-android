@@ -48,6 +48,10 @@ public class ChatActivity extends AppCompatActivity {
     int maxim = 0;
 
     TypeWriter tw;
+
+    @Override
+    public void onBackPressed() {}
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +105,9 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
+
+
 
 
     }
@@ -190,6 +197,7 @@ public class ChatActivity extends AppCompatActivity {
         imageView.setImageURI(imageUrl);
 
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageInByte = baos.toByteArray();
@@ -205,9 +213,7 @@ public class ChatActivity extends AppCompatActivity {
         //onImageMessage(myImageMessage);
         MergedMessage mergedMessage = new MergedMessage(myImageMessage);
         onMessage(mergedMessage);
-       // layout.addView(imageView);
-//        BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
-//        Bitmap bitmap = drawable.getBitmap();
+
 
     }
 

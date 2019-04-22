@@ -7,9 +7,10 @@
     android:orientation="vertical"
     android:clipToPadding="false"
     android:focusableInTouchMode="true"
-    android:background="@drawable/gradient_background">
-    tools:context=".activitys.interlocutionActivity.ChatActivity"
-    >
+    android:background="@drawable/gradient_background"
+    tools:context=".activitys.interlocutionActivity.ChatActivity">
+
+
 
     <ListView
         android:id="@+id/messages_view"
