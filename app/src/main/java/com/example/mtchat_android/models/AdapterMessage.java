@@ -65,7 +65,7 @@ public class AdapterMessage extends BaseAdapter {
                 convertView = messageInflater.inflate(R.layout.new_uset_layout, null);
                 holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
                 convertView.setTag(holder);
-                holder.messageBody.setText(message.getTextMessage().getText() + " joined the chat");
+                holder.messageBody.setText(message.getTextMessage().getText());
             } else if (message.getTextMessage().getName().toString().equals(StaticModels.userInfo.getName())) { // this message was sent by us so let's create a basic chat bubble on the right
                 convertView = messageInflater.inflate(R.layout.my_message, null);
                 holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
@@ -191,16 +191,14 @@ public class AdapterMessage extends BaseAdapter {
         }
     }
 
-    //    public void setMessages(List<Message> messages) {
-//        this.messages = messages;
-//    }
-//
-//    public int getSize() {
-//        return messages.size();
-//    }
+
     class MessageViewHolder {
         public TextView name;
         public TextView messageBody;
+    }
+
+    class MessageViewHolder2 {
+        public ImageView messageBody;
     }
 
 

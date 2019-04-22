@@ -17,9 +17,12 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Switch;
 
 import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.ChatCloseActivity;
@@ -31,6 +34,7 @@ import com.example.mtchat_android.models.MergedMessage;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.models.TypeWriter;
+import com.example.mtchat_android.serverobjects.ImageCanSend;
 import com.example.mtchat_android.serverobjects.InterlocutorTyping;
 import com.example.mtchat_android.serverobjects.Message;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
@@ -48,6 +52,8 @@ public class ChatActivity extends AppCompatActivity  {
     private EditText editText;
     private AdapterMessage adapterMessage;
     private ListView messagesView;
+    private Switch imageMessageSwitch;
+    private ImageButton imageMessageButton;
 
     private  static  final  int PICK_IMAGE =100;
     private Uri imageUrl;
@@ -66,6 +72,10 @@ public class ChatActivity extends AppCompatActivity  {
 
         editText = (EditText) findViewById(R.id.editText);
         messagesView = (ListView) findViewById(R.id.messages_view);
+        imageMessageSwitch = (Switch) findViewById(R.id.imageMessageSwitch);
+        imageMessageButton = (ImageButton) findViewById(R.id.btnSendImage);
+        imageMessageButton.setVisibility(View.GONE);
+
           messagesView.setAdapter(adapterMessage);
         EchoWebSocketListener.chatActivity=this;
 
@@ -124,6 +134,26 @@ public class ChatActivity extends AppCompatActivity  {
             @Override
             public void onDrawerSlide(float openRatio, int offsetPixels) {
 
+            }
+        });
+
+        //////
+
+        imageMessageSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    ImageCanSend imageCanSend = new ImageCanSend();
+                    imageCanSend.setAvailable(false);
+                    StartSocketConnection.webSocket.send(ObjectType.getJson(imageCanSend));
+                }
+                if(isChecked==false)
+                {
+                    ImageCanSend imageCanSend = new ImageCanSend();
+                    imageCanSend.setAvailable(true);
+                    StartSocketConnection.webSocket.send(ObjectType.getJson(imageCanSend));
+                }
             }
         });
 
@@ -233,7 +263,27 @@ public class ChatActivity extends AppCompatActivity  {
         });
     }
 
+    public void hideButtonImageSend()
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                imageMessageButton.setVisibility(View.GONE);
+            }
+        });
 
+    }
+
+    public void showButtonImageSend()
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                imageMessageButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+    }
 
 }
 

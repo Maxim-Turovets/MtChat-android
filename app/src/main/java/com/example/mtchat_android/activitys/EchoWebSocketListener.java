@@ -7,6 +7,7 @@ import com.example.mtchat_android.models.MergedMessage;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.IfRoomCreated;
+import com.example.mtchat_android.serverobjects.ImageCanSend;
 import com.example.mtchat_android.serverobjects.InterlocutorTyping;
 import com.example.mtchat_android.serverobjects.Message;
 
@@ -30,13 +31,46 @@ public  class EchoWebSocketListener extends WebSocketListener {
     @Override
     public void onMessage(WebSocket webSocket, String text) {
 
+        if(objectInfo(text).toString().equals("ImageCanSend"))
+        {
+            ImageCanSend imageCanSend = new ImageCanSend();
+            imageCanSend =(ImageCanSend) ObjectType.getObject(text, imageCanSend);
+
+            if(imageCanSend.isAvailable())
+            {
+                chatActivity.hideButtonImageSend();
+
+                Message myMessage = new Message();
+                myMessage.setName("fict");
+                myMessage.setObjectType("Message");
+                myMessage.setText("you are allowed to send image");
+                myMessage.setTime("");
+                MergedMessage mergedMessage = new MergedMessage(myMessage);
+                chatActivity.onMessage(mergedMessage);
+            }
+            if(imageCanSend.isAvailable()==false)
+            {
+                chatActivity.showButtonImageSend();
+
+                Message myMessage = new Message();
+                myMessage.setName("fict");
+                myMessage.setObjectType("Message");
+                myMessage.setText("you are not allowed to send image");
+                myMessage.setTime("");
+                MergedMessage mergedMessage = new MergedMessage(myMessage);
+                chatActivity.onMessage(mergedMessage);
+            }
+
+        }
         if(objectInfo(text).toString().equals("InterlocutorTyping"))
         {
             InterlocutorTyping interlocutorTyping = new InterlocutorTyping();
             interlocutorTyping =(InterlocutorTyping)ObjectType.getObject(text, interlocutorTyping);
 
-            if(interlocutorTyping.isTyping())
-            chatActivity.showPersonTyping();
+            if(interlocutorTyping.isTyping()) {
+                chatActivity.showPersonTyping();
+
+            }
 
             if(interlocutorTyping.isTyping()==false)
                 chatActivity.hidePersonTyping();
@@ -57,7 +91,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
             Message myMessage = new Message();
             myMessage.setName("fict");
             myMessage.setObjectType("Message");
-            myMessage.setText(StaticModels.interlocutorName);
+            myMessage.setText(StaticModels.interlocutorName + " joined the chat");
             myMessage.setTime("");
             MergedMessage mergedMessage = new MergedMessage(myMessage);
             try {
