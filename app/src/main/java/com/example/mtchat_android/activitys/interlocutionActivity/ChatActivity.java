@@ -23,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.ChatCloseActivity;
@@ -43,17 +44,26 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import java.io.ByteArrayOutputStream;
 
 
+import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
+import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 import okio.ByteString;
 
 
 public class ChatActivity extends AppCompatActivity  {
 
     private FlowingDrawer mDrawer;
-    private EditText editText;
+    private EmojiconEditText editText;
     private AdapterMessage adapterMessage;
     private ListView messagesView;
     private Switch imageMessageSwitch;
     private ImageButton imageMessageButton;
+    private ImageButton textMessageButton;
+    private boolean showButton;
+
+
+    ImageButton emojiImageButton;
+    View rootView;
+    EmojIconActions emojIcon;
 
     private  static  final  int PICK_IMAGE =100;
     private Uri imageUrl;
@@ -70,11 +80,20 @@ public class ChatActivity extends AppCompatActivity  {
         setContentView(R.layout.chat_layout);
         adapterMessage = new AdapterMessage(this);
 
-        editText = (EditText) findViewById(R.id.editText);
+        editText = (EmojiconEditText) findViewById(R.id.editText);
         messagesView = (ListView) findViewById(R.id.messages_view);
         imageMessageSwitch = (Switch) findViewById(R.id.imageMessageSwitch);
         imageMessageButton = (ImageButton) findViewById(R.id.btnSendImage);
+        textMessageButton = (ImageButton) findViewById(R.id.btnSendMessage);
         imageMessageButton.setVisibility(View.GONE);
+
+        /// Smile
+        rootView = findViewById(R.id.root_view);
+        emojiImageButton = (ImageButton) findViewById(R.id.emoji_btn);
+        emojIcon = new EmojIconActions(this, rootView, editText, emojiImageButton);
+        emojIcon.ShowEmojIcon();
+        emojIcon.setIconsIds(R.drawable.ic_action_keyboard, R.drawable.smiley);
+        /// end smile
 
         messagesView.setAdapter(adapterMessage);
         EchoWebSocketListener.chatActivity=this;
@@ -84,9 +103,7 @@ public class ChatActivity extends AppCompatActivity  {
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -99,6 +116,8 @@ public class ChatActivity extends AppCompatActivity  {
                         interlocutorTyping.setTyping(true);
                         interlocutorTyping.setName(StaticModels.userInfo.getName());
                         StartSocketConnection.webSocket.send(ObjectType.getJson(interlocutorTyping));
+                        imageMessageButton.setVisibility(View.GONE);
+                        textMessageButton.setVisibility(View.VISIBLE);
                         maxim++;
                     }
                 if(size==0)
@@ -107,6 +126,10 @@ public class ChatActivity extends AppCompatActivity  {
                     InterlocutorTyping interlocutorTyping = new InterlocutorTyping();
                     interlocutorTyping.setTyping(false);
                     StartSocketConnection.webSocket.send(ObjectType.getJson(interlocutorTyping));
+                    if(showButton) {
+                        imageMessageButton.setVisibility(View.VISIBLE);
+                        textMessageButton.setVisibility(View.GONE);
+                    }
                 }
 
             }
@@ -178,6 +201,7 @@ public class ChatActivity extends AppCompatActivity  {
             onMessage(mergedMessage);
             StartSocketConnection.webSocket.send(ObjectType.getJson(myMessage));
         }
+
     }
 
     public  void  onMessage (final MergedMessage message) {
@@ -209,29 +233,33 @@ public class ChatActivity extends AppCompatActivity  {
 
         ImageView imageView = new ImageView(this);
 
-        if(resultCode==RESULT_OK&& requestCode==PICK_IMAGE)
+        if(resultCode==RESULT_OK&& requestCode==PICK_IMAGE) {
             imageUrl = data.getData();
 
-        imageView.setImageURI(imageUrl);
+            imageView.setImageURI(imageUrl);
 
-        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 25, baos);
-        byte[] imageInByte = baos.toByteArray();
-        byte[] one_bit = new byte[1];
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 25, baos);
+            byte[] imageInByte = baos.toByteArray();
+            byte[] one_bit = new byte[1];
 
-        ByteString byteString = ByteString.of(imageInByte);
-        ByteString byteString2 = ByteString.of(one_bit);
+            ByteString byteString = ByteString.of(imageInByte);
+            ByteString byteString2 = ByteString.of(one_bit);
 
-        StartSocketConnection.webSocket.send(byteString);
-        StartSocketConnection.webSocket.send(byteString2);
+            StartSocketConnection.webSocket.send(byteString);
+            StartSocketConnection.webSocket.send(byteString2);
 
-        ImageMessage myImageMessage = new ImageMessage(imageInByte, true);
-        //onImageMessage(myImageMessage);
-        MergedMessage mergedMessage = new MergedMessage(myImageMessage);
-        onMessage(mergedMessage);
-
+            ImageMessage myImageMessage = new ImageMessage(imageInByte, true);
+            //onImageMessage(myImageMessage);
+            MergedMessage mergedMessage = new MergedMessage(myImageMessage);
+            onMessage(mergedMessage);
+        }
+        else{
+            Toast toast = Toast.makeText(this, "Select please a photo", Toast.LENGTH_SHORT);
+            toast.show();
+        }
 
     }
 
@@ -269,6 +297,8 @@ public class ChatActivity extends AppCompatActivity  {
             @Override
             public void run() {
                 imageMessageButton.setVisibility(View.GONE);
+                textMessageButton.setVisibility(View.VISIBLE);
+                showButton = false;
             }
         });
 
@@ -279,7 +309,9 @@ public class ChatActivity extends AppCompatActivity  {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                imageMessageButton.setVisibility(View.VISIBLE);
+               imageMessageButton.setVisibility(View.VISIBLE);
+               textMessageButton.setVisibility(View.GONE);
+               showButton = true;
             }
         });
 
