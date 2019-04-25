@@ -89,11 +89,11 @@ public class AdapterMessage extends BaseAdapter {
 
 
 
-              ByteArrayOutputStream out = new ByteArrayOutputStream();
-              bmp.compress(Bitmap.CompressFormat.JPEG, 10, out);
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG, 10, out);
             byte[] byteArray = out.toByteArray();
 
-          //  bmp = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
+            //  bmp = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
 
             if (message.getImageMessage().isFromMe()) {
                 // Convert bytes data into a Bitmap
@@ -203,4 +203,3 @@ public class AdapterMessage extends BaseAdapter {
 
 
 }
-

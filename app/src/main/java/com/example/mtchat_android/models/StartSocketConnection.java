@@ -9,6 +9,7 @@ import com.example.mtchat_android.serverobjects.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -24,9 +25,15 @@ public class StartSocketConnection {
 
     public static void startSocketConnection() {
         client = new OkHttpClient();
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .build();
+
         request = new Request.Builder().url("ws://77.47.224.135:8080/sock/chat").build();
         listener = new EchoWebSocketListener();
-        webSocket = client.newWebSocket(request, listener);
+        webSocket = okHttpClient.newWebSocket(request, listener);
        // client.dispatcher().executorService().shutdown();
     }
 

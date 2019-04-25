@@ -76,11 +76,11 @@ public class ChatActivity extends AppCompatActivity  {
         imageMessageButton = (ImageButton) findViewById(R.id.btnSendImage);
         imageMessageButton.setVisibility(View.GONE);
 
-          messagesView.setAdapter(adapterMessage);
+        messagesView.setAdapter(adapterMessage);
         EchoWebSocketListener.chatActivity=this;
 
         tw = (TypeWriter) findViewById(R.id.tv);
-         tw.setVisibility(View.GONE);
+        tw.setVisibility(View.GONE);
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -182,17 +182,17 @@ public class ChatActivity extends AppCompatActivity  {
 
     public  void  onMessage (final MergedMessage message) {
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    adapterMessage.add(message);
-                    messagesView.setSelection(messagesView.getCount() - 1);
-                    if(message.getTextMessage()!=null)
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapterMessage.add(message);
+                messagesView.setSelection(messagesView.getCount() - 1);
+                if(message.getTextMessage()!=null)
                     if (message.getTextMessage().getName().equals(StaticModels.userInfo.getName()))
                         editText.setText("");
-                }
-            });
-        }
+            }
+        });
+    }
 
     public   void openGallery(View view){
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -217,7 +217,7 @@ public class ChatActivity extends AppCompatActivity  {
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 25, baos);
         byte[] imageInByte = baos.toByteArray();
         byte[] one_bit = new byte[1];
 
@@ -286,4 +286,3 @@ public class ChatActivity extends AppCompatActivity  {
     }
 
 }
-
