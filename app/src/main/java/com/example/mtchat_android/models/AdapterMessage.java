@@ -78,7 +78,7 @@ public class AdapterMessage extends BaseAdapter {
                 holder.name.setText(StaticModels.interlocutorName);
                 holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
                 convertView.setTag(holder);
-                holder.messageBody.setText(message.getTextMessage().getText() + "\n" + StaticModels.messageTime);
+                holder.messageBody.setText(message.getTextMessage().getText());
             }
         }
         if (message.getImageMessage() != null) {

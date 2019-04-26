@@ -92,7 +92,7 @@ public class StartSocketConnection {
         nameList.add("Ягуар");
         nameList.add("java иди на***");
 
-        double item = Math.random()*(nameList.size()+1);
+        double item = Math.random()*(nameList.size());
         return nameList.get((int)item);
 
     }
