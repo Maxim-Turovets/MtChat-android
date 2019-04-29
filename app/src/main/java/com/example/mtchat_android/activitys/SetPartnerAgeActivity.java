@@ -7,14 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.mtchat_android.R;
-import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
-import com.example.mtchat_android.serverobjects.InterlocutorInfo;
 
 public class SetPartnerAgeActivity extends AppCompatActivity {
     Button search;
@@ -30,7 +27,6 @@ public class SetPartnerAgeActivity extends AppCompatActivity {
         search = (Button) findViewById(R.id.btnSetPartnerAgeSearch);
         from = (EditText) findViewById(R.id.inpSetPartnerAgeFrom);
         to = (EditText) findViewById(R.id.inpSetPartnerAgeTo);
-        EchoWebSocketListener.setPartnerAgeActivity = this;
     }
 
 
@@ -39,13 +35,8 @@ public class SetPartnerAgeActivity extends AppCompatActivity {
         StaticModels.interlocutorInfo.setAgeFrom(from.getText().toString());
         StaticModels.interlocutorInfo.setAgeTo(to.getText().toString());
         StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.interlocutorInfo));
-        Intent intent = new Intent(this, Loading_animation_activity.class);
+        Intent intent = new Intent(this, LoadingAnimationActivity.class);
         startActivity(intent);
     }
 
-    public void goToChat()
-    {
-        Intent intent = new Intent(this, ChatActivity.class);
-        startActivity(intent);
-    }
 }

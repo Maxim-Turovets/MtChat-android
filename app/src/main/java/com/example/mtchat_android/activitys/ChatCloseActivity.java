@@ -11,6 +11,7 @@ import com.example.mtchat_android.R;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
+import com.example.mtchat_android.serverobjects.ConnectInfo;
 
 public class ChatCloseActivity extends AppCompatActivity {
 
@@ -30,10 +31,14 @@ public class ChatCloseActivity extends AppCompatActivity {
 
     public  void reconnectButtonPress(View view)
     {
-        StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.connectInfo));
+        ConnectInfo templateConnectInfo = new ConnectInfo();
+        templateConnectInfo.setObjectType("ConnectInfo");
+        templateConnectInfo.setChatType("pair");
+
+        StartSocketConnection.webSocket.send(ObjectType.getJson(templateConnectInfo));
         StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.userInfo));
         StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.interlocutorInfo));
-        Intent intent = new Intent(this, Loading_animation_activity.class);
+        Intent intent = new Intent(this, LoadingAnimationActivity.class);
         startActivity(intent);
     }
 

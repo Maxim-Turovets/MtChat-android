@@ -78,7 +78,7 @@ public class ChatActivity extends AppCompatActivity  {
         imageMessageSwitch = (Switch) findViewById(R.id.imageMessageSwitch);
         imageMessageButton = (ImageButton) findViewById(R.id.btnSendImage);
         textMessageButton = (ImageButton) findViewById(R.id.btnSendMessage);
-        imageMessageButton.setVisibility(View.GONE);
+      //  imageMessageButton.setVisibility(View.GONE);
 
         /// Smile
         rootView = findViewById(R.id.root_view);

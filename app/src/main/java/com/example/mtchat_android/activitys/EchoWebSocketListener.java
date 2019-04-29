@@ -21,7 +21,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
     private static final int NORMAL_CLOSURE_STATUS = 1000;
 
     public static ChatActivity chatActivity;
-    public static SetPartnerAgeActivity setPartnerAgeActivity;
+   // public static SetPartnerAgeActivity setPartnerAgeActivity;
 
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
@@ -99,8 +99,8 @@ public  class EchoWebSocketListener extends WebSocketListener {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(setPartnerAgeActivity!=null)
-                setPartnerAgeActivity.goToChat();
+            if(StaticModels.chatCloseActivity!=null)
+                StaticModels.chatCloseActivity.goToChat();
             try {
                 Thread.sleep(600);
             } catch (InterruptedException e) {
