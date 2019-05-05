@@ -14,6 +14,6 @@ public class StaticModels {
     public  static InterlocutorInfo interlocutorInfo;
     public  static ConnectInfo connectInfo;
     public  static String messageTime;
-    public  static LoadingAnimationActivity chatCloseActivity;
+    public  static LoadingAnimationActivity loadingAnimationActivity;
 
 }

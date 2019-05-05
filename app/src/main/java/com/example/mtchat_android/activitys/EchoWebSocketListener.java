@@ -95,14 +95,14 @@ public  class EchoWebSocketListener extends WebSocketListener {
             myMessage.setTime("");
             MergedMessage mergedMessage = new MergedMessage(myMessage);
             try {
-                Thread.sleep(100);
+                Thread.sleep(400);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(StaticModels.chatCloseActivity!=null)
-                StaticModels.chatCloseActivity.goToChat();
+            if(StaticModels.loadingAnimationActivity!=null)
+                StaticModels.loadingAnimationActivity.goToChat();
             try {
-                Thread.sleep(600);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

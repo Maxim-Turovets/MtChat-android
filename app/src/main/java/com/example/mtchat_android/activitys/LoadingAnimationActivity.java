@@ -20,7 +20,12 @@ public class LoadingAnimationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loadind_animation_layout);
 
-        StaticModels.chatCloseActivity = this;
+        StaticModels.loadingAnimationActivity = this;
+        try {
+            Thread.sleep(400);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         myBrowser = (WebView) findViewById(R.id.web_view);
         myBrowser.loadUrl("file:///android_asset/animation/animation.html");

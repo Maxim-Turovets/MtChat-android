@@ -3,6 +3,7 @@ package com.example.mtchat_android.activitys.interlocutionActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -52,6 +53,7 @@ public class ChatActivity extends AppCompatActivity  {
     private ImageButton imageMessageButton;
     private ImageButton textMessageButton;
     private boolean showButton;
+    private MediaPlayer messageSound;
 
 
     ImageButton emojiImageButton;
@@ -78,7 +80,11 @@ public class ChatActivity extends AppCompatActivity  {
         imageMessageSwitch = (Switch) findViewById(R.id.imageMessageSwitch);
         imageMessageButton = (ImageButton) findViewById(R.id.btnSendImage);
         textMessageButton = (ImageButton) findViewById(R.id.btnSendMessage);
-      //  imageMessageButton.setVisibility(View.GONE);
+        imageMessageButton.setVisibility(View.GONE);
+
+        /// Sound message
+        messageSound = MediaPlayer.create(this,R.raw.message);
+
 
         /// Smile
         rootView = findViewById(R.id.root_view);
@@ -204,6 +210,7 @@ public class ChatActivity extends AppCompatActivity  {
             public void run() {
                 adapterMessage.add(message);
                 messagesView.setSelection(messagesView.getCount() - 1);
+                messageSound.start();
                 if(message.getTextMessage()!=null)
                     if (message.getTextMessage().getName().equals(StaticModels.userInfo.getName()))
                         editText.setText("");
