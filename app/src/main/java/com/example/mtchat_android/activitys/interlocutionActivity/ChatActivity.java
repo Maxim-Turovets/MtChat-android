@@ -210,7 +210,6 @@ public class ChatActivity extends AppCompatActivity  {
             public void run() {
                 adapterMessage.add(message);
                 messagesView.setSelection(messagesView.getCount() - 1);
-                messageSound.start();
                 if(message.getTextMessage()!=null)
                     if (message.getTextMessage().getName().equals(StaticModels.userInfo.getName()))
                         editText.setText("");
@@ -315,6 +314,12 @@ public class ChatActivity extends AppCompatActivity  {
             }
         });
 
+    }
+
+
+    public  void soundPlay()
+    {
+        messageSound.start();
     }
 
 }

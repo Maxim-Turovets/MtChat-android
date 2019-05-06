@@ -1,5 +1,8 @@
 package com.example.mtchat_android.activitys;
 
+import android.content.Context;
+import android.os.Vibrator;
+
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.ImageMessage;
@@ -118,6 +121,12 @@ public  class EchoWebSocketListener extends WebSocketListener {
            MergedMessage mergedMessage = new MergedMessage(tempMessage);
             chatActivity.onMessage(mergedMessage);
             StaticModels.messageTime=tempMessage.getTime();
+           long[] pattern = { 100, 300, 400, 300 };
+           chatActivity.soundPlay();
+           Vibrator vibrator = (Vibrator) chatActivity.getSystemService(Context.VIBRATOR_SERVICE);
+           if (vibrator.hasVibrator()) {
+               vibrator.vibrate(pattern, -1);
+           }
        }
 
     }

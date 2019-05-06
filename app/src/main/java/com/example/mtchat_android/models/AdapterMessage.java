@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +74,7 @@ public class AdapterMessage extends BaseAdapter {
                 holder.messageBody.setText(message.getTextMessage().getText());
 
             } else { // this message was sent by someone else so let's create an advanced chat bubble on the left
+
                 convertView = messageInflater.inflate(R.layout.their_message, null);
                 holder.name = (TextView) convertView.findViewById(R.id.name);
                 holder.name.setText(StaticModels.interlocutorName);
