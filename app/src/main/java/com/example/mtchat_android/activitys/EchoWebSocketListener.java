@@ -2,6 +2,7 @@ package com.example.mtchat_android.activitys;
 
 import android.content.Context;
 import android.os.Vibrator;
+import android.util.Log;
 
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
@@ -142,10 +143,12 @@ public  class EchoWebSocketListener extends WebSocketListener {
     public void onClosing(WebSocket webSocket, int code, String reason) {
         webSocket.close(NORMAL_CLOSURE_STATUS, null);
         System.out.print("Closing : " + code + " / " + reason);
+        Log.d("1","close");
     }
     @Override
     public void onFailure(WebSocket webSocket, Throwable t, Response response) {
         System.out.print("Error : " + t.getMessage());
+        Log.d("1","close");
     }
 
 
