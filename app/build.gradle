@@ -36,6 +36,7 @@ dependencies {
 }
 
 dependencies{
+
     implementation 'com.squareup.okhttp3:okhttp:3.6.0'
 
     implementation 'com.github.hani-momanii:SuperNova-Emoji:1.1'
