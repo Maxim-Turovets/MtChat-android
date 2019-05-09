@@ -66,6 +66,8 @@ public class UserInfoActivity  extends  AppCompatActivity{
             // not active
             femaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
             anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+            //gender
+            StaticModels.userInfo.setGender("male");
             genderChoose = true;
         }
 
@@ -76,7 +78,7 @@ public class UserInfoActivity  extends  AppCompatActivity{
             // not active
             femaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
             maleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-            genderChoose = true;
+           // genderChoose = true;
         }
 
         public  void  userInfoNextBtnPress(View view)

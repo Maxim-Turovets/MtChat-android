@@ -53,43 +53,43 @@
             android:layout_marginTop="30dp">
 
             <ImageButton
-                android:id="@+id/femaleBtn"
+                android:id="@+id/interlocutorFemaleBtn"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
-                android:layout_alignTop="@id/maleBtn"
-                android:layout_alignBottom="@id/maleBtn"
+                android:layout_alignTop="@id/interlocutorMaleBtn"
+                android:layout_alignBottom="@id/interlocutorMaleBtn"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/maleBtn"
+                android:layout_toLeftOf="@+id/interlocutorMaleBtn"
                 android:background="@drawable/gender_white_color_drawable"
                 android:padding="5dp"
-                android:onClick="femaleButtonPress"
+                android:onClick="interlocutorFemaleButtonPress"
                 android:src="@mipmap/icons8_person_female_64">
 
             </ImageButton>
 
             <ImageButton
-                android:id="@+id/maleBtn"
+                android:id="@+id/interlocutorMaleBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_margin="10dp"
                 android:background="@drawable/gender_white_color_drawable"
                 android:gravity="center"
-                android:onClick="maleButtonPress"
+                android:onClick="interlocutorMaleButtonPress"
                 android:padding="15dp"
                 android:src="@mipmap/icons8_user_64" />
 
             <ImageButton
-                android:id="@+id/anonBtn"
+                android:id="@+id/interlocutorAnonBtn"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
-                android:layout_alignTop="@id/maleBtn"
-                android:layout_alignBottom="@id/maleBtn"
+                android:layout_alignTop="@id/interlocutorMaleBtn"
+                android:layout_alignBottom="@id/interlocutorMaleBtn"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/maleBtn"
+                android:layout_toRightOf="@+id/interlocutorMaleBtn"
                 android:background="@drawable/gender_white_color_drawable"
                 android:gravity="center"
-                android:onClick="anonButtonPress"
+                android:onClick="interlocutorAnonButtonPress"
                 android:padding="15dp"
                 android:src="@mipmap/anon_64"></ImageButton>
 
@@ -130,13 +130,13 @@
             tools:layout_editor_absoluteY="0dp">
 
             <EditText
+                android:id="@+id/inpTo"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/gender_white_color_drawable"
                 android:ems="20"
                 android:textAlignment="center"
-
                 android:hint="To"
                 android:layout_toRightOf="@+id/central"
                 android:inputType="number"
@@ -149,6 +149,7 @@
                 android:layout_centerHorizontal="true"/>
 
             <EditText
+                android:id="@+id/inpFrom"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_centerHorizontal="true"
@@ -179,7 +180,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/chat_type_button"
-                android:onClick="goToSetPartnerGender"
+                android:onClick="searchBtnPress"
                 android:layout_centerHorizontal="true"
                 android:text="Search" />
 
