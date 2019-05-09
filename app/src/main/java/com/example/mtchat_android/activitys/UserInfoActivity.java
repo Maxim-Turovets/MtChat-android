@@ -81,14 +81,25 @@ public class UserInfoActivity  extends  AppCompatActivity{
 
         public  void  userInfoNextBtnPress(View view)
         {
+            String localName = inpName.getText().toString().trim();
+            String localAge = inpAge.getText().toString().trim();
             // text edit not empty
-            if(!inpName.toString().trim().equals("") && !inpAge.toString().trim().equals("") && genderChoose)
+            if(!localName.equals("") && !localAge.trim().equals("") && genderChoose)
                  {
-                    StaticModels.userInfo.setName(inpName.getText().toString());
-                    StaticModels.userInfo.setAge(inpAge.getText().toString());
-                    StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.userInfo));
-                    Intent intent = new Intent(this, InterlocutorInfoActivity.class);
-                    startActivity(intent);
+                     int localAgeInteger = Integer.parseInt(localAge);
+                     if(localAgeInteger>100||localAgeInteger<0)
+                     {
+                         Toast toast = Toast.makeText(this, "age must be more 0 and less 100", Toast.LENGTH_SHORT);
+                         toast.show();
+                     }
+                     else {
+                         // info normal
+                         StaticModels.userInfo.setName(inpName.getText().toString());
+                         StaticModels.userInfo.setAge(inpAge.getText().toString());
+                         StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.userInfo));
+                         Intent intent = new Intent(this, InterlocutorInfoActivity.class);
+                         startActivity(intent);
+                     }
                 }
             else {
                 Toast toast = Toast.makeText(this, "Fill in all the fields ", Toast.LENGTH_SHORT);
