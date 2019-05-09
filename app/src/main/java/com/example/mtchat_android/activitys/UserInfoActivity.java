@@ -91,7 +91,7 @@ public class UserInfoActivity  extends  AppCompatActivity{
                     startActivity(intent);
                 }
             else {
-                Toast toast = Toast.makeText(this, "Fill in all the fields", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, "Fill in all the fields ", Toast.LENGTH_SHORT);
                 toast.show();
             }
 
