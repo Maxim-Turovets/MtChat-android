@@ -52,7 +52,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
                 MergedMessage mergedMessage = new MergedMessage(myMessage);
                 chatActivity.onMessage(mergedMessage);
             }
-            if(imageCanSend.isAvailable()==false)
+            if( imageCanSend.isAvailable()==false)
             {
                 chatActivity.showButtonImageSend();
 
