@@ -57,7 +57,7 @@ public class AdapterMessage extends BaseAdapter {
     public View getView(int i, View convertView, ViewGroup viewGroup) {
 
         MergedMessage message = mergedMessages.get(i);
-
+        //TEXT MESSAGE
         if (message.getTextMessage() != null) {
             MessageViewHolder holder = new MessageViewHolder();
             LayoutInflater messageInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -83,6 +83,8 @@ public class AdapterMessage extends BaseAdapter {
                 holder.messageBody.setText(message.getTextMessage().getText());
             }
         }
+
+        // IMAGE MESSAGE
         if (message.getImageMessage() != null) {
             MessageViewHolder2 holder = new MessageViewHolder2();
             LayoutInflater messageInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -95,103 +97,115 @@ public class AdapterMessage extends BaseAdapter {
             bmp.compress(Bitmap.CompressFormat.JPEG, 10, out);
             byte[] byteArray = out.toByteArray();
 
-            //  bmp = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
 
-            if (message.getImageMessage().isFromMe()) {
+            // MY IMAGE
+         //   if (message.getImageMessage().isFromMe()) {
                 // Convert bytes data into a Bitmap
                 convertView = messageInflater.inflate(R.layout.image_my_message_layout, null);
                 holder.messageBody = (ImageView) convertView.findViewById(R.id.imageMessageView);
+                holder.messageBody.setImageBitmap(bmp);
 
-                // Вычисляем ширину и высоту изображения
+
+
+
+                //Вычисляем ширину и высоту изображения
                 int width = bmp.getWidth();
                 int height = bmp.getHeight();
 
-                if (width>1000) {
-                    if (width > height) {
-                        int temp_int = width;
-                        width = height;
-                        height = temp_int;
+                double koef = height/1000;
+                int newWidht = (int) (width/koef);
+                int newheight = (int) (height/koef);
 
-                        if (width > 1000) {
-                            if (height > width) {
-                                int t = width / 1000;
-                                width =1000;
-                                height = height/ t;
-                                Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, height,
-                                        width, false);
-                                holder.messageBody.setImageBitmap(bmHalf);
-                            }
+                Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, newWidht,newheight, false);
+                holder.messageBody.setImageBitmap(bmHalf);
+//
+//                if (width>1000) {
+//                    if (width > height) {
+//                        int temp_int = width;
+//                        width = height;
+//                        height = temp_int;
+//
+//                        if (width > 1000) {
+//                            if (height > width) {
+//                                int t = width / 1000;
+//                                width =1000;
+//                                height = height/ t;
+//                                Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, height,
+//                                        width, false);
+//                                holder.messageBody.setImageBitmap(bmHalf);
+//                            }
+//
+//                        }
+//                        holder.messageBody.setRotation(90);
+//                    }else {
+//                        int t = width - 1000;
+//                        Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, 1000, height - t, false);
+//                        holder.messageBody.setImageBitmap(bmHalf);
+//
+//                    }
+//                } else {
+//                    holder.messageBody.setImageBitmap(bmp);
+//                }
 
-                        }
-                        holder.messageBody.setRotation(90);
-                    }else {
-                        int t = width - 1000;
-                        Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, 1000, height - t, false);
-                        holder.messageBody.setImageBitmap(bmHalf);
+//            } else {
+//                // Convert bytes data into a Bitmap
+//                convertView = messageInflater.inflate(R.layout.image_their_message_layout, null);
+//                holder.messageBody = (ImageView) convertView.findViewById(R.id.imageMessageView);
+//                convertView.setTag(holder);
+//
+//
+//                //Вычисляем ширину и высоту изображения
+//                int width = bmp.getWidth();
+//                int height = bmp.getHeight();
+//
+//                double koef = height/1000;
+//                int newWidht = (int) (width/koef);
+//                int newheight = (int) (height/koef);
+//
+//                Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, newWidht,newheight, false);
+//                holder.messageBody.setImageBitmap(bmHalf);
+//
+//                if (width>1000) {
+//                    if (width > height) {
+//                        int temp_int = width;
+//                        width = height;
+//                        height = temp_int;
+//
+//                        if (width > 1000) {
+//                            if (height > width) {
+//                                int t = width / 1000;
+//                                width =1000;
+//                                height = height/ t;
+//                                Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, height,
+//                                        width, false);
+//                                holder.messageBody.setImageBitmap(bmHalf);
+//                            }
+//
+//                        }
+//                        holder.messageBody.setRotation(90);
+//                    }else {
+//                        int t = width - 1000;
+//                        Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, 1000, height - t, false);
+//                        holder.messageBody.setImageBitmap(bmHalf);
+//
+//                    }
+//                } else {
+//                    holder.messageBody.setImageBitmap(bmp);
+//                }
+           // }
 
-                    }
-                } else {
-                    holder.messageBody.setImageBitmap(bmp);
-                }
-
-            } else {
-                // Convert bytes data into a Bitmap
-                convertView = messageInflater.inflate(R.layout.image_their_message_layout, null);
-                holder.messageBody = (ImageView) convertView.findViewById(R.id.imageMessageView);
-                convertView.setTag(holder);
-                // Вычисляем ширину и высоту изображения
-                int width = bmp.getWidth();
-                int height = bmp.getHeight();
-
-                if (width>1000) {
-                    if (width > height) {
-                        int temp_int = width;
-                        width = height;
-                        height = temp_int;
-
-                        if (width > 1000) {
-                            if (height > width) {
-                                int t = width / 1000;
-                                width =1000;
-                                height = height/ t;
-                                Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, height,
-                                        width, false);
-                                holder.messageBody.setImageBitmap(bmHalf);
-                            }
-
-                        }
-                        holder.messageBody.setRotation(90);
-                    }else {
-                        int t = width - 1000;
-                        Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, 1000, height - t, false);
-                        holder.messageBody.setImageBitmap(bmHalf);
-
-                    }
-                } else {
-                    holder.messageBody.setImageBitmap(bmp);
-                }
-            }
-
-            holder.messageBody.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    v.setRotation(90);
-                }
-            });
+//            holder.messageBody.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    v.setRotation(90);
+//                }
+//            });
         }
 
 
         return convertView;
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
-    protected int sizeOf(Bitmap data) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR1) {
-            return data.getRowBytes() * data.getHeight();
-        } else {
-            return data.getByteCount();
-        }
-    }
 
 
     class MessageViewHolder {

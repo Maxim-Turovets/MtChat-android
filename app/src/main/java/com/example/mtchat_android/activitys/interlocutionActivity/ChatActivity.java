@@ -240,6 +240,7 @@ public class ChatActivity extends AppCompatActivity  {
             Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
+           // bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 25, baos);
             byte[] imageInByte = baos.toByteArray();
             byte[] one_bit = new byte[1];
