@@ -9,190 +9,196 @@
     >
 
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="0dp">
 
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints"
-        android:layout_centerVertical ="true"
-        tools:layout_editor_absoluteX="-62dp"
-        tools:layout_editor_absoluteY="51dp">
-
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="false"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/window_name_drawable"
-        android:lineSpacingExtra="24sp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="Information about you"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textAppearance="@style/TextAppearance.Compat.Notification.Time"
-        android:textColor="@color/their_name"
-        android:textSize="26dp"
-        android:textStyle="bold" />
-</RelativeLayout>
-
-        <!--USER GENDER   -->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="30dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="100dp"
+            android:clipToPadding="false"
+            android:focusableInTouchMode="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="-62dp">
 
-            <ImageButton
-                android:id="@+id/femaleBtn"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_alignTop="@id/maleBtn"
-                android:layout_alignBottom="@id/maleBtn"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/maleBtn"
-                android:background="@drawable/gender_white_color_drawable"
-                android:padding="5dp"
-                android:onClick="femaleButtonPress"
-                android:src="@mipmap/icons8_person_female_64">
-
-            </ImageButton>
-
-            <ImageButton
-                android:id="@+id/maleBtn"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_margin="10dp"
-                android:background="@drawable/gender_white_color_drawable"
-                android:gravity="center"
-                android:onClick="maleButtonPress"
-                android:padding="15dp"
-                android:src="@mipmap/icons8_user_64" />
+                android:layout_gravity="center">
 
-            <ImageButton
-                android:id="@+id/anonBtn"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_alignTop="@id/maleBtn"
-                android:layout_alignBottom="@id/maleBtn"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/maleBtn"
-                android:background="@drawable/gender_white_color_drawable"
-                android:gravity="center"
-                android:onClick="anonButtonPress"
-                android:padding="15dp"
-                android:src="@mipmap/anon_64"></ImageButton>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="false"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/window_name_drawable"
+                    android:lineSpacingExtra="24sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Information about you"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Compat.Notification.Time"
+                    android:textColor="@color/their_name"
+                    android:textSize="26dp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <!--USER GENDER   -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="30dp">
+
+                <ImageButton
+                    android:id="@+id/femaleBtn"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_alignTop="@id/maleBtn"
+                    android:layout_alignBottom="@id/maleBtn"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/maleBtn"
+                    android:background="@drawable/gender_white_color_drawable"
+                    android:onClick="femaleButtonPress"
+                    android:padding="5dp"
+                    android:src="@mipmap/icons8_person_female_64">
+
+                </ImageButton>
+
+                <ImageButton
+                    android:id="@+id/maleBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/gender_white_color_drawable"
+                    android:gravity="center"
+                    android:onClick="maleButtonPress"
+                    android:padding="15dp"
+                    android:src="@mipmap/icons8_user_64" />
+
+                <ImageButton
+                    android:id="@+id/anonBtn"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_alignTop="@id/maleBtn"
+                    android:layout_alignBottom="@id/maleBtn"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/maleBtn"
+                    android:background="@drawable/gender_white_color_drawable"
+                    android:gravity="center"
+                    android:onClick="anonButtonPress"
+                    android:padding="15dp"
+                    android:src="@mipmap/anon_64"></ImageButton>
 
 
+                <TextView
+                    android:id="@+id/textView05"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="24sp"
+                    android:text="your gender"
 
-            <TextView
-                android:id="@+id/textView05"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Compat.Notification.Time"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <!--NAME-->
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="24sp"
-                android:text="your gender"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent">
 
-                android:textAlignment="center"
-                android:textAllCaps="true"
-                android:textAppearance="@style/TextAppearance.Compat.Notification.Time"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="24sp"
+                    android:text="your name and age"
 
-        <!--NAME-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent">
-            <TextView
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Compat.Notification.Time"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/inpName"
+                    android:layout_width="218dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/gender_white_color_drawable"
+                    android:ems="20"
+                    android:hint="Enter your name"
+                    android:inputType="text"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+            <!--USER AGE   -->
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lineSpacingExtra="24sp"
-                android:text="your name and age"
-
-                android:textAlignment="center"
-                android:textAllCaps="true"
-                android:textAppearance="@style/TextAppearance.Compat.Notification.Time"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/inpName"
-                android:layout_width="218dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/gender_white_color_drawable"
-                android:ems="20"
-                android:textAlignment="center"
-                android:hint="Enter your name"
-                android:inputType="text"
-                android:text=""
-                android:textSize="18sp" />
-
-        </RelativeLayout>
-
-        <!--USER AGE   -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="0dp">
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="0dp">
 
 
-            <EditText
-                android:id="@+id/inpAge"
-                android:layout_width="218dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/gender_white_color_drawable"
-                android:ems="20"
-                android:textAlignment="center"
-                android:hint="Enter your age"
-                android:inputType="number"
-                android:text=""
-                android:textSize="18sp" />
-        </RelativeLayout>
+                <EditText
+                    android:id="@+id/inpAge"
+                    android:layout_width="218dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/gender_white_color_drawable"
+                    android:ems="20"
+                    android:hint="Enter your age"
+                    android:inputType="number"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+            </RelativeLayout>
 
-        <!--NEXT BUTTON-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="0dp">
-        <Button
-            android:id="@+id/btnUserInfoNext"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/chat_type_button"
-            android:onClick="userInfoNextBtnPress"
-            android:layout_centerHorizontal="true"
-            android:text="Next" />
+            <!--NEXT BUTTON-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="0dp">
 
-        </RelativeLayout>
+                <Button
+                    android:id="@+id/btnUserInfoNext"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/chat_type_button"
+                    android:onClick="userInfoNextBtnPress"
+                    android:text="Next" />
 
-    </LinearLayout>
+            </RelativeLayout>
 
+        </LinearLayout>
 
+    </ScrollView>
 
 
 </android.support.constraint.ConstraintLayout>
