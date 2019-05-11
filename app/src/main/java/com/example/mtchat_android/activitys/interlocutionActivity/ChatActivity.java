@@ -21,7 +21,9 @@ import android.widget.Toast;
 
 import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.ChatCloseActivity;
+import com.example.mtchat_android.activitys.ChatTypeActivity;
 import com.example.mtchat_android.activitys.EchoWebSocketListener;
+import com.example.mtchat_android.activitys.LoadingAnimationActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.AdapterMessage;
 import com.example.mtchat_android.models.ImageMessage;
@@ -43,7 +45,7 @@ import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 import okio.ByteString;
 
 
-public class ChatActivity extends AppCompatActivity  {
+public class ChatActivity extends AppCompatActivity {
 
     private FlowingDrawer mDrawer;
     private EmojiconEditText editText;
@@ -54,20 +56,24 @@ public class ChatActivity extends AppCompatActivity  {
     private ImageButton textMessageButton;
     private boolean showButton;
     private MediaPlayer messageSound;
+    private ImageButton recconectBtn;
+    private ImageButton goToMenuBtn;
+    private ImageButton openCameraBtn;
 
 
     ImageButton emojiImageButton;
     View rootView;
     EmojIconActions emojIcon;
 
-    private  static  final  int PICK_IMAGE =100;
+    private static final int PICK_IMAGE = 100;
     private Uri imageUrl;
     int maxim = 0;
 
     TypeWriter tw;
 
     @Override
-    public void onBackPressed() {}
+    public void onBackPressed() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,10 +86,13 @@ public class ChatActivity extends AppCompatActivity  {
         imageMessageSwitch = (Switch) findViewById(R.id.imageMessageSwitch);
         imageMessageButton = (ImageButton) findViewById(R.id.btnSendImage);
         textMessageButton = (ImageButton) findViewById(R.id.btnSendMessage);
+        recconectBtn = findViewById(R.id.recconectBtn);
+        goToMenuBtn = findViewById(R.id.goToMenuBtn);
+        openCameraBtn = findViewById(R.id.openCameraBtn);
         imageMessageButton.setVisibility(View.GONE);
 
         /// Sound message
-        messageSound = MediaPlayer.create(this,R.raw.message);
+        messageSound = MediaPlayer.create(this, R.raw.message);
 
 
         /// Smile
@@ -95,22 +104,22 @@ public class ChatActivity extends AppCompatActivity  {
         /// end smile
 
         messagesView.setAdapter(adapterMessage);
-        EchoWebSocketListener.chatActivity=this;
+        EchoWebSocketListener.chatActivity = this;
 
         tw = (TypeWriter) findViewById(R.id.tv);
         tw.setVisibility(View.GONE);
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 int size = editText.getText().length();
 
-                if(size>0)
-                    if(maxim==0)
-                    {
+                if (size > 0)
+                    if (maxim == 0) {
                         InterlocutorTyping interlocutorTyping = new InterlocutorTyping();
                         interlocutorTyping.setTyping(true);
                         interlocutorTyping.setName(StaticModels.userInfo.getName());
@@ -119,13 +128,12 @@ public class ChatActivity extends AppCompatActivity  {
                         textMessageButton.setVisibility(View.VISIBLE);
                         maxim++;
                     }
-                if(size==0)
-                {
-                    maxim=0;
+                if (size == 0) {
+                    maxim = 0;
                     InterlocutorTyping interlocutorTyping = new InterlocutorTyping();
                     interlocutorTyping.setTyping(false);
                     StartSocketConnection.webSocket.send(ObjectType.getJson(interlocutorTyping));
-                    if(showButton) {
+                    if (showButton) {
                         imageMessageButton.setVisibility(View.VISIBLE);
                         textMessageButton.setVisibility(View.GONE);
                     }
@@ -139,7 +147,6 @@ public class ChatActivity extends AppCompatActivity  {
 
             }
         });
-
 
 
         /////
@@ -164,14 +171,12 @@ public class ChatActivity extends AppCompatActivity  {
         imageMessageSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                {
+                if (isChecked) {
                     ImageCanSend imageCanSend = new ImageCanSend();
                     imageCanSend.setAvailable(false);
                     StartSocketConnection.webSocket.send(ObjectType.getJson(imageCanSend));
                 }
-                if(isChecked==false)
-                {
+                if (isChecked == false) {
                     ImageCanSend imageCanSend = new ImageCanSend();
                     imageCanSend.setAvailable(true);
                     StartSocketConnection.webSocket.send(ObjectType.getJson(imageCanSend));
@@ -181,7 +186,6 @@ public class ChatActivity extends AppCompatActivity  {
 
 
     }
-
 
 
     public void sendMessage(View view) {
@@ -203,26 +207,23 @@ public class ChatActivity extends AppCompatActivity  {
 
     }
 
-    public  void  onMessage (final MergedMessage message) {
+    public void onMessage(final MergedMessage message) {
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 adapterMessage.add(message);
                 messagesView.setSelection(messagesView.getCount() - 1);
-                if(message.getTextMessage()!=null)
+                if (message.getTextMessage() != null)
                     if (message.getTextMessage().getName().equals(StaticModels.userInfo.getName()))
                         editText.setText("");
             }
         });
     }
 
-    public   void openGallery(View view){
+    public void openGallery(View view) {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery,PICK_IMAGE);
-
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        startActivityForResult(intent,1);
+        startActivityForResult(gallery, PICK_IMAGE);
 
     }
 
@@ -232,7 +233,7 @@ public class ChatActivity extends AppCompatActivity  {
 
         ImageView imageView = new ImageView(this);
 
-        if(resultCode==RESULT_OK&& requestCode==PICK_IMAGE) {
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageUrl = data.getData();
 
             imageView.setImageURI(imageUrl);
@@ -240,7 +241,7 @@ public class ChatActivity extends AppCompatActivity  {
             Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-           // bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            // bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 25, baos);
             byte[] imageInByte = baos.toByteArray();
             byte[] one_bit = new byte[1];
@@ -255,34 +256,32 @@ public class ChatActivity extends AppCompatActivity  {
             //onImageMessage(myImageMessage);
             MergedMessage mergedMessage = new MergedMessage(myImageMessage);
             onMessage(mergedMessage);
-        }
-        else{
+        } else {
             Toast toast = Toast.makeText(this, "Select please a photo", Toast.LENGTH_SHORT);
             toast.show();
         }
 
     }
 
-    public void  goToChatClose(){
+    public void goToChatClose() {
         Intent intent = new Intent(this, ChatCloseActivity.class);
         startActivity(intent);
     }
 
-    public void showPersonTyping()
-    {
+    public void showPersonTyping() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 tw.setVisibility(View.VISIBLE);
                 tw.setText("");
                 tw.setCharacterDelay(150);
-                tw.animateText(StaticModels.interlocutorName+"  typing ✍ ... ");
+                tw.animateText(StaticModels.interlocutorName + "  typing ✍ ... ");
             }
         });
     }
 
 
-    public void hidePersonTyping(){
+    public void hidePersonTyping() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -291,8 +290,7 @@ public class ChatActivity extends AppCompatActivity  {
         });
     }
 
-    public void hideButtonImageSend()
-    {
+    public void hideButtonImageSend() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -304,23 +302,52 @@ public class ChatActivity extends AppCompatActivity  {
 
     }
 
-    public void showButtonImageSend()
-    {
+    public void showButtonImageSend() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-               imageMessageButton.setVisibility(View.VISIBLE);
-               textMessageButton.setVisibility(View.GONE);
-               showButton = true;
+                imageMessageButton.setVisibility(View.VISIBLE);
+                textMessageButton.setVisibility(View.GONE);
+                showButton = true;
             }
         });
 
     }
 
 
-    public  void soundPlay()
-    {
+    public void soundPlay() {
         messageSound.start();
+    }
+
+    public void reconnectBtnPress(View view) {
+        recconectBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+        StartSocketConnection.webSocket.close(4999, "Recconect");
+
+
+        Intent intent = new Intent(this, LoadingAnimationActivity.class);
+        startActivity(intent);
+
+        StartSocketConnection.startSocketConnection();
+        StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.connectInfo));
+        StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.userInfo));
+        StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.interlocutorInfo));
+    }
+
+    public void goToMenuBtnPress(View view) {
+        goToMenuBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+        StartSocketConnection.webSocket.close(4999, "Recconect");
+
+        Intent intent = new Intent(this, ChatTypeActivity.class);
+        startActivity(intent);
+    }
+
+    public void openCameraBtnPress(View view)
+    {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent,1);
+
+        openCameraBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+
     }
 
 }
