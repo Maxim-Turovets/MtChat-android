@@ -11,7 +11,12 @@
 
 
 
-
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="0dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -182,11 +187,13 @@
                 android:background="@drawable/chat_type_button"
                 android:onClick="searchBtnPress"
                 android:layout_centerHorizontal="true"
-                android:text="Search" />
+                android:text="Search"
+                android:layout_marginBottom="30dp"/>
 
         </RelativeLayout>
 
     </LinearLayout>
+    </ScrollView>
 
 
 

@@ -192,7 +192,8 @@
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/chat_type_button"
                     android:onClick="userInfoNextBtnPress"
-                    android:text="Next" />
+                    android:text="Next"
+                    android:layout_marginBottom="30dp"/>
 
             </RelativeLayout>
 
