@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.ChatCloseActivity;
 import com.example.mtchat_android.activitys.ChatTypeActivity;
 import com.example.mtchat_android.activitys.EchoWebSocketListener;
+import com.example.mtchat_android.activitys.InterlocutorInfoActivity;
 import com.example.mtchat_android.activitys.LoadingAnimationActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.AdapterMessage;
@@ -56,10 +58,10 @@ public class ChatActivity extends AppCompatActivity {
     private ImageButton textMessageButton;
     private boolean showButton;
     private MediaPlayer messageSound;
-    private ImageButton recconectBtn;
+    private ImageButton reconnectBtn;
     private ImageButton goToMenuBtn;
     private ImageButton openCameraBtn;
-
+    private int countClickedBackButton = 0;
 
     ImageButton emojiImageButton;
     View rootView;
@@ -73,6 +75,27 @@ public class ChatActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        countClickedBackButton++;
+        if(countClickedBackButton==2)
+        {
+            this.finish();
+            StartSocketConnection.webSocket.close(4999, "Recconect");
+            Intent intent = new Intent(this, InterlocutorInfoActivity.class);
+            startActivity(intent);
+        }
+        Toast toast = Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT);
+        toast.show();
+
+        new CountDownTimer(2_000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+            @Override
+            public void onFinish() {
+               countClickedBackButton=0;
+            }
+        }.start();
+
     }
 
     @Override
@@ -86,7 +109,7 @@ public class ChatActivity extends AppCompatActivity {
         imageMessageSwitch = (Switch) findViewById(R.id.imageMessageSwitch);
         imageMessageButton = (ImageButton) findViewById(R.id.btnSendImage);
         textMessageButton = (ImageButton) findViewById(R.id.btnSendMessage);
-        recconectBtn = findViewById(R.id.recconectBtn);
+        reconnectBtn = findViewById(R.id.recconectBtn);
         goToMenuBtn = findViewById(R.id.goToMenuBtn);
         openCameraBtn = findViewById(R.id.openCameraBtn);
         imageMessageButton.setVisibility(View.GONE);
@@ -204,7 +227,7 @@ public class ChatActivity extends AppCompatActivity {
             onMessage(mergedMessage);
             StartSocketConnection.webSocket.send(ObjectType.getJson(myMessage));
         }
-
+        countClickedBackButton = 0;
     }
 
     public void onMessage(final MergedMessage message) {
@@ -320,7 +343,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     public void reconnectBtnPress(View view) {
-        recconectBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+        reconnectBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
         StartSocketConnection.webSocket.close(4999, "Recconect");
 
 

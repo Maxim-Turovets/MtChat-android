@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.mtchat_android"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -51,5 +51,14 @@ dependencies {
     implementation 'com.mxn.soul:flowingdrawer-core:2.0.0'
     implementation 'com.nineoldandroids:library:2.4.0'
 
+}
+
+// Anim
+dependencies {
+    implementation 'me.itangqi.waveloadingview:library:0.3.5'
+    implementation 'net.bohush.geometricprogressview:geometricprogressview:1.1.1'
+
+    // I have uploaded v0.3.5 on 2017-01-06, if it doesn't take effect or your
+    // gradle cannot find it in maven central, you may try v0.3.4.
 }
 

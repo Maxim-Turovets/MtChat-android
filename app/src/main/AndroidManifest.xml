@@ -29,29 +29,25 @@
         </activity>
         <activity
             android:name=".activitys.ChatTypeActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activitys.interlocutionActivity.ChatActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+             />
         <activity
             android:name=".activitys.LoadingAnimationActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activitys.ChatCloseActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
 
         <activity
         android:name=".activitys.UserInfoActivity"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".activitys.InterlocutorInfoActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
 
         <meta-data

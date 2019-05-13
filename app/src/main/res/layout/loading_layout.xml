@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <!--<me.itangqi.waveloadingview.WaveLoadingView-->
+        <!--android:id="@+id/waveLoadingView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:wlv_borderColor="#4D673AB7"-->
+        <!--app:wlv_borderWidth="3dp"-->
+        <!--app:wlv_shapeType="circle"-->
+        <!--app:wlv_round_rectangle="true"-->
+        <!--app:wlv_triangle_direction="north"-->
+        <!--app:wlv_titleCenterStrokeColor="@color/colorPrimaryDark"-->
+        <!--app:wlv_titleCenterStrokeWidth="3dp"-->
+        <!--app:wlv_titleCenter=""-->
+        <!--app:wlv_titleCenterColor="#9C27B0"-->
+        <!--app:wlv_titleCenterSize="24sp"-->
+        <!--app:wlv_waveAmplitude="70"-->
+        <!--app:wlv_waveColor="#809C27B0"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_centerVertical="true"-->
+         <!--/>-->
+
+
+        <net.bohush.geometricprogressview.GeometricProgressView
+            android:id="@+id/progressView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:gp_type="triangle"
+            app:gp_number_of_angles="8"
+            app:gp_color="#673AB7"
+            app:gp_duration="800"
+            app:gp_figure_padding="3dp" />
+
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

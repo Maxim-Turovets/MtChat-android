@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
@@ -35,36 +36,18 @@ public class ChatTypeActivity extends AppCompatActivity {
     }
 
 
-//    public  void goToChat(View view)
-//    {
-//        StartSocketConnection.startSocketConnection();
-//        StartSocketConnection.sendTestJson();
-//
-//        Intent intent = new Intent(this, ChatActivity.class);
-//        startActivity(intent);
-//    }
-//
-//    public  void goToSetName(View view)
-//    {
-//        StartSocketConnection.startSocketConnection();
-//        StaticModels.connectInfo = new ConnectInfo();
-//        StaticModels.connectInfo.setObjectType("ConnectInfo");
-//        StaticModels.connectInfo.setChatType("pair");
-//        StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.connectInfo));
-//        Intent intent = new Intent(this, SetYourNameActivity.class);
-//        startActivity(intent);
-//    }
 
     public  void privateBtnPress(View view)  {
         // active
         privateBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
 
         // socket send message
-        StartSocketConnection.startSocketConnection();
+//        StartSocketConnection.startSocketConnection();
         StaticModels.connectInfo = new ConnectInfo();
         StaticModels.connectInfo.setObjectType("ConnectInfo");
         StaticModels.connectInfo.setChatType("pair");
-        StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.connectInfo));
+        //StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.connectInfo));
+        this.finish();
         Intent intent = new Intent(this, UserInfoActivity.class);
         startActivity(intent);
 
@@ -77,8 +60,13 @@ public class ChatTypeActivity extends AppCompatActivity {
         // test
         StartSocketConnection.startSocketConnection();
         StartSocketConnection.sendTestJson();
-        Intent intent = new Intent(this, ChatActivity.class);
+        Intent intent = new Intent(this, LoadingAnimationActivity.class);
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+            this.finish();
+            System.exit(0);
+    }
 }

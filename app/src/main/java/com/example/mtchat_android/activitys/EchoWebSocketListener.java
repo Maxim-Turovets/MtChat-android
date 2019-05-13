@@ -139,6 +139,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
         MergedMessage mergedMessage = new MergedMessage(imageMessage);
         chatActivity.onMessage(mergedMessage);
     }
+
     @Override
     public void onClosing(WebSocket webSocket, int code, String reason) {
         webSocket.close(NORMAL_CLOSURE_STATUS, null);

@@ -2,6 +2,7 @@ package com.example.mtchat_android.activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.InterlocutorInfo;
+import com.example.mtchat_android.serverobjects.UserInfo;
 
 public class InterlocutorInfoActivity  extends AppCompatActivity {
 
@@ -91,9 +93,14 @@ public class InterlocutorInfoActivity  extends AppCompatActivity {
             }
             else {
                 // info normal
+                StartSocketConnection.startSocketConnection();
+
                 StaticModels.interlocutorInfo.setAgeFrom(localFrom);
                 StaticModels.interlocutorInfo.setAgeTo(localTo);
+                StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.connectInfo));
+                StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.userInfo));
                 StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.interlocutorInfo));
+                this.finish();
                 Intent intent = new Intent(this, LoadingAnimationActivity.class);
                 startActivity(intent);
             }
@@ -102,6 +109,16 @@ public class InterlocutorInfoActivity  extends AppCompatActivity {
             Toast toast = Toast.makeText(this, "Fill in all the fields ", Toast.LENGTH_SHORT);
             toast.show();
         }
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+            this.finish();
+            Intent intent = new Intent(this, UserInfoActivity.class);
+            startActivity(intent);
 
     }
 
