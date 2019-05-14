@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -40,6 +41,7 @@ import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import java.io.ByteArrayOutputStream;
+import java.nio.charset.StandardCharsets;
 
 
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
@@ -269,9 +271,19 @@ public class ChatActivity extends AppCompatActivity {
             byte[] imageInByte = baos.toByteArray();
             byte[] one_bit = new byte[1];
 
+
             ByteString byteString = ByteString.of(imageInByte);
             ByteString byteString2 = ByteString.of(one_bit);
 
+            String encodedImage = Base64.encodeToString(imageInByte, Base64.DEFAULT);
+
+
+    //        ByteString f = ByteString.encodeUtf8(encodedImage);
+     //       StartSocketConnection.webSocket.send(f);
+
+
+
+           // StartSocketConnection.webSocket.send();
             StartSocketConnection.webSocket.send(byteString);
             StartSocketConnection.webSocket.send(byteString2);
 

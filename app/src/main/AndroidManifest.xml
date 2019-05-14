@@ -33,6 +33,7 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activitys.interlocutionActivity.ChatActivity"
+            android:theme="@style/AppTheme2"
             android:screenOrientation="portrait"
              />
         <activity

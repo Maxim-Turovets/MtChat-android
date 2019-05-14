@@ -1,55 +1,61 @@
 package com.example.mtchat_android.activitys;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.webkit.WebView;
-import android.widget.Toast;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.os.CountDownTimer;
+        import android.os.Handler;
+        import android.support.v7.app.AppCompatActivity;
+        import android.view.View;
+        import android.webkit.WebView;
+        import android.widget.Toast;
 
-import com.example.mtchat_android.R;
-import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
-import com.example.mtchat_android.models.StartSocketConnection;
-import com.example.mtchat_android.models.StaticModels;
-import com.example.mtchat_android.serverobjects.InterlocutorInfo;
+        import com.example.mtchat_android.R;
+        import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
+        import com.example.mtchat_android.models.StartSocketConnection;
+        import com.example.mtchat_android.models.StaticModels;
+        import com.example.mtchat_android.serverobjects.InterlocutorInfo;
 
-import net.bohush.geometricprogressview.GeometricProgressView;
+        import net.bohush.geometricprogressview.GeometricProgressView;
 
-import java.util.Timer;
-import java.util.TimerTask;
+        import java.util.Timer;
+        import java.util.TimerTask;
 
-import me.itangqi.waveloadingview.WaveLoadingView;
+        import me.itangqi.waveloadingview.WaveLoadingView;
 
 public class LoadingAnimationActivity extends AppCompatActivity {
 
 
     int countClickedBackButton = 0;
     int countProgress = 0;
+    WebView myBrowser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.loading_layout);
 
-//        this.finish();
-//        Intent intent = new Intent(this, ChatTypeActivity.class);
-//        startActivity(intent);
 
-//        final WaveLoadingView mWaveLoadingView = (WaveLoadingView) findViewById(R.id.waveLoadingView);
-//        mWaveLoadingView.startAnimation();
 
-        GeometricProgressView progressView = (GeometricProgressView) findViewById(R.id.progressView);
-        progressView.setNumberOfAngles(8);
-        progressView.setDuration(1000);
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.loadind_animation_layout);
+
+            StaticModels.loadingAnimationActivity = this;
+            myBrowser = (WebView) findViewById(R.id.web_view);
+            myBrowser.loadUrl("file:///android_asset/animation/animation.html");
+
+
+            class UpdateTimeTask extends TimerTask {
+                public void run() {
+
+                }
+            }
+
+
+
 
 
         new CountDownTimer(50_000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 countProgress+=2;
-//                mWaveLoadingView.setProgressValue(countProgress);
             }
             @Override
             public void onFinish() {

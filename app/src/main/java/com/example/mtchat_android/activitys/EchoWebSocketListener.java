@@ -15,6 +15,8 @@ import com.example.mtchat_android.serverobjects.ImageCanSend;
 import com.example.mtchat_android.serverobjects.InterlocutorTyping;
 import com.example.mtchat_android.serverobjects.Message;
 
+import java.nio.ByteBuffer;
+
 import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
@@ -131,13 +133,21 @@ public  class EchoWebSocketListener extends WebSocketListener {
        }
 
     }
+
     @Override
     public void onMessage(WebSocket webSocket, ByteString bytes) {
 
-        ImageMessage imageMessage = new ImageMessage(bytes.toByteArray(), false);
-        imageMessage.setByteArray(bytes.toByteArray());
-        MergedMessage mergedMessage = new MergedMessage(imageMessage);
-        chatActivity.onMessage(mergedMessage);
+
+            ImageMessage imageMessage = new ImageMessage(bytes.toByteArray(), false);
+            imageMessage.setByteArray(bytes.toByteArray());
+            MergedMessage mergedMessage = new MergedMessage(imageMessage);
+            chatActivity.onMessage(mergedMessage);
+
+    }
+
+    @Override
+    public void onClosed(WebSocket webSocket, int code, String reason) {
+        super.onClosed(webSocket, code, reason);
     }
 
     @Override
