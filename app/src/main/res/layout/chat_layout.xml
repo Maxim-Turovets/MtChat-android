@@ -313,6 +313,36 @@
                     android:textStyle="bold" />
             </RelativeLayout>
 
+            <!--4 BUTTON  New partner -->
+            <RelativeLayout
+                android:id="@+id/settingSection"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@id/recconectSection">
+                <ImageButton
+                    android:id="@+id/settingBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@drawable/gender_white_color_drawable"
+                    android:src="@mipmap/setting_64" />
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="12sp"
+                android:text="setting"
+                android:textAlignment="center"
+                android:layout_centerHorizontal="true"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.Compat.Notification.Time"
+                android:textSize="9sp"
+                android:layout_below="@+id/settingBtn"
+                android:textStyle="bold" />
+            </RelativeLayout>
+
 
 
         </RelativeLayout>
