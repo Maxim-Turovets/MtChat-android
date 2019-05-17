@@ -3,6 +3,7 @@ package com.example.mtchat_android.activitys;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.motion.MotionLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -22,6 +23,7 @@ public class ChatTypeActivity extends AppCompatActivity {
 
     private ImageButton privateBtn;
     private ImageButton generalBtn;
+    private MotionLayout chatTypeLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,8 +33,10 @@ public class ChatTypeActivity extends AppCompatActivity {
         // init
         privateBtn = findViewById(R.id.privateBtn);
         generalBtn = findViewById(R.id.generalBtn);
+        chatTypeLayout = findViewById(R.id.chat_type_container);
 
-
+        chatTypeLayout.transitionToStart();
+        chatTypeLayout.transitionToEnd();
     }
 
 
@@ -42,14 +46,16 @@ public class ChatTypeActivity extends AppCompatActivity {
         privateBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
 
         // socket send message
-//        StartSocketConnection.startSocketConnection();
+
         StaticModels.connectInfo = new ConnectInfo();
         StaticModels.connectInfo.setObjectType("ConnectInfo");
         StaticModels.connectInfo.setChatType("pair");
-        //StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.connectInfo));
+
         this.finish();
         Intent intent = new Intent(this, UserInfoActivity.class);
         startActivity(intent);
+
+
 
     }
 

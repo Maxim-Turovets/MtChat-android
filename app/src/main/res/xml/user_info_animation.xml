@@ -6,7 +6,7 @@
     <!-- More code here -->
 
     <ConstraintSet android:id="@+id/starting_set">
-        <Constraint android:id="@+id/greetingSection"
+        <Constraint android:id="@+id/userInfoSection"
             app:layout_constraintTop_toTopOf="parent"
 
 
@@ -16,7 +16,7 @@
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/ending_set">a
-        <Constraint android:id="@+id/greetingSection"
+        <Constraint android:id="@+id/userInfoSection"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_width="match_parent"
@@ -26,16 +26,14 @@
 
     <Transition
         android:id="@+id/my_transition"
-        app:constraintSetStart="@+id/starting_set"
-        app:constraintSetEnd="@+id/ending_set"
         app:duration="1500"
         >
-        <KeyFrameSet android:id="@+id/my_keys">
+        <KeyFrameSet android:id="@+id/my_keyses">
             <KeyCycle
-                app:target="@+id/greetingSection"
-                app:framePosition="10"
-                android:rotation="180"
-                app:waveShape="sawtooth"
+                app:target="@+id/userInfoSection"
+                app:framePosition="1"
+                android:rotation="10"
+                app:waveShape="sin"
                 app:wavePeriod="1" />
         </KeyFrameSet>
 

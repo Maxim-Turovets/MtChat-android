@@ -1,22 +1,17 @@
 package com.example.mtchat_android.activitys;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.motion.MotionLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mtchat_android.R;
-import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 
-import com.example.mtchat_android.jsonservises.ObjectType;
-import com.example.mtchat_android.models.ImageMessage;
-import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.UserInfo;
 
@@ -29,11 +24,12 @@ public class UserInfoActivity extends AppCompatActivity {
     private EditText inpName;
     private EditText inpAge;
     private boolean genderChoose = false;
+    private MotionLayout userInfoLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.this_user_info_layout);
+        setContentView(R.layout.user_info_layout);
 
         // Initialization
         femaleBtn = findViewById(R.id.femaleBtn);
@@ -41,6 +37,7 @@ public class UserInfoActivity extends AppCompatActivity {
         anonBtn = findViewById(R.id.anonBtn);
         inpName = findViewById(R.id.inpName);
         inpAge = findViewById(R.id.inpAge);
+        userInfoLayout = findViewById(R.id.user_info_container);
         StaticModels.userInfo = new UserInfo();
         StaticModels.userInfo.setObjectType("UserInfo");
     }
@@ -84,18 +81,21 @@ public class UserInfoActivity extends AppCompatActivity {
         if (!localName.equals("") && !localAge.trim().equals("") && genderChoose) {
             int localAgeInteger = Integer.parseInt(localAge);
             if (localAgeInteger > 100 || localAgeInteger < 0) {
+                userInfoLayout.transitionToStart();
+                userInfoLayout.transitionToEnd();
                 Toast toast = Toast.makeText(this, "age must be more 0 and less 100", Toast.LENGTH_SHORT);
                 toast.show();
             } else {
                 // info normal
                 StaticModels.userInfo.setName(inpName.getText().toString());
                 StaticModels.userInfo.setAge(inpAge.getText().toString());
-                //  StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.userInfo));
                 this.finish();
                 Intent intent = new Intent(this, InterlocutorInfoActivity.class);
                 startActivity(intent);
             }
         } else {
+            userInfoLayout.transitionToStart();
+            userInfoLayout.transitionToEnd();
             Toast toast = Toast.makeText(this, "Fill in all the fields ", Toast.LENGTH_SHORT);
             toast.show();
         }

@@ -1,99 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.constraint.motion.MotionLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-
+    android:id="@+id/chat_type_container"
+   app:layoutDescription="@xml/chat_type_animation"
     >
 
 
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--tools:layout_editor_absoluteY="0dp">-->
-
-
-        <!--<Button-->
-            <!--android:id="@+id/btnTestChat"-->
-            <!--style="@style/Widget.AppCompat.Button.Colored"-->
-            <!--android:layout_width="300dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="222dp"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:background="@drawable/gender_female_drawable"-->
-            <!--android:onClick="goToChat"-->
-            <!--android:text="Test sing in" />-->
-
-
-        <!--<Button-->
-            <!--android:id="@+id/btnPrivateChat"-->
-            <!--style="@style/Widget.AppCompat.Button.Colored"-->
-            <!--android:layout_width="300dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="282dp"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:background="@drawable/chat_type_button"-->
-            <!--android:onClick="goToSetName"-->
-            <!--android:text="Private" />-->
-
-        <!--<Button-->
-            <!--android:id="@+id/btnGeneralChat"-->
-            <!--style="@style/Widget.AppCompat.Button.Colored"-->
-            <!--android:layout_width="300dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="342dp"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:background="@drawable/chat_type_button"-->
-            <!--android:onClick="goToAnimation"-->
-            <!--android:text="General" />-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/imageView2"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_alignBottom="@+id/btnGeneralChat"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--android:layout_marginTop="169dp"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:layout_marginBottom="-17dp"-->
-            <!--android:background="@drawable/border_drawable" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/textView3"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textAlignment="center"-->
-            <!--android:layout_marginTop="174dp"-->
-            <!--android:lineSpacingExtra="24sp"-->
-            <!--android:text="Chose chat type"-->
-            <!--android:textAllCaps="true"-->
-            <!--android:textAppearance="@style/TextAppearance.Compat.Notification.Time"-->
-            <!--android:textSize="18sp"-->
-            <!--android:textStyle="bold" />-->
-
-
-    <!--</RelativeLayout>-->
-
-
-
     <LinearLayout
+        android:id="@+id/chatTypeSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:focusableInTouchMode="true"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints"
         android:gravity="center"
-        android:layout_centerVertical ="true"
-        tools:layout_editor_absoluteX="-62dp"
-        tools:layout_editor_absoluteY="51dp">
+        android:layout_centerVertical ="true">
 
         <TextView
             android:layout_marginTop="15dp"
@@ -111,7 +36,7 @@
 
         <!--Private-->
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp">
 
@@ -149,7 +74,7 @@
 
         <!--Private-->
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
 
@@ -195,4 +120,4 @@
 
 
 
-</android.support.constraint.ConstraintLayout>
+</android.support.constraint.motion.MotionLayout>
