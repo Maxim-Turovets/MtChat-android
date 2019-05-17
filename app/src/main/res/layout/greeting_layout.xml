@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.constraint.motion.MotionLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient_background"
-    >
+    app:layoutDescription="@xml/greeting_animation"
+    android:id="@+id/greeting_container">
 
     <RelativeLayout
+        android:id="@+id/greetingSection"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <ImageView
-        android:layout_width="410dp"
-        android:layout_height="276dp"
-        android:src="@mipmap/greeting"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        <ImageView
+            android:layout_width="410dp"
+            android:layout_height="276dp"
+            android:src="@mipmap/greeting"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
-</android.support.constraint.ConstraintLayout>
+</android.support.constraint.motion.MotionLayout>

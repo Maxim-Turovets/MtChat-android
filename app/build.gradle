@@ -58,6 +58,8 @@ dependencies {
     implementation 'me.itangqi.waveloadingview:library:0.3.5'
     implementation 'net.bohush.geometricprogressview:geometricprogressview:1.1.1'
 
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.0-alpha1'
     // I have uploaded v0.3.5 on 2017-01-06, if it doesn't take effect or your
     // gradle cannot find it in maven central, you may try v0.3.4.
 }
