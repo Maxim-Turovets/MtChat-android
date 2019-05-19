@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
+import android.support.constraint.motion.MotionLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ public class InterlocutorInfoActivity  extends AppCompatActivity {
     private EditText inpFrom;
     private EditText inpTo;
     private boolean genderChoose = false;
+    private MotionLayout interlocutorInfoLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class InterlocutorInfoActivity  extends AppCompatActivity {
         interlocutorAnonBtn = findViewById(R.id.interlocutorAnonBtn);
         inpFrom = findViewById(R.id.inpFrom);
         inpTo = findViewById(R.id.inpTo);
+        interlocutorInfoLayout = findViewById(R.id.interlocutor_info_container);
         StaticModels.interlocutorInfo = new InterlocutorInfo();
         StaticModels.interlocutorInfo.setObjectType("InterlocutorInfo");
     }
@@ -86,9 +89,11 @@ public class InterlocutorInfoActivity  extends AppCompatActivity {
         {
             int localFromInteger = Integer.parseInt(localFrom);
             int localToInteger = Integer.parseInt(localTo);
-            if(localFromInteger>100||localFromInteger<0||localToInteger>100||localToInteger<0 ||localFromInteger>=localToInteger)
+            if(localFromInteger>100||localFromInteger<1||localToInteger>100||localToInteger<1 ||localFromInteger>=localToInteger)
             {
-                Toast toast = Toast.makeText(this, "age must be more 0 and less 100", Toast.LENGTH_SHORT);
+                interlocutorInfoLayout.transitionToStart();
+                interlocutorInfoLayout.transitionToEnd();
+                Toast toast = Toast.makeText(this, "Возвраст может быть от 1 то 100", Toast.LENGTH_SHORT);
                 toast.show();
             }
             else {
@@ -106,7 +111,9 @@ public class InterlocutorInfoActivity  extends AppCompatActivity {
             }
         }
         else {
-            Toast toast = Toast.makeText(this, "Fill in all the fields ", Toast.LENGTH_SHORT);
+            interlocutorInfoLayout.transitionToStart();
+            interlocutorInfoLayout.transitionToEnd();
+            Toast toast = Toast.makeText(this, "Укажите все параметры ", Toast.LENGTH_SHORT);
             toast.show();
         }
 

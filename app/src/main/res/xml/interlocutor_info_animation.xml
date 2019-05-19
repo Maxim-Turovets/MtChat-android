@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- More code here -->
+
+    <ConstraintSet android:id="@+id/starting_set">
+        <Constraint android:id="@+id/interlocutorInfoSection"
+            app:layout_constraintTop_toTopOf="parent"
+
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/ending_set">a
+        <Constraint android:id="@+id/interlocutorInfoSection"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </ConstraintSet>
+
+    <Transition
+        android:id="@+id/my_transition"
+        app:duration="1500"
+        >
+        <KeyFrameSet android:id="@+id/my_keyses">
+            <KeyCycle
+                app:target="@+id/interlocutorInfoSection"
+                app:framePosition="1"
+                android:rotation="10"
+                app:waveShape="sin"
+                app:wavePeriod="1" />
+        </KeyFrameSet>
+
+    </Transition>
+
+</MotionScene>

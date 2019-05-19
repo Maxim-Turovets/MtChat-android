@@ -80,10 +80,10 @@ public class UserInfoActivity extends AppCompatActivity {
         // text edit not empty
         if (!localName.equals("") && !localAge.trim().equals("") && genderChoose) {
             int localAgeInteger = Integer.parseInt(localAge);
-            if (localAgeInteger > 100 || localAgeInteger < 0) {
+            if (localAgeInteger > 100 || localAgeInteger < 1) {
                 userInfoLayout.transitionToStart();
                 userInfoLayout.transitionToEnd();
-                Toast toast = Toast.makeText(this, "age must be more 0 and less 100", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, "Возвраст может быть от 1 то 100", Toast.LENGTH_SHORT);
                 toast.show();
             } else {
                 // info normal
@@ -96,12 +96,11 @@ public class UserInfoActivity extends AppCompatActivity {
         } else {
             userInfoLayout.transitionToStart();
             userInfoLayout.transitionToEnd();
-            Toast toast = Toast.makeText(this, "Fill in all the fields ", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(this, "Укажите все параметры ", Toast.LENGTH_SHORT);
             toast.show();
         }
 
     }
-
 
     @Override
     public void onBackPressed() {
