@@ -12,6 +12,7 @@ import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.IfRoomCreated;
 import com.example.mtchat_android.serverobjects.ImageCanSend;
+import com.example.mtchat_android.serverobjects.ImageFrame;
 import com.example.mtchat_android.serverobjects.InterlocutorTyping;
 import com.example.mtchat_android.serverobjects.Message;
 
@@ -27,7 +28,9 @@ public  class EchoWebSocketListener extends WebSocketListener {
     private static final int NORMAL_CLOSURE_STATUS = 1000;
 
     public static ChatActivity chatActivity;
-   // public static SetPartnerAgeActivity setPartnerAgeActivity;
+    boolean openBufferString = false;
+    StringBuffer imgBase64 = new StringBuffer();
+    // public static SetPartnerAgeActivity setPartnerAgeActivity;
 
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
@@ -37,111 +40,131 @@ public  class EchoWebSocketListener extends WebSocketListener {
     @Override
     public void onMessage(WebSocket webSocket, String text) {
 
-        if(objectInfo(text).toString().equals("ImageCanSend"))
-        {
-            ImageCanSend imageCanSend = new ImageCanSend();
-            imageCanSend =(ImageCanSend) ObjectType.getObject(text, imageCanSend);
-
-            if(imageCanSend.isAvailable())
+            if (objectInfo(text).toString().equals("ImageFrame"))
             {
-                chatActivity.hideButtonImageSend();
+                ImageFrame imageFrame = new ImageFrame();
+                imageFrame = (ImageFrame) ObjectType.getObject(text, imageFrame);
+
+                if(imageFrame.getNumberFrame()==-1)
+                {
+                    StaticModels.image.append(imageFrame.getFrame().toCharArray());
+                  System.out.println(StaticModels.image);
+
+                   ImageMessage imageMessage = new ImageMessage();
+                    imageMessage.setFromMe(false);
+                    imageMessage.setImage(StaticModels.image);
+                    MergedMessage mergedMessage = new MergedMessage(imageMessage);
+
+                    chatActivity.onMessage(mergedMessage);
+                    StaticModels.image = new StringBuffer();
+                }
+                if(imageFrame.getNumberFrame()==0)
+                {
+                    StaticModels.image = new StringBuffer();
+                    StaticModels.image.append(imageFrame.getFrame().toCharArray());
+                }
+                else
+                {
+                    StaticModels.image.append(imageFrame.getFrame().toCharArray());
+                }
+            }
+            if (objectInfo(text).toString().equals("ImageCanSend")) {
+                ImageCanSend imageCanSend = new ImageCanSend();
+                imageCanSend = (ImageCanSend) ObjectType.getObject(text, imageCanSend);
+
+                if (imageCanSend.isAvailable()) {
+                    chatActivity.hideButtonImageSend();
+
+                    Message myMessage = new Message();
+                    myMessage.setName("fict");
+                    myMessage.setObjectType("Message");
+                    myMessage.setText("you are allowed to send image");
+                    myMessage.setTime("");
+                    MergedMessage mergedMessage = new MergedMessage(myMessage);
+                    chatActivity.onMessage(mergedMessage);
+                }
+                if (imageCanSend.isAvailable() == false) {
+                    chatActivity.showButtonImageSend();
+
+                    Message myMessage = new Message();
+                    myMessage.setName("fict");
+                    myMessage.setObjectType("Message");
+                    myMessage.setText("you are not allowed to send image");
+                    myMessage.setTime("");
+                    MergedMessage mergedMessage = new MergedMessage(myMessage);
+                    chatActivity.onMessage(mergedMessage);
+                }
+
+            }
+            if (objectInfo(text).toString().equals("InterlocutorTyping")) {
+                InterlocutorTyping interlocutorTyping = new InterlocutorTyping();
+                interlocutorTyping = (InterlocutorTyping) ObjectType.getObject(text, interlocutorTyping);
+
+                if (interlocutorTyping.isTyping()) {
+                    chatActivity.showPersonTyping();
+
+                }
+
+                if (interlocutorTyping.isTyping() == false)
+                    chatActivity.hidePersonTyping();
+
+            }
+            if (objectInfo(text).toString().equals("IfRoomDeleted")) {
+                chatActivity.goToChatClose();
+            }
+            if (objectInfo(text).toString().equals("IfRoomCreated")) {
+                IfRoomCreated ifRoomCreated = new IfRoomCreated("z");
+                ifRoomCreated = (IfRoomCreated) ObjectType.getObject(text, ifRoomCreated);
+                StaticModels.interlocutorName = ifRoomCreated.getNameInterlocutor();
+
 
                 Message myMessage = new Message();
                 myMessage.setName("fict");
                 myMessage.setObjectType("Message");
-                myMessage.setText("you are allowed to send image");
+                myMessage.setText(StaticModels.interlocutorName + " joined the chat");
                 myMessage.setTime("");
                 MergedMessage mergedMessage = new MergedMessage(myMessage);
+                try {
+                    Thread.sleep(400);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (StaticModels.loadingAnimationActivity != null)
+                    StaticModels.loadingAnimationActivity.goToChat();
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 chatActivity.onMessage(mergedMessage);
-            }
-            if( imageCanSend.isAvailable()==false)
-            {
-                chatActivity.showButtonImageSend();
 
-                Message myMessage = new Message();
-                myMessage.setName("fict");
-                myMessage.setObjectType("Message");
-                myMessage.setText("you are not allowed to send image");
-                myMessage.setTime("");
-                MergedMessage mergedMessage = new MergedMessage(myMessage);
+
+            }
+            if (objectInfo(text).toString().equals("Message")) {
+                Message tempMessage = new Message();
+                tempMessage = (Message) ObjectType.getObject(text, tempMessage);
+                MergedMessage mergedMessage = new MergedMessage(tempMessage);
                 chatActivity.onMessage(mergedMessage);
+                StaticModels.messageTime = tempMessage.getTime();
+                long[] pattern = {100, 300, 400, 300};
+                chatActivity.soundPlay();
+                Vibrator vibrator = (Vibrator) chatActivity.getSystemService(Context.VIBRATOR_SERVICE);
+                if (vibrator.hasVibrator()) {
+                    vibrator.vibrate(pattern, -1);
+                }
             }
 
-        }
-        if(objectInfo(text).toString().equals("InterlocutorTyping"))
-        {
-            InterlocutorTyping interlocutorTyping = new InterlocutorTyping();
-            interlocutorTyping =(InterlocutorTyping)ObjectType.getObject(text, interlocutorTyping);
-
-            if(interlocutorTyping.isTyping()) {
-                chatActivity.showPersonTyping();
-
-            }
-
-            if(interlocutorTyping.isTyping()==false)
-                chatActivity.hidePersonTyping();
-
-        }
-        if(objectInfo(text).toString().equals("IfRoomDeleted"))
-        {
-            chatActivity.goToChatClose();
-        }
-
-        if(objectInfo(text).toString().equals("IfRoomCreated"))
-        {
-            IfRoomCreated ifRoomCreated = new IfRoomCreated("z");
-            ifRoomCreated = (IfRoomCreated) ObjectType.getObject(text,ifRoomCreated);
-            StaticModels.interlocutorName = ifRoomCreated.getNameInterlocutor();
-
-
-            Message myMessage = new Message();
-            myMessage.setName("fict");
-            myMessage.setObjectType("Message");
-            myMessage.setText(StaticModels.interlocutorName + " joined the chat");
-            myMessage.setTime("");
-            MergedMessage mergedMessage = new MergedMessage(myMessage);
-            try {
-                Thread.sleep(400);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if(StaticModels.loadingAnimationActivity!=null)
-                StaticModels.loadingAnimationActivity.goToChat();
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-              chatActivity.onMessage(mergedMessage);
-
-
-        }
-
-       if(objectInfo(text).toString().equals("Message"))
-       {
-            Message tempMessage = new Message();
-            tempMessage = (Message)ObjectType.getObject(text,tempMessage);
-           MergedMessage mergedMessage = new MergedMessage(tempMessage);
-            chatActivity.onMessage(mergedMessage);
-            StaticModels.messageTime=tempMessage.getTime();
-           long[] pattern = { 100, 300, 400, 300 };
-           chatActivity.soundPlay();
-           Vibrator vibrator = (Vibrator) chatActivity.getSystemService(Context.VIBRATOR_SERVICE);
-           if (vibrator.hasVibrator()) {
-               vibrator.vibrate(pattern, -1);
-           }
-       }
 
     }
 
     @Override
     public void onMessage(WebSocket webSocket, ByteString bytes) {
 
-
-            ImageMessage imageMessage = new ImageMessage(bytes.toByteArray(), false);
-            imageMessage.setByteArray(bytes.toByteArray());
-            MergedMessage mergedMessage = new MergedMessage(imageMessage);
-            chatActivity.onMessage(mergedMessage);
+//
+//        ImageMessage imageMessage = new ImageMessage(bytes.toByteArray(), false);
+//        imageMessage.setByteArray(bytes.toByteArray());
+//        MergedMessage mergedMessage = new MergedMessage(imageMessage);
+//        chatActivity.onMessage(mergedMessage);
 
     }
 
@@ -164,25 +187,25 @@ public  class EchoWebSocketListener extends WebSocketListener {
 
 
 
-     /**
-      * For the first JSON field, take the object type.
-      * @param json (String)
-      * @return StringBugger (name object)
-      */
-     private StringBuffer objectInfo(String json) {
-         int lastIndex =json.indexOf("objectType");
-         lastIndex+=13;
-         StringBuffer returnJson = new StringBuffer();
+    /**
+     * For the first JSON field, take the object type.
+     * @param json (String)
+     * @return StringBugger (name object)
+     */
+    private StringBuffer objectInfo(String json) {
+        int lastIndex =json.indexOf("objectType");
+        lastIndex+=13;
+        StringBuffer returnJson = new StringBuffer();
 
-         for (int i = lastIndex; i < json.length(); i++) {
-             if (json.charAt(i) == '\"') {
-                 return returnJson;
-             }
-             else {
-                 returnJson.append(json.charAt(i));
-             }
-         }
-         returnJson.deleteCharAt(0);
-         return returnJson;
-     }
+        for (int i = lastIndex; i < json.length(); i++) {
+            if (json.charAt(i) == '\"') {
+                return returnJson;
+            }
+            else {
+                returnJson.append(json.charAt(i));
+            }
+        }
+        returnJson.deleteCharAt(0);
+        return returnJson;
+    }
 }

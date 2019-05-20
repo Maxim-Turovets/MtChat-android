@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Vibrator;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,8 +91,12 @@ public class AdapterMessage extends BaseAdapter {
         if (message.getImageMessage() != null) {
             MessageViewHolder2 holder = new MessageViewHolder2();
             LayoutInflater messageInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            byte [] ar = message.getImageMessage().getByteArray();
-            Bitmap bmp = BitmapFactory.decodeByteArray(ar , 0, ar.length);
+//            byte [] ar = message.getImageMessage().getByteArray();
+
+
+            byte[] decodedString = Base64.decode(message.getImageMessage().getImage().toString().getBytes(), Base64.DEFAULT);
+            Bitmap bmp = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
 
             if (bmp!=null) {
 
@@ -102,6 +107,7 @@ public class AdapterMessage extends BaseAdapter {
                 // MY IMAGE
                 //   if (message.getImageMessage().isFromMe()) {
                 // Convert bytes data into a Bitmap
+
                 convertView = messageInflater.inflate(R.layout.image_my_message_layout, null);
                 holder.messageBody = (ImageView) convertView.findViewById(R.id.imageMessageView);
                 holder.messageBody.setImageBitmap(bmp);

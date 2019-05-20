@@ -35,6 +35,7 @@ import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.models.TypeWriter;
 import com.example.mtchat_android.serverobjects.ImageCanSend;
+import com.example.mtchat_android.serverobjects.ImageFrame;
 import com.example.mtchat_android.serverobjects.InterlocutorTyping;
 import com.example.mtchat_android.serverobjects.Message;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
@@ -94,7 +95,7 @@ public class ChatActivity extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
-               countClickedBackButton=0;
+                countClickedBackButton=0;
             }
         }.start();
 
@@ -267,7 +268,7 @@ public class ChatActivity extends AppCompatActivity {
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             // bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 25, baos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 15 , baos);
             byte[] imageInByte = baos.toByteArray();
             byte[] one_bit = new byte[1];
 
@@ -276,19 +277,57 @@ public class ChatActivity extends AppCompatActivity {
             ByteString byteString2 = ByteString.of(one_bit);
 
             String encodedImage = Base64.encodeToString(imageInByte, Base64.DEFAULT);
+            StringBuffer str = new StringBuffer();
+            StringBuffer mystr = new StringBuffer();
+
+            int strSixe = encodedImage.length();
+
+            int indexFrame=0;
+            ImageFrame imageFrame = new ImageFrame();
+
+            for(int i =0;i<encodedImage.length();i++)
+            {
+                if(i==encodedImage.length()-1) {
+                    str.append(encodedImage.charAt(i));
+                    imageFrame.setFrame(str.toString());
+                    imageFrame.setNumberFrame(-1);
+                    mystr.append(encodedImage.charAt(i));
+                    StartSocketConnection.webSocket.send(ObjectType.getJson(imageFrame));
+                }
+                if(str.length()<5_000)
+                {
+                    str.append(encodedImage.charAt(i));
+                    mystr.append(encodedImage.charAt(i));
+                }
+                else{
+                    imageFrame.setNumberFrame(indexFrame);
+                    str.append(encodedImage.charAt(i));
+                    mystr.append(encodedImage.charAt(i));
+                    imageFrame.setFrame(str.toString());
+                    StartSocketConnection.webSocket.send(ObjectType.getJson(imageFrame));
+                    indexFrame++;
+                    str= new StringBuffer();
+                }
+            }
 
 
-    //        ByteString f = ByteString.encodeUtf8(encodedImage);
-     //       StartSocketConnection.webSocket.send(f);
+
+            //        ByteString f = ByteString.encodeUtf8(encodedImage);
+            //       StartSocketConnection.webSocket.send(f);
 
 
 
-           // StartSocketConnection.webSocket.send();
-            StartSocketConnection.webSocket.send(byteString);
-            StartSocketConnection.webSocket.send(byteString2);
+//            String encoded = Base64.encodeToString(imageInByte, Base64.DEFAULT);
+//            int a = encoded.length();
 
-            ImageMessage myImageMessage = new ImageMessage(imageInByte, true);
-            //onImageMessage(myImageMessage);
+            // StartSocketConnection.webSocket.send();
+//            StartSocketConnection.webSocket.send(byteString);
+//            StartSocketConnection.webSocket.send(byteString2);
+
+            ImageMessage myImageMessage = new ImageMessage();
+            myImageMessage.setFromMe(true);
+            myImageMessage.setImage(mystr);
+
             MergedMessage mergedMessage = new MergedMessage(myImageMessage);
             onMessage(mergedMessage);
         } else {

@@ -3,6 +3,7 @@ package com.example.mtchat_android.models;
 import com.example.mtchat_android.serverobjects.Message;
 
 public class MergedMessage {
+
     private Message textMessage;
     private ImageMessage imageMessage;
 
