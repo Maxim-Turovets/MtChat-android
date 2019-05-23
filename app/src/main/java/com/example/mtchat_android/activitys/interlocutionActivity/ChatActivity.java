@@ -290,7 +290,7 @@ public class ChatActivity extends AppCompatActivity {
                 for(int i =0;i<encodedImage.length();i++) {
                     str.append(encodedImage.charAt(i));
                 }
-                imageFrame.setNumberFrame(-1);
+                imageFrame.setNumberFrame(-2);
                 imageFrame.setFrame(str.toString());
                 StartSocketConnection.webSocket.send(ObjectType.getJson(imageFrame));
             }

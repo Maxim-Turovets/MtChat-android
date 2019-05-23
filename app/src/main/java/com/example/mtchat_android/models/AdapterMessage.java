@@ -126,7 +126,7 @@ public class AdapterMessage extends BaseAdapter {
                 Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, newWidht, newheight, false);
                 holder.messageBody.setImageBitmap(bmHalf);
 
-                String FILENAME = "image.png";
+                String FILENAME = "imageStringBuffer.png";
                 String PATH = "/mnt/sdcard/"+ FILENAME;
                 File f = new File(PATH);
                 Uri yourUri = Uri.fromFile(f);

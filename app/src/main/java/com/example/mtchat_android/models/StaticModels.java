@@ -15,5 +15,5 @@ public class StaticModels {
     public  static ConnectInfo connectInfo;
     public  static String messageTime;
     public  static LoadingAnimationActivity loadingAnimationActivity;
-    public  static StringBuffer image;
+    public  static StringBuffer imageStringBuffer;
 }

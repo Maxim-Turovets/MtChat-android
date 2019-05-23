@@ -8,15 +8,12 @@ import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.ImageMessage;
 import com.example.mtchat_android.models.MergedMessage;
-import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.IfRoomCreated;
 import com.example.mtchat_android.serverobjects.ImageCanSend;
 import com.example.mtchat_android.serverobjects.ImageFrame;
 import com.example.mtchat_android.serverobjects.InterlocutorTyping;
 import com.example.mtchat_android.serverobjects.Message;
-
-import java.nio.ByteBuffer;
 
 import okhttp3.Response;
 import okhttp3.WebSocket;
@@ -44,28 +41,40 @@ public  class EchoWebSocketListener extends WebSocketListener {
                 ImageFrame imageFrame = new ImageFrame();
                 imageFrame = (ImageFrame) ObjectType.getObject(text, imageFrame);
 
-                StaticModels.image = new StringBuffer();
+                if(imageFrame.getNumberFrame()==-2)
+                {
+                    StaticModels.imageStringBuffer = new StringBuffer();
+                    StaticModels.imageStringBuffer.append(imageFrame.getFrame().toCharArray());
 
+                    ImageMessage imageMessage = new ImageMessage();
+                    imageMessage.setFromMe(false);
+                    imageMessage.setImage(StaticModels.imageStringBuffer);
+                    MergedMessage mergedMessage = new MergedMessage(imageMessage);
+
+                    chatActivity.onMessage(mergedMessage);
+                    StaticModels.imageStringBuffer = new StringBuffer();
+                }
                 if(imageFrame.getNumberFrame()==-1)
                 {
-                    StaticModels.image.append(imageFrame.getFrame().toCharArray());
+                    StaticModels.imageStringBuffer.append(imageFrame.getFrame().toCharArray());
 
 
                    ImageMessage imageMessage = new ImageMessage();
                     imageMessage.setFromMe(false);
-                    imageMessage.setImage(StaticModels.image);
+                    imageMessage.setImage(StaticModels.imageStringBuffer);
                     MergedMessage mergedMessage = new MergedMessage(imageMessage);
 
                     chatActivity.onMessage(mergedMessage);
-                    StaticModels.image = new StringBuffer();
+                    StaticModels.imageStringBuffer = new StringBuffer();
                 }
                 if(imageFrame.getNumberFrame()==0)
                 {
-                    StaticModels.image.append(imageFrame.getFrame().toCharArray());
+                    StaticModels.imageStringBuffer = new StringBuffer();
+                    StaticModels.imageStringBuffer.append(imageFrame.getFrame().toCharArray());
                 }
                 else
                 {
-                    StaticModels.image.append(imageFrame.getFrame().toCharArray());
+                    StaticModels.imageStringBuffer.append(imageFrame.getFrame().toCharArray());
                 }
             }
             if (objectInfo(text).toString().equals("ImageCanSend")) {
@@ -78,7 +87,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
                     Message myMessage = new Message();
                     myMessage.setName("fict");
                     myMessage.setObjectType("Message");
-                    myMessage.setText("you are allowed to send image");
+                    myMessage.setText("you are allowed to send imageStringBuffer");
                     myMessage.setTime("");
                     MergedMessage mergedMessage = new MergedMessage(myMessage);
                     chatActivity.onMessage(mergedMessage);
@@ -89,7 +98,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
                     Message myMessage = new Message();
                     myMessage.setName("fict");
                     myMessage.setObjectType("Message");
-                    myMessage.setText("you are not allowed to send image");
+                    myMessage.setText("you are not allowed to send imageStringBuffer");
                     myMessage.setTime("");
                     MergedMessage mergedMessage = new MergedMessage(myMessage);
                     chatActivity.onMessage(mergedMessage);
