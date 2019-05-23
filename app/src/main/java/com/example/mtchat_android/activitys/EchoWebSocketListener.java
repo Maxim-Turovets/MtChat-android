@@ -40,15 +40,16 @@ public  class EchoWebSocketListener extends WebSocketListener {
     @Override
     public void onMessage(WebSocket webSocket, String text) {
 
-            if (objectInfo(text).toString().equals("ImageFrame"))
-            {
+            if (objectInfo(text).toString().equals("ImageFrame")) {
                 ImageFrame imageFrame = new ImageFrame();
                 imageFrame = (ImageFrame) ObjectType.getObject(text, imageFrame);
+
+                StaticModels.image = new StringBuffer();
 
                 if(imageFrame.getNumberFrame()==-1)
                 {
                     StaticModels.image.append(imageFrame.getFrame().toCharArray());
-                  System.out.println(StaticModels.image);
+
 
                    ImageMessage imageMessage = new ImageMessage();
                     imageMessage.setFromMe(false);
@@ -60,7 +61,6 @@ public  class EchoWebSocketListener extends WebSocketListener {
                 }
                 if(imageFrame.getNumberFrame()==0)
                 {
-                    StaticModels.image = new StringBuffer();
                     StaticModels.image.append(imageFrame.getFrame().toCharArray());
                 }
                 else
@@ -160,7 +160,6 @@ public  class EchoWebSocketListener extends WebSocketListener {
     @Override
     public void onMessage(WebSocket webSocket, ByteString bytes) {
 
-//
 //        ImageMessage imageMessage = new ImageMessage(bytes.toByteArray(), false);
 //        imageMessage.setByteArray(bytes.toByteArray());
 //        MergedMessage mergedMessage = new MergedMessage(imageMessage);

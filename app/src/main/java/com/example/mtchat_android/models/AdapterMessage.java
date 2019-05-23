@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Vibrator;
 import android.util.Base64;
@@ -20,6 +21,7 @@ import com.example.mtchat_android.serverobjects.Message;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -102,6 +104,7 @@ public class AdapterMessage extends BaseAdapter {
 
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 bmp.compress(Bitmap.CompressFormat.JPEG, 10, out);
+
                 byte[] byteArray = out.toByteArray();
 
                 // MY IMAGE
@@ -122,6 +125,12 @@ public class AdapterMessage extends BaseAdapter {
 
                 Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, newWidht, newheight, false);
                 holder.messageBody.setImageBitmap(bmHalf);
+
+                String FILENAME = "image.png";
+                String PATH = "/mnt/sdcard/"+ FILENAME;
+                File f = new File(PATH);
+                Uri yourUri = Uri.fromFile(f);
+
             }
         }
 

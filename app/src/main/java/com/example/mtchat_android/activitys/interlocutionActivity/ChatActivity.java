@@ -285,42 +285,49 @@ public class ChatActivity extends AppCompatActivity {
             int indexFrame=0;
             ImageFrame imageFrame = new ImageFrame();
 
-            for(int i =0;i<encodedImage.length();i++)
+            if(strSixe<5_000)
             {
-                if(i==encodedImage.length()-1) {
+                for(int i =0;i<encodedImage.length();i++) {
                     str.append(encodedImage.charAt(i));
-                    imageFrame.setFrame(str.toString());
-                    imageFrame.setNumberFrame(-1);
-                    mystr.append(encodedImage.charAt(i));
-                    StartSocketConnection.webSocket.send(ObjectType.getJson(imageFrame));
                 }
-                if(str.length()<5_000)
-                {
-                    str.append(encodedImage.charAt(i));
-                    mystr.append(encodedImage.charAt(i));
+                imageFrame.setNumberFrame(-1);
+                imageFrame.setFrame(str.toString());
+                StartSocketConnection.webSocket.send(ObjectType.getJson(imageFrame));
+            }
+            else {
+
+                for (int i = 0; i < encodedImage.length(); i++) {
+
+                    if (i == encodedImage.length() - 1) {
+                        str.append(encodedImage.charAt(i));
+                        imageFrame.setFrame(str.toString());
+                        imageFrame.setNumberFrame(-1);
+                        mystr.append(encodedImage.charAt(i));
+                        StartSocketConnection.webSocket.send(ObjectType.getJson(imageFrame));
+                    }
+                    if (str.length() < 5_000) {
+                        str.append(encodedImage.charAt(i));
+                        mystr.append(encodedImage.charAt(i));
+                    } else {
+                        imageFrame.setNumberFrame(indexFrame);
+                        str.append(encodedImage.charAt(i));
+                        mystr.append(encodedImage.charAt(i));
+                        imageFrame.setFrame(str.toString());
+                        StartSocketConnection.webSocket.send(ObjectType.getJson(imageFrame));
+                        indexFrame++;
+                        str = new StringBuffer();
+                    }
                 }
-                else{
-                    imageFrame.setNumberFrame(indexFrame);
-                    str.append(encodedImage.charAt(i));
-                    mystr.append(encodedImage.charAt(i));
-                    imageFrame.setFrame(str.toString());
-                    StartSocketConnection.webSocket.send(ObjectType.getJson(imageFrame));
-                    indexFrame++;
-                    str= new StringBuffer();
-                }
+
             }
 
-
-
-            //        ByteString f = ByteString.encodeUtf8(encodedImage);
-            //       StartSocketConnection.webSocket.send(f);
-
-
-
+//            ByteString f = ByteString.encodeUtf8(encodedImage);
+//            StartSocketConnection.webSocket.send(f);
+//
 //            String encoded = Base64.encodeToString(imageInByte, Base64.DEFAULT);
 //            int a = encoded.length();
-
-            // StartSocketConnection.webSocket.send();
+//
+//             StartSocketConnection.webSocket.send();
 //            StartSocketConnection.webSocket.send(byteString);
 //            StartSocketConnection.webSocket.send(byteString2);
 
