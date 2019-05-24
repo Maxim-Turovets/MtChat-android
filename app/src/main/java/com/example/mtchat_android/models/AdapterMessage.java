@@ -18,14 +18,17 @@ import android.widget.TextView;
 
 import com.example.mtchat_android.R;
 import com.example.mtchat_android.serverobjects.Message;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class AdapterMessage extends BaseAdapter {
 
@@ -41,6 +44,7 @@ public class AdapterMessage extends BaseAdapter {
         this.mergedMessages.add(message);
         notifyDataSetChanged(); // to render the list we need to notify
     }
+    ImageLoader imageLoader = ImageLoader.getInstance(); // Get singleton instance
 
     @Override
     public int getCount() {
@@ -113,7 +117,9 @@ public class AdapterMessage extends BaseAdapter {
 
                 convertView = messageInflater.inflate(R.layout.image_my_message_layout, null);
                 holder.messageBody = (ImageView) convertView.findViewById(R.id.imageMessageView);
-                holder.messageBody.setImageBitmap(bmp);
+                //holder.messageBody.setImageBitmap(bmp);
+
+
 
                 //Вычисляем ширину и высоту изображения
                 double width = bmp.getWidth();
@@ -126,10 +132,7 @@ public class AdapterMessage extends BaseAdapter {
                 Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, newWidht, newheight, false);
                 holder.messageBody.setImageBitmap(bmHalf);
 
-                String FILENAME = "imageStringBuffer.png";
-                String PATH = "/mnt/sdcard/"+ FILENAME;
-                File f = new File(PATH);
-                Uri yourUri = Uri.fromFile(f);
+
 
             }
         }
@@ -137,6 +140,7 @@ public class AdapterMessage extends BaseAdapter {
 
         return convertView;
     }
+
 
 
 

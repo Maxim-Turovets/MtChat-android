@@ -1,7 +1,9 @@
 package com.example.mtchat_android.activitys.interlocutionActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -42,7 +44,9 @@ import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import java.io.ByteArrayOutputStream;
-import java.nio.charset.StandardCharsets;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Random;
 
 
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
@@ -430,5 +434,7 @@ public class ChatActivity extends AppCompatActivity {
         openCameraBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
 
     }
+
+
 
 }
