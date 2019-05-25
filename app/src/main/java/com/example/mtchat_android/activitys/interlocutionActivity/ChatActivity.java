@@ -40,6 +40,7 @@ import com.example.mtchat_android.serverobjects.ImageCanSend;
 import com.example.mtchat_android.serverobjects.ImageFrame;
 import com.example.mtchat_android.serverobjects.InterlocutorTyping;
 import com.example.mtchat_android.serverobjects.Message;
+import com.example.mtchat_android.toasts.ToastAllert;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
@@ -144,6 +145,10 @@ public class ChatActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
+            /**
+             *
+              Send object if keyboard is active
+             */
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 int size = editText.getText().length();
@@ -261,91 +266,81 @@ public class ChatActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        ImageView imageView = new ImageView(this);
+         try {
+             ImageView imageView = new ImageView(this);
 
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
-            imageUrl = data.getData();
+             if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+                 imageUrl = data.getData();
 
-            imageView.setImageURI(imageUrl);
+                 imageView.setImageURI(imageUrl);
 
-            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                 Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
 
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            // bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 15 , baos);
-            byte[] imageInByte = baos.toByteArray();
-            byte[] one_bit = new byte[1];
+                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                 // bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                 bitmap.compress(Bitmap.CompressFormat.JPEG, 15, baos);
+                 byte[] imageInByte = baos.toByteArray();
 
 
-            ByteString byteString = ByteString.of(imageInByte);
-            ByteString byteString2 = ByteString.of(one_bit);
+                 ByteString byteString = ByteString.of(imageInByte);
 
-            String encodedImage = Base64.encodeToString(imageInByte, Base64.DEFAULT);
-            StringBuffer str = new StringBuffer();
-            StringBuffer mystr = new StringBuffer();
+                 String encodedImage = Base64.encodeToString(imageInByte, Base64.DEFAULT);
+                 StringBuffer str = new StringBuffer();
+                 StringBuffer mystr = new StringBuffer();
 
-            int strSixe = encodedImage.length();
+                 int strSixe = encodedImage.length();
 
-            int indexFrame=0;
-            ImageFrame imageFrame = new ImageFrame();
+                 int indexFrame = 0;
+                 ImageFrame imageFrame = new ImageFrame();
 
-            if(strSixe<5_000)
-            {
-                for(int i =0;i<encodedImage.length();i++) {
-                    str.append(encodedImage.charAt(i));
-                }
-                imageFrame.setNumberFrame(-2);
-                imageFrame.setFrame(str.toString());
-                StartSocketConnection.webSocket.send(ObjectType.getJson(imageFrame));
-            }
-            else {
+                 if (strSixe < 5_000) {
+                     for (int i = 0; i < encodedImage.length(); i++) {
+                         str.append(encodedImage.charAt(i));
+                     }
+                     imageFrame.setNumberFrame(-2);
+                     imageFrame.setFrame(str.toString());
+                     StartSocketConnection.webSocket.send(ObjectType.getJson(imageFrame));
+                 } else {
 
-                for (int i = 0; i < encodedImage.length(); i++) {
+                     for (int i = 0; i < encodedImage.length(); i++) {
 
-                    if (i == encodedImage.length() - 1) {
-                        str.append(encodedImage.charAt(i));
-                        imageFrame.setFrame(str.toString());
-                        imageFrame.setNumberFrame(-1);
-                        mystr.append(encodedImage.charAt(i));
-                        StartSocketConnection.webSocket.send(ObjectType.getJson(imageFrame));
-                    }
-                    if (str.length() < 5_000) {
-                        str.append(encodedImage.charAt(i));
-                        mystr.append(encodedImage.charAt(i));
-                    } else {
-                        imageFrame.setNumberFrame(indexFrame);
-                        str.append(encodedImage.charAt(i));
-                        mystr.append(encodedImage.charAt(i));
-                        imageFrame.setFrame(str.toString());
-                        StartSocketConnection.webSocket.send(ObjectType.getJson(imageFrame));
-                        indexFrame++;
-                        str = new StringBuffer();
-                    }
-                }
+                         if (i == encodedImage.length() - 1) {
+                             str.append(encodedImage.charAt(i));
+                             imageFrame.setFrame(str.toString());
+                             imageFrame.setNumberFrame(-1);
+                             mystr.append(encodedImage.charAt(i));
+                             StartSocketConnection.webSocket.send(ObjectType.getJson(imageFrame));
+                         }
+                         if (str.length() < 5_000) {
+                             str.append(encodedImage.charAt(i));
+                             mystr.append(encodedImage.charAt(i));
+                         } else {
+                             imageFrame.setNumberFrame(indexFrame);
+                             str.append(encodedImage.charAt(i));
+                             mystr.append(encodedImage.charAt(i));
+                             imageFrame.setFrame(str.toString());
+                             StartSocketConnection.webSocket.send(ObjectType.getJson(imageFrame));
+                             indexFrame++;
+                             str = new StringBuffer();
+                         }
+                     }
 
-            }
+                 }
 
-//            ByteString f = ByteString.encodeUtf8(encodedImage);
-//            StartSocketConnection.webSocket.send(f);
-//
-//            String encoded = Base64.encodeToString(imageInByte, Base64.DEFAULT);
-//            int a = encoded.length();
-//
-//             StartSocketConnection.webSocket.send();
-//            StartSocketConnection.webSocket.send(byteString);
-//            StartSocketConnection.webSocket.send(byteString2);
 
-            ImageMessage myImageMessage = new ImageMessage();
-            myImageMessage.setFromMe(true);
-            myImageMessage.setImage(mystr);
+                 ImageMessage myImageMessage = new ImageMessage();
+                 myImageMessage.setFromMe(true);
+                 myImageMessage.setImage(mystr);
 
-            MergedMessage mergedMessage = new MergedMessage(myImageMessage);
-            onMessage(mergedMessage);
-        } else {
-            Toast toast = Toast.makeText(this, "Select please a photo", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-
+                 MergedMessage mergedMessage = new MergedMessage(myImageMessage);
+                 onMessage(mergedMessage);
+             } else {
+                 ToastAllert.toatallert(this,"Select please a photo");
+             }
+         }
+         catch (Exception e){
+             ToastAllert.toatallert(this,"Error format image");
+         }
     }
 
     public void goToChatClose() {
