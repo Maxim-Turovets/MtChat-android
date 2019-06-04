@@ -31,11 +31,10 @@ public class StartSocketConnection {
                 .readTimeout(60, TimeUnit.SECONDS)
                 .build();
 
-        request = new Request.Builder().url("ws://77.47.224.135:8080/sock/chat").build();
+        request = new Request.Builder().url("ws://18.224.252.15:8080/sock/chat").build();
         listener = new EchoWebSocketListener();
         webSocket = okHttpClient.newWebSocket(request, listener);
-       // client.dispatcher().executorService().shutdown();
-    }
+           }
 
     public static void sendTestJson(){
         ConnectInfo connectInfo = new ConnectInfo();
