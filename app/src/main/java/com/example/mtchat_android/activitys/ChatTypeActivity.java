@@ -64,8 +64,16 @@ public class ChatTypeActivity extends AppCompatActivity {
         generalBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
 
         // test
+        StaticModels.connectInfo = new ConnectInfo();
+        StaticModels.connectInfo.setObjectType("ConnectInfo");
+        StaticModels.connectInfo.setChatType("pair");
         StartSocketConnection.startSocketConnection();
         StartSocketConnection.sendTestJson();
+//        StaticModels.connectInfo = new ConnectInfo();
+//        StaticModels.connectInfo.setObjectType("ConnectInfo");
+//        StaticModels.connectInfo.setChatType("general");
+
+        this.finish();
         Intent intent = new Intent(this, LoadingAnimationActivity.class);
         startActivity(intent);
     }

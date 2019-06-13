@@ -106,16 +106,17 @@ public  class EchoWebSocketListener extends WebSocketListener {
 
             }
             if (objectInfo(text).toString().equals("InterlocutorTyping")) {
-                InterlocutorTyping interlocutorTyping = new InterlocutorTyping();
-                interlocutorTyping = (InterlocutorTyping) ObjectType.getObject(text, interlocutorTyping);
+                if(StaticModels.connectInfo.getChatType().equals("pair")) {
+                    InterlocutorTyping interlocutorTyping = new InterlocutorTyping();
+                    interlocutorTyping = (InterlocutorTyping) ObjectType.getObject(text, interlocutorTyping);
 
-                if (interlocutorTyping.isTyping()) {
-                    chatActivity.showPersonTyping();
+                    if (interlocutorTyping.isTyping()) {
+                        chatActivity.showPersonTyping();
+                    }
 
+                    if (interlocutorTyping.isTyping() == false)
+                        chatActivity.hidePersonTyping();
                 }
-
-                if (interlocutorTyping.isTyping() == false)
-                    chatActivity.hidePersonTyping();
 
             }
             if (objectInfo(text).toString().equals("IfRoomDeleted")) {

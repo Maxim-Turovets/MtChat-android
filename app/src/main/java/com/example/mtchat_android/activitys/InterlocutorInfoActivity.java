@@ -17,6 +17,7 @@ import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.InterlocutorInfo;
 import com.example.mtchat_android.serverobjects.UserInfo;
+import com.example.mtchat_android.toasts.ToastAllert;
 
 public class InterlocutorInfoActivity  extends AppCompatActivity {
 
@@ -42,82 +43,115 @@ public class InterlocutorInfoActivity  extends AppCompatActivity {
         interlocutorInfoLayout = findViewById(R.id.interlocutor_info_container);
         StaticModels.interlocutorInfo = new InterlocutorInfo();
         StaticModels.interlocutorInfo.setObjectType("InterlocutorInfo");
+        isAnonimGender();
     }
 
 
     public  void  interlocutorFemaleButtonPress(View view)
     {
-        // active
-        interlocutorFemaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
-        // not active
-        interlocutorMaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-        interlocutorAnonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-        //gender
-        StaticModels.interlocutorInfo.setGender("female");
-        genderChoose = true;
+        if(StaticModels.isAnonimGender==false) {
+            // active
+            inputTextFieldUnlock(true);
+            interlocutorFemaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+            // not active
+            interlocutorMaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+            interlocutorAnonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+            //gender
+            StaticModels.interlocutorInfo.setGender("female");
+            genderChoose = true;
+        }
         //
     }
 
     public  void  interlocutorMaleButtonPress(View view)
     {
-        // active
-        interlocutorMaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
-        // not active
-        interlocutorFemaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-        interlocutorAnonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-        genderChoose = true;
-        //gender
-        StaticModels.interlocutorInfo.setGender("male");
+        if(StaticModels.isAnonimGender==false)  // if not anonim gender
+        {
+            // active
+            inputTextFieldUnlock(true);
+            interlocutorMaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+            // not active
+            interlocutorFemaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+            interlocutorAnonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+            genderChoose = true;
+            //gender
+            StaticModels.interlocutorInfo.setGender("male");
+        }
     }
 
     public  void  interlocutorAnonButtonPress(View view)
     {
-        //active
-        interlocutorAnonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
-        // not active
-        interlocutorFemaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-        interlocutorMaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-        //genderChoose = true;
+        if(StaticModels.isAnonimGender==false) {
+
+            //active
+            interlocutorAnonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+            // not active
+            interlocutorFemaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+            interlocutorMaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+            genderChoose = true;
+            //gender
+            StaticModels.interlocutorInfo.setGender("anonim");
+            StaticModels.interlocutorInfo.setAgeFrom("0");
+            StaticModels.interlocutorInfo.setAgeTo("99");
+            inputTextFieldUnlock(false);
+        }
     }
 
-    public void searchBtnPress(View view)
+    private  boolean isAnonimGender()
     {
-        String localFrom = inpFrom.getText().toString().trim();
-        String localTo = inpTo.getText().toString().trim();
-        // text edit not empty
-        if(!localFrom.equals("") && !localTo.trim().equals("") && genderChoose)
+        if(StaticModels.isAnonimGender)
         {
-            int localFromInteger = Integer.parseInt(localFrom);
-            int localToInteger = Integer.parseInt(localTo);
-            if(localFromInteger>100||localFromInteger<1||localToInteger>100||localToInteger<1 ||localFromInteger>=localToInteger)
-            {
-                interlocutorInfoLayout.transitionToStart();
-                interlocutorInfoLayout.transitionToEnd();
-                Toast toast = Toast.makeText(this, "Возвраст может быть от 1 то 100", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-            else {
-                // info normal
-                StartSocketConnection.startSocketConnection();
-
-                StaticModels.interlocutorInfo.setAgeFrom(localFrom);
-                StaticModels.interlocutorInfo.setAgeTo(localTo);
-                StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.connectInfo));
-                StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.userInfo));
-                StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.interlocutorInfo));
-                this.finish();
-                Intent intent = new Intent(this, LoadingAnimationActivity.class);
-                startActivity(intent);
-            }
+            // active
+            interlocutorFemaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+            interlocutorMaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+            interlocutorAnonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+            //gender
+            StaticModels.interlocutorInfo.setGender("anonim");
+            StaticModels.interlocutorInfo.setAgeTo("99");
+            StaticModels.interlocutorInfo.setAgeFrom("0");
+            inputTextFieldUnlock(false); // lock text field
+            return  false;
         }
         else {
-            interlocutorInfoLayout.transitionToStart();
-            interlocutorInfoLayout.transitionToEnd();
-            Toast toast = Toast.makeText(this, "Укажите все параметры ", Toast.LENGTH_SHORT);
-            toast.show();
+            return true;
+        }
+    }
+    public void searchBtnPress(View view)
+    {
+        if(StaticModels.isAnonimGender)
+        {
+            sendInfoToServer();
+            goToNextLayout();
+        }
+        else {
+            String localFrom = inpFrom.getText().toString().trim();
+            String localTo = inpTo.getText().toString().trim();
+            // text edit not empty
+            if (!localFrom.equals("") && !localTo.trim().equals("") && genderChoose) {
+                int localFromInteger = Integer.parseInt(localFrom);
+                int localToInteger = Integer.parseInt(localTo);
+                if (localFromInteger > 100 || localFromInteger < 1 || localToInteger > 100 || localToInteger < 1 || localFromInteger >= localToInteger) {
+                    interlocutorInfoLayout.transitionToStart();
+                    interlocutorInfoLayout.transitionToEnd();
+                    ToastAllert.toatallert(this,"Возвраст может быть от 1 то 100");
+                } else {
+                    // info normal
+
+                    StaticModels.interlocutorInfo.setAgeFrom(localFrom);
+                    StaticModels.interlocutorInfo.setAgeTo(localTo);
+                    sendInfoToServer();
+                    goToNextLayout();
+                }
+            } else {
+                interlocutorInfoLayout.transitionToStart();
+                interlocutorInfoLayout.transitionToEnd();
+                ToastAllert.toatallert(this,"Укажите все параметры ");
+            }
         }
 
     }
+
+
 
 
     @Override
@@ -128,6 +162,36 @@ public class InterlocutorInfoActivity  extends AppCompatActivity {
             startActivity(intent);
 
     }
+
+
+    private void  goToNextLayout()
+    {
+        this.finish();
+        Intent intent = new Intent(this, LoadingAnimationActivity.class);
+        startActivity(intent);
+    }
+
+    private  void  sendInfoToServer(){
+        StartSocketConnection.startSocketConnection();
+        StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.connectInfo));
+        StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.userInfo));
+        StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.interlocutorInfo));
+    }
+
+    private void  inputTextFieldUnlock(boolean status){
+        if(!status) {
+            inpFrom.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+            inpTo.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+        }
+        else {
+            inpFrom.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+            inpTo.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+        }
+        inpFrom.setEnabled(status);
+        inpTo.setEnabled(status);
+
+    }
+
 
 
 }

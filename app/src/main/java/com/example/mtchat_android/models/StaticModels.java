@@ -16,4 +16,5 @@ public class StaticModels {
     public  static String messageTime;
     public  static LoadingAnimationActivity loadingAnimationActivity;
     public  static StringBuffer imageStringBuffer;
+    public  static boolean isAnonimGender;
 }
