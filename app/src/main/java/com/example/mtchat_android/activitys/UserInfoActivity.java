@@ -71,6 +71,11 @@ public class UserInfoActivity extends AppCompatActivity {
         // not active
         femaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
         maleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+        // input field
+        inpName.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+        inpAge.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+        inpName.setEnabled(false);
+        inpAge.setEnabled(false);
         // genderChoose = true;
     }
 

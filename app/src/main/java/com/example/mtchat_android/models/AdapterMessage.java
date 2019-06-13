@@ -1,13 +1,11 @@
 package com.example.mtchat_android.models;
 
-import android.annotation.TargetApi;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Vibrator;
+
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,18 +15,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mtchat_android.R;
-import com.example.mtchat_android.serverobjects.Message;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.io.ByteArrayInputStream;
+
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 
 public class AdapterMessage extends BaseAdapter {
 

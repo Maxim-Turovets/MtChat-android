@@ -27,7 +27,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
     public static ChatActivity chatActivity;
     boolean openBufferString = false;
     StringBuffer imgBase64 = new StringBuffer();
-    // public static SetPartnerAgeActivity setPartnerAgeActivity;
+
 
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
