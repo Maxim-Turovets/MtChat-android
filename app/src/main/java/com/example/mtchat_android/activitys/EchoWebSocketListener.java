@@ -5,6 +5,7 @@ import android.os.Vibrator;
 import android.util.Log;
 
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
+import com.example.mtchat_android.activitys.interlocutionActivity.GeneralChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.ImageMessage;
 import com.example.mtchat_android.models.MergedMessage;
@@ -25,6 +26,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
     private static final int NORMAL_CLOSURE_STATUS = 1000;
 
     public static ChatActivity chatActivity;
+    public  static GeneralChatActivity generalChatActivity;
     boolean openBufferString = false;
     StringBuffer imgBase64 = new StringBuffer();
 
@@ -146,6 +148,9 @@ public  class EchoWebSocketListener extends WebSocketListener {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                if(StaticModels.connectInfo.getChatType().equals("general"))
+                    generalChatActivity.onMessage(mergedMessage);
+                else
                 chatActivity.onMessage(mergedMessage);
 
 
@@ -154,7 +159,11 @@ public  class EchoWebSocketListener extends WebSocketListener {
                 Message tempMessage = new Message();
                 tempMessage = (Message) ObjectType.getObject(text, tempMessage);
                 MergedMessage mergedMessage = new MergedMessage(tempMessage);
+                if(StaticModels.connectInfo.getChatType().equals("pair"))
                 chatActivity.onMessage(mergedMessage);
+                else
+                    generalChatActivity.onMessage(mergedMessage);
+
                 StaticModels.messageTime = tempMessage.getTime();
                 long[] pattern = {100, 300, 400, 300};
                 chatActivity.soundPlay();

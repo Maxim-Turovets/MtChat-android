@@ -172,7 +172,7 @@ public class InterlocutorInfoActivity  extends AppCompatActivity {
     }
 
     private  void  sendInfoToServer(){
-        StartSocketConnection.startSocketConnection();
+        StartSocketConnection.startSocketConnection("chat");
         StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.connectInfo));
         StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.userInfo));
         StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.interlocutorInfo));

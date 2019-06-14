@@ -407,7 +407,7 @@ public class ChatActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoadingAnimationActivity.class);
         startActivity(intent);
 
-        StartSocketConnection.startSocketConnection();
+        StartSocketConnection.startSocketConnection("chat");
         StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.connectInfo));
         StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.userInfo));
         StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.interlocutorInfo));

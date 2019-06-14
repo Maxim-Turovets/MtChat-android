@@ -7,16 +7,15 @@ import android.support.constraint.motion.MotionLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mtchat_android.R;
 import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
+import com.example.mtchat_android.activitys.interlocutionActivity.GeneralChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.ConnectInfo;
-import com.example.mtchat_android.serverobjects.UserInfo;
+import com.example.mtchat_android.serverobjects.UserGeneralInfo;
 
 public class ChatTypeActivity extends AppCompatActivity {
 
@@ -63,15 +62,23 @@ public class ChatTypeActivity extends AppCompatActivity {
         // active
         generalBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
 
+//        UserGeneralInfo userGeneralInfo = new UserGeneralInfo();
+//        userGeneralInfo.setObjectType("UserGeneralInfo");
+//        userGeneralInfo.setName("MAXIM");
+//        StartSocketConnection.startSocketConnection("generalChat");
+//        StartSocketConnection.webSocket.send(ObjectType.getJson(userGeneralInfo));
         // test
         StaticModels.connectInfo = new ConnectInfo();
         StaticModels.connectInfo.setObjectType("ConnectInfo");
         StaticModels.connectInfo.setChatType("pair");
-        StartSocketConnection.startSocketConnection();
+        StartSocketConnection.startSocketConnection("chat");
         StartSocketConnection.sendTestJson();
 //        StaticModels.connectInfo = new ConnectInfo();
 //        StaticModels.connectInfo.setObjectType("ConnectInfo");
 //        StaticModels.connectInfo.setChatType("general");
+
+
+
 
         this.finish();
         Intent intent = new Intent(this, LoadingAnimationActivity.class);

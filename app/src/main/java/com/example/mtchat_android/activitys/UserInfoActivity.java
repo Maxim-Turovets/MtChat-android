@@ -148,7 +148,7 @@ public class UserInfoActivity extends AppCompatActivity {
         if(StaticModels.connectInfo.getChatType().equals("general"))
         {
             this.finish();
-            StartSocketConnection.startSocketConnection();
+            StartSocketConnection.startSocketConnection("chat3");
             StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.connectInfo));
             StartSocketConnection.webSocket.send(ObjectType.getJson(StaticModels.userInfo));
             StaticModels.interlocutorInfo = new InterlocutorInfo();

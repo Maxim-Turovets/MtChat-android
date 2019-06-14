@@ -17,13 +17,13 @@ import okhttp3.WebSocket;
 
 public class StartSocketConnection {
 
-    public static Request request;
-    public static EchoWebSocketListener listener;
-    public static OkHttpClient client;
+    private static Request request;
+    private static EchoWebSocketListener listener;
+    private static OkHttpClient client;
     public static WebSocket webSocket;
 
 
-    public static void startSocketConnection() {
+    public static void startSocketConnection(String ip) {
         client = new OkHttpClient();
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
@@ -32,7 +32,7 @@ public class StartSocketConnection {
                 .build();
 
         //18.224.252.15
-        request = new Request.Builder().url("ws://77.47.224.135:8080/sock/chat").build();
+        request = new Request.Builder().url("ws://18.224.252.15:8080/sock/"+ip).build();
         listener = new EchoWebSocketListener();
         webSocket = okHttpClient.newWebSocket(request, listener);
            }
