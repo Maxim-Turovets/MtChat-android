@@ -15,6 +15,8 @@ import com.example.mtchat_android.serverobjects.ImageCanSend;
 import com.example.mtchat_android.serverobjects.ImageFrame;
 import com.example.mtchat_android.serverobjects.InterlocutorTyping;
 import com.example.mtchat_android.serverobjects.Message;
+import com.example.mtchat_android.soundVibration.Sound;
+import com.example.mtchat_android.soundVibration.Vibrate;
 
 import okhttp3.Response;
 import okhttp3.WebSocket;
@@ -165,12 +167,9 @@ public  class EchoWebSocketListener extends WebSocketListener {
                     generalChatActivity.onMessage(mergedMessage);
 
                 StaticModels.messageTime = tempMessage.getTime();
-                long[] pattern = {100, 300, 400, 300};
-                chatActivity.soundPlay();
-                Vibrator vibrator = (Vibrator) chatActivity.getSystemService(Context.VIBRATOR_SERVICE);
-                if (vibrator.hasVibrator()) {
-                    vibrator.vibrate(pattern, -1);
-                }
+
+                Sound.soundPlay(chatActivity);
+                Vibrate.vibration(chatActivity);
             }
 
 

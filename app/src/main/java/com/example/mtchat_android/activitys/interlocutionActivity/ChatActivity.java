@@ -65,7 +65,7 @@ public class ChatActivity extends AppCompatActivity {
     private ImageButton imageMessageButton;
     private ImageButton textMessageButton;
     private boolean showButton;
-    private MediaPlayer messageSound;
+
     private ImageButton reconnectBtn;
     private ImageButton goToMenuBtn;
     private ImageButton openCameraBtn;
@@ -123,7 +123,7 @@ public class ChatActivity extends AppCompatActivity {
         imageMessageButton.setVisibility(View.GONE);
 
         /// Sound message
-        messageSound = MediaPlayer.create(this, R.raw.message);
+
 
 
         /// Smile
@@ -395,9 +395,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    public void soundPlay() {
-        messageSound.start();
-    }
+
 
     public void reconnectBtnPress(View view) {
         reconnectBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
