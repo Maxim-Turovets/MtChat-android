@@ -9,13 +9,9 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.mtchat_android.R;
-import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
-import com.example.mtchat_android.activitys.interlocutionActivity.GeneralChatActivity;
-import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.ConnectInfo;
-import com.example.mtchat_android.serverobjects.UserGeneralInfo;
 
 public class ChatTypeActivity extends AppCompatActivity {
 
