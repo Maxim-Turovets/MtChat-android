@@ -1,11 +1,9 @@
 package com.example.mtchat_android.activitys.interlocutionActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.MediaPlayer;
+import android.inputmethodservice.Keyboard;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -29,6 +27,7 @@ import com.example.mtchat_android.activitys.ChatTypeActivity;
 import com.example.mtchat_android.activitys.EchoWebSocketListener;
 import com.example.mtchat_android.activitys.InterlocutorInfoActivity;
 import com.example.mtchat_android.activitys.LoadingAnimationActivity;
+import com.example.mtchat_android.activitys.interlocutionActivity.chatServise.keyboards.KeyboardServise;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.AdapterMessage;
 import com.example.mtchat_android.models.ImageMessage;
@@ -43,13 +42,7 @@ import com.example.mtchat_android.serverobjects.Message;
 import com.example.mtchat_android.toasts.ToastAllert;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
-
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Random;
-
-
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 import okio.ByteString;
@@ -77,7 +70,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 100;
     private Uri imageUrl;
-    int maxim = 0;
+
 
     TypeWriter tw;
 
@@ -140,48 +133,7 @@ public class ChatActivity extends AppCompatActivity {
         tw = (TypeWriter) findViewById(R.id.tv);
         tw.setVisibility(View.GONE);
 
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            /**
-             *
-              Send object if keyboard is active
-             */
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                int size = editText.getText().length();
-
-                if (size > 0)
-                    if (maxim == 0) {
-                        InterlocutorTyping interlocutorTyping = new InterlocutorTyping();
-                        interlocutorTyping.setTyping(true);
-                        interlocutorTyping.setName(StaticModels.userInfo.getName());
-                        StartSocketConnection.webSocket.send(ObjectType.getJson(interlocutorTyping));
-                        imageMessageButton.setVisibility(View.GONE);
-                        textMessageButton.setVisibility(View.VISIBLE);
-                        maxim++;
-                    }
-                if (size == 0) {
-                    maxim = 0;
-                    InterlocutorTyping interlocutorTyping = new InterlocutorTyping();
-                    interlocutorTyping.setTyping(false);
-                    StartSocketConnection.webSocket.send(ObjectType.getJson(interlocutorTyping));
-                    if (showButton) {
-                        imageMessageButton.setVisibility(View.VISIBLE);
-                        textMessageButton.setVisibility(View.GONE);
-                    }
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                System.out.print("dsgfh");
-
-            }
-        });
+        new KeyboardServise(editText, imageMessageButton, textMessageButton , showButton);
 
 
         /////
