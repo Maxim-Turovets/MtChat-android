@@ -138,21 +138,7 @@ public class ChatActivity extends AppCompatActivity {
 
         //////
 
-        imageMessageSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    ImageCanSend imageCanSend = new ImageCanSend();
-                    imageCanSend.setAvailable(false);
-                    StartSocketConnection.webSocket.send(ObjectType.getJson(imageCanSend));
-                }
-                if (isChecked == false) {
-                    ImageCanSend imageCanSend = new ImageCanSend();
-                    imageCanSend.setAvailable(true);
-                    StartSocketConnection.webSocket.send(ObjectType.getJson(imageCanSend));
-                }
-            }
-        });
+
 
 
     }
