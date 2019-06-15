@@ -3,15 +3,12 @@ package com.example.mtchat_android.activitys.interlocutionActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.inputmethodservice.Keyboard;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -27,7 +24,8 @@ import com.example.mtchat_android.activitys.ChatTypeActivity;
 import com.example.mtchat_android.activitys.EchoWebSocketListener;
 import com.example.mtchat_android.activitys.InterlocutorInfoActivity;
 import com.example.mtchat_android.activitys.LoadingAnimationActivity;
-import com.example.mtchat_android.activitys.interlocutionActivity.chatServise.keyboards.KeyboardServise;
+import com.example.mtchat_android.activitys.interlocutionActivity.flowing.Flowing;
+import com.example.mtchat_android.activitys.interlocutionActivity.keyboards.KeyboardServise;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.AdapterMessage;
 import com.example.mtchat_android.models.ImageMessage;
@@ -37,10 +35,8 @@ import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.models.TypeWriter;
 import com.example.mtchat_android.serverobjects.ImageCanSend;
 import com.example.mtchat_android.serverobjects.ImageFrame;
-import com.example.mtchat_android.serverobjects.InterlocutorTyping;
 import com.example.mtchat_android.serverobjects.Message;
 import com.example.mtchat_android.toasts.ToastAllert;
-import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import java.io.ByteArrayOutputStream;
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
@@ -136,22 +132,9 @@ public class ChatActivity extends AppCompatActivity {
         new KeyboardServise(editText, imageMessageButton, textMessageButton , showButton);
 
 
-        /////
+        // левая шторка
         mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
-        mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_BEZEL);
-        mDrawer.setOnDrawerStateChangeListener(new ElasticDrawer.OnDrawerStateChangeListener() {
-            @Override
-            public void onDrawerStateChange(int oldState, int newState) {
-                if (newState == ElasticDrawer.STATE_CLOSED) {
-
-                }
-            }
-
-            @Override
-            public void onDrawerSlide(float openRatio, int offsetPixels) {
-
-            }
-        });
+        new Flowing(mDrawer);
 
         //////
 

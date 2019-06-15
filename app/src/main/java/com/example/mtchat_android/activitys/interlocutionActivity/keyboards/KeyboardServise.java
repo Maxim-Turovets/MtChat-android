@@ -1,4 +1,4 @@
-package com.example.mtchat_android.activitys.interlocutionActivity.chatServise.keyboards;
+package com.example.mtchat_android.activitys.interlocutionActivity.keyboards;
 
 import android.text.Editable;
 import android.text.TextWatcher;
