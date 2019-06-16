@@ -11,7 +11,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -25,6 +24,7 @@ import com.example.mtchat_android.activitys.EchoWebSocketListener;
 import com.example.mtchat_android.activitys.InterlocutorInfoActivity;
 import com.example.mtchat_android.activitys.LoadingAnimationActivity;
 import com.example.mtchat_android.activitys.interlocutionActivity.flowing.Flowing;
+import com.example.mtchat_android.activitys.interlocutionActivity.flowing.SwitchServise;
 import com.example.mtchat_android.activitys.interlocutionActivity.keyboards.KeyboardServise;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.AdapterMessage;
@@ -33,7 +33,6 @@ import com.example.mtchat_android.models.MergedMessage;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.models.TypeWriter;
-import com.example.mtchat_android.serverobjects.ImageCanSend;
 import com.example.mtchat_android.serverobjects.ImageFrame;
 import com.example.mtchat_android.serverobjects.Message;
 import com.example.mtchat_android.toasts.ToastAllert;
@@ -54,21 +53,21 @@ public class ChatActivity extends AppCompatActivity {
     private ImageButton imageMessageButton;
     private ImageButton textMessageButton;
     private boolean showButton;
-
+    private View rootViewEmoji;
     private ImageButton reconnectBtn;
     private ImageButton goToMenuBtn;
     private ImageButton openCameraBtn;
     private int countClickedBackButton = 0;
 
     ImageButton emojiImageButton;
-    View rootView;
-    EmojIconActions emojIcon;
+
+    private  EmojIconActions emojIcon;
 
     private static final int PICK_IMAGE = 100;
     private Uri imageUrl;
 
 
-    TypeWriter tw;
+    TypeWriter isTypingWriter;
 
     @Override
     public void onBackPressed() {
@@ -109,16 +108,14 @@ public class ChatActivity extends AppCompatActivity {
         reconnectBtn = findViewById(R.id.recconectBtn);
         goToMenuBtn = findViewById(R.id.goToMenuBtn);
         openCameraBtn = findViewById(R.id.openCameraBtn);
+        mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
+        rootViewEmoji = findViewById(R.id.root_view);
+        emojiImageButton = (ImageButton) findViewById(R.id.emoji_btn);
+        isTypingWriter = (TypeWriter) findViewById(R.id.isTyping);
         imageMessageButton.setVisibility(View.GONE);
 
-        /// Sound message
-
-
-
-        /// Smile
-        rootView = findViewById(R.id.root_view);
-        emojiImageButton = (ImageButton) findViewById(R.id.emoji_btn);
-        emojIcon = new EmojIconActions(this, rootView, editText, emojiImageButton);
+        // Smile
+        emojIcon = new EmojIconActions(this, rootViewEmoji, editText, emojiImageButton);
         emojIcon.ShowEmojIcon();
         emojIcon.setIconsIds(R.drawable.ic_action_keyboard, R.drawable.smiley);
         /// end smile
@@ -126,20 +123,14 @@ public class ChatActivity extends AppCompatActivity {
         messagesView.setAdapter(adapterMessage);
         EchoWebSocketListener.chatActivity = this;
 
-        tw = (TypeWriter) findViewById(R.id.tv);
-        tw.setVisibility(View.GONE);
+        isTypingWriter.setVisibility(View.GONE);
 
+        // keyboards
         new KeyboardServise(editText, imageMessageButton, textMessageButton , showButton);
-
-
         // левая шторка
-        mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
         new Flowing(mDrawer);
-
-        //////
-
-
-
+        // switch
+        new SwitchServise(imageMessageSwitch);
 
     }
 
@@ -151,7 +142,7 @@ public class ChatActivity extends AppCompatActivity {
         myMessage.setName(StaticModels.userInfo.getName());
         myMessage.setObjectType("Message");
         myMessage.setText(editText.getText().toString());
-        myMessage.setTime("00:00");
+      //  myMessage.setTime("00:00");
         MergedMessage mergedMessage = new MergedMessage(myMessage);
 
 
@@ -273,10 +264,10 @@ public class ChatActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                tw.setVisibility(View.VISIBLE);
-                tw.setText("");
-                tw.setCharacterDelay(150);
-                tw.animateText(StaticModels.interlocutorName + "  typing ✍ ... ");
+                isTypingWriter.setVisibility(View.VISIBLE);
+                isTypingWriter.setText("");
+                isTypingWriter.setCharacterDelay(150);
+                isTypingWriter.animateText(StaticModels.interlocutorName + "  typing ✍ ... ");
             }
         });
     }
@@ -286,7 +277,7 @@ public class ChatActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                tw.setVisibility(View.GONE);
+                isTypingWriter.setVisibility(View.GONE);
             }
         });
     }

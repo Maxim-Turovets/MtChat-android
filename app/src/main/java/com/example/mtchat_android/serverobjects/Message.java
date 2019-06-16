@@ -7,7 +7,7 @@ public class Message {
     private  String objectType;
     private  String name;
     private  String text;
-    private  String time;
+//    private  String time;
 
     public String getObjectType() {
         return objectType;
@@ -17,13 +17,13 @@ public class Message {
         this.objectType = objectType;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
+//    public String getTime() {
+//        return time;
+//    }
+//
+//    public void setTime(String time) {
+//        this.time = time;
+//    }
 
     public String getName() {
         return name;

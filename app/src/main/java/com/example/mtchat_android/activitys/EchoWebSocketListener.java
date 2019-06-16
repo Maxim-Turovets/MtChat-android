@@ -88,7 +88,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
                     myMessage.setName("fict");
                     myMessage.setObjectType("Message");
                     myMessage.setText("you are allowed to send imageStringBuffer");
-                    myMessage.setTime("");
+//                    myMessage.setTime("");
                     MergedMessage mergedMessage = new MergedMessage(myMessage);
                     chatActivity.onMessage(mergedMessage);
                 }
@@ -99,7 +99,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
                     myMessage.setName("fict");
                     myMessage.setObjectType("Message");
                     myMessage.setText("you are not allowed to send imageStringBuffer");
-                    myMessage.setTime("");
+//                    myMessage.setTime("");
                     MergedMessage mergedMessage = new MergedMessage(myMessage);
                     chatActivity.onMessage(mergedMessage);
                 }
@@ -132,7 +132,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
                 myMessage.setName("fict");
                 myMessage.setObjectType("Message");
                 myMessage.setText(StaticModels.interlocutorName + " joined the chat");
-                myMessage.setTime("");
+//                myMessage.setTime("");
                 MergedMessage mergedMessage = new MergedMessage(myMessage);
                 try {
                     Thread.sleep(400);
@@ -159,7 +159,7 @@ public  class EchoWebSocketListener extends WebSocketListener {
                 chatActivity.onMessage(mergedMessage);
 
 
-                StaticModels.messageTime = tempMessage.getTime();
+//                StaticModels.messageTime = tempMessage.getTime();
 
                 Sound.soundPlay(chatActivity);
                 Vibrate.vibration(chatActivity);

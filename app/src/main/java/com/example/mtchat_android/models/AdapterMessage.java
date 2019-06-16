@@ -92,21 +92,28 @@ public class AdapterMessage extends BaseAdapter {
 
         // IMAGE MESSAGE
         if (message.getImageMessage() != null) {
-            MessageViewHolder2 holder = new MessageViewHolder2();
+            final MessageViewHolder2 holder = new MessageViewHolder2();
             LayoutInflater messageInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 //            byte [] ar = message.getImageMessage().getByteArray();
 
 
+
             byte[] decodedString = Base64.decode(message.getImageMessage().getImage().toString().getBytes(), Base64.DEFAULT);
-            Bitmap bmp = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            final Bitmap bmp  = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
 
             if (bmp!=null) {
 
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.JPEG, 10, out);
+                final ByteArrayOutputStream out = new ByteArrayOutputStream();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        bmp.compress(Bitmap.CompressFormat.JPEG, 10, out);
+                    }
+                }).start();
 
-                byte[] byteArray = out.toByteArray();
+
+
 
                 // MY IMAGE
                 //   if (message.getImageMessage().isFromMe()) {
@@ -117,16 +124,24 @@ public class AdapterMessage extends BaseAdapter {
                 //holder.messageBody.setImageBitmap(bmp);
 
 
+                 Bitmap bmHalf = null;
 
-                //Вычисляем ширину и высоту изображения
-                double width = bmp.getWidth();
-                double height = bmp.getHeight();
+//                new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+                        //Вычисляем ширину и высоту изображения
+                        double width = bmp.getWidth();
+                        double height = bmp.getHeight();
 
-                double koef = height / 1000;
-                int newWidht = (int) (width / koef);
-                int newheight = (int) (height / koef);
+                        double koef = height / 1000;
+                        int newWidht = (int) (width / koef);
+                        int newheight = (int) (height / koef);
 
-                Bitmap bmHalf = Bitmap.createScaledBitmap(bmp, newWidht, newheight, false);
+                        bmHalf = Bitmap.createScaledBitmap(bmp, newWidht, newheight, false);
+
+
+//                    }
+//                }).start();
                 holder.messageBody.setImageBitmap(bmHalf);
 
 
@@ -137,6 +152,7 @@ public class AdapterMessage extends BaseAdapter {
 
         return convertView;
     }
+
 
 
 
