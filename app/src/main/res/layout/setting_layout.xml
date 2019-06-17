@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
+
+
+    <RelativeLayout
+        android:id="@+id/settingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--SETTING IMAGE-->
+        <RelativeLayout
+            android:id="@+id/settingImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/icons8_setting_512"/>
+        </RelativeLayout>
+
+        <!--1 ELEMENT-->
+        <RelativeLayout
+            android:id="@+id/one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/settingImage"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/setting_section_drawable"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="15dp"
+
+                android:text="Sound"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textColor="#3F51B5"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/imageMessageSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="8dp" />
+
+
+
+
+        </RelativeLayout>
+
+        <!--1 ELEMENT-->
+        <RelativeLayout
+            android:id="@+id/two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/one"
+            android:background="@drawable/setting_section_drawable"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="15dp"
+
+                android:text="Sound"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textColor="#3F51B5"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/imageMessageSwitch2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="8dp" />
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+        <!--&lt;!&ndash;1 ELEMENT&ndash;&gt;-->
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/two"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_below="@id/one"-->
+            <!--android:background="@drawable/setting_section_drawable">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_marginLeft="15dp"-->
+
+                <!--android:text="Vibration"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Button"-->
+                <!--android:textColor="#3F51B5"-->
+                <!--android:textSize="18sp" />-->
+
+            <!--<Switch-->
+                <!--android:id="@+id/imageMessageSwitch2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginTop="4dp"-->
+                <!--android:layout_marginRight="8dp" />-->
+
+
+
+
+        <!--</RelativeLayout>-->
+
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>
