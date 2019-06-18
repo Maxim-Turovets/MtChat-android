@@ -29,7 +29,7 @@ public class SettingActivity extends AppCompatActivity {
    switchRememberMyData = findViewById(R.id.settingRememberNyDataSwitch);
    switchRememberInterlocutor = findViewById(R.id.settingRememberInterlocutorSwitch);
 
-   //     view.setBackground(ContextCompat.getDrawable(this, R.drawable.gender_active_drawable));
+    //    view.setBackground(ContextCompat.getDrawable(this, R.drawable.gender_active_drawable));
 
         switchSound.setChecked(StaticModels.setting.isSound());
         switchVibration.setChecked(StaticModels.setting.isVibration());
@@ -39,6 +39,7 @@ public class SettingActivity extends AppCompatActivity {
         new SoundSwitchServise(switchSound,this);
         new VibrationSwitchServise(switchVibration,this);
         new RememberMyDataSwitchServise(switchRememberMyData,this);
+        new RememberInterlocutorSwitchServise(switchRememberInterlocutor,this);
     }
 
 

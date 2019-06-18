@@ -12,9 +12,11 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.mtchat_android.R;
+import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
+import com.example.mtchat_android.saveDeleteSetting.SettingInfo;
 import com.example.mtchat_android.serverobjects.InterlocutorInfo;
 import com.example.mtchat_android.serverobjects.UserInfo;
 import com.example.mtchat_android.toasts.ToastAllert;
@@ -44,6 +46,15 @@ public class InterlocutorInfoActivity  extends AppCompatActivity {
         StaticModels.interlocutorInfo = new InterlocutorInfo();
         StaticModels.interlocutorInfo.setObjectType("InterlocutorInfo");
         isAnonimGender();
+
+
+
+        if(StaticModels.setting.isRememberInterlocutor())
+        {
+            StaticModels.interlocutorInfo = SettingInfo.getInterlocutorData(this);
+            sendInfoToServer();
+            goToNextLayout();
+        }
     }
 
 

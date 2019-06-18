@@ -41,6 +41,7 @@ public class  MainActivity extends AppCompatActivity {
 
         // init setting
       StaticModels.setting = SettingInfo.getSetting(this);
+      SettingInfo.setSetting(this);
 
 
 

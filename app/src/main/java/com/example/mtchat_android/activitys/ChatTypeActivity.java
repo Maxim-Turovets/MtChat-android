@@ -48,14 +48,12 @@ public class ChatTypeActivity extends AppCompatActivity {
         StaticModels.connectInfo.setObjectType("ConnectInfo");
         StaticModels.connectInfo.setChatType("pair");
 
-        if(StaticModels.setting.isRememberMyData())
-        {
-            StaticModels.userInfo = SettingInfo.getUserData(this);
-            this.finish();
-            Intent intent = new Intent(this, InterlocutorInfoActivity.class);
-            startActivity(intent);
-
-        }
+            if (StaticModels.setting.isRememberMyData()) {
+                StaticModels.userInfo = SettingInfo.getUserData(this);
+                this.finish();
+                Intent intent = new Intent(this, InterlocutorInfoActivity.class);
+                startActivity(intent);
+            }
         else
             {
             this.finish();
