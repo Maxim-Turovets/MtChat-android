@@ -328,7 +328,8 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:background="@drawable/gender_white_color_drawable"
-                    android:src="@mipmap/setting_64" />
+                    android:src="@mipmap/setting_64"
+                    android:onClick="goToSettingBtnPress"/>
 
                 <TextView
                 android:layout_width="wrap_content"

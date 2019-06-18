@@ -23,6 +23,7 @@ import com.example.mtchat_android.activitys.ChatTypeActivity;
 import com.example.mtchat_android.activitys.EchoWebSocketListener;
 import com.example.mtchat_android.activitys.InterlocutorInfoActivity;
 import com.example.mtchat_android.activitys.LoadingAnimationActivity;
+import com.example.mtchat_android.activitys.SettingActivity;
 import com.example.mtchat_android.activitys.interlocutionActivity.flowing.Flowing;
 import com.example.mtchat_android.activitys.interlocutionActivity.flowing.SwitchServise;
 import com.example.mtchat_android.activitys.interlocutionActivity.keyboards.KeyboardServise;
@@ -52,6 +53,7 @@ public class ChatActivity extends AppCompatActivity {
     private Switch imageMessageSwitch;
     private ImageButton imageMessageButton;
     private ImageButton textMessageButton;
+    private ImageButton settingButton;
     private boolean showButton;
     private View rootViewEmoji;
     private ImageButton reconnectBtn;
@@ -112,6 +114,7 @@ public class ChatActivity extends AppCompatActivity {
         rootViewEmoji = findViewById(R.id.root_view);
         emojiImageButton = (ImageButton) findViewById(R.id.emoji_btn);
         isTypingWriter = (TypeWriter) findViewById(R.id.isTyping);
+        settingButton = (ImageButton) findViewById(R.id.settingBtn);
         imageMessageButton.setVisibility(View.GONE);
 
         // Smile
@@ -338,6 +341,13 @@ public class ChatActivity extends AppCompatActivity {
 
         openCameraBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
 
+    }
+
+    public void goToSettingBtnPress(View view) {
+        settingButton.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+
+        Intent intent = new Intent(this, SettingActivity.class);
+        startActivity(intent);
     }
 
 

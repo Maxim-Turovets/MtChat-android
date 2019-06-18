@@ -48,7 +48,7 @@ public class  MainActivity extends AppCompatActivity {
     public  void  nextLayout()
     {
         this.finish();
-        Intent intent = new Intent(this, ChatTypeActivity.class);
+        Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
     }
 

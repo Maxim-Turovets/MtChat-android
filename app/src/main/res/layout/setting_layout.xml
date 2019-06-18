@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background">
 
@@ -8,7 +10,12 @@
     <RelativeLayout
         android:id="@+id/settingLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <!--SETTING IMAGE-->
         <RelativeLayout
@@ -19,127 +26,199 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/icons8_setting_512"/>
+                android:src="@mipmap/icons8_setting_512" />
         </RelativeLayout>
 
-        <!--1 ELEMENT-->
+
+        <!--MEDIA-->
         <RelativeLayout
-            android:id="@+id/one"
+            android:id="@+id/setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/settingImage"
             android:layout_marginTop="15dp"
-            android:background="@drawable/setting_section_drawable"
-            >
-
+            android:background="@drawable/setting_section_drawable">
+            <!--TEXT-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="15dp"
-
-                android:text="Sound"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                android:textColor="#3F51B5"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/imageMessageSwitch"
+                android:layout_centerHorizontal="true"
+                android:text="Media"
+                android:textColor="#0D26A3"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <!--on/off-->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="8dp" />
+                android:layout_marginEnd="12dp"
+                android:text="on/off"
+                android:textColor="#0D26A3"
+                android:textSize="15sp"
+                android:textStyle="italic" />
+            <!--1 ELEMENT-->
+            <RelativeLayout
+                android:id="@+id/one"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="Sound"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:textColor="#3F51B5"
+                    android:textSize="18sp" />
+
+                <Switch
+                    android:id="@+id/imageMessageSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="8dp" />
 
 
+            </RelativeLayout>
+
+            <!--2 ELEMENT-->
+            <RelativeLayout
+                android:id="@+id/two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/one">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="Vibration "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:textColor="#3F51B5"
+                    android:textSize="18sp" />
+
+                <Switch
+                    android:id="@+id/imageMessageSwitch2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="8dp" />
 
 
+            </RelativeLayout>
         </RelativeLayout>
 
-        <!--1 ELEMENT-->
+
         <RelativeLayout
-            android:id="@+id/two"
+            android:id="@+id/settingData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/setting"
             android:layout_marginTop="15dp"
-            android:layout_below="@id/one"
-            android:background="@drawable/setting_section_drawable"
-            >
+            android:background="@drawable/setting_section_drawable">
 
+            <!--TEXT-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="15dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="12dp"
+                android:text="Data"
+                android:textColor="#0D26A3"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-                android:text="Sound"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                android:textColor="#3F51B5"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/imageMessageSwitch2"
-                android:layout_width="wrap_content"
+            <!--1 ELEMENT-->
+            <RelativeLayout
+                android:id="@+id/fg"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="8dp" />
+                android:layout_marginTop="25dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="remember my data"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:textColor="#3F51B5"
+                    android:textSize="18sp" />
+
+                <Switch
+                    android:id="@+id/imageMessageSwitcgh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="8dp" />
 
 
+            </RelativeLayout>
 
+            <!--2 ELEMENT-->
+            <RelativeLayout
+                android:id="@+id/fg2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/fg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="remember interlocutor"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:textColor="#3F51B5"
+                    android:textSize="18sp" />
+
+                <Switch
+                    android:id="@+id/imageMessageSwitcghf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="8dp" />
+
+
+            </RelativeLayout>
 
         </RelativeLayout>
-
-
-
-
-        <!--&lt;!&ndash;1 ELEMENT&ndash;&gt;-->
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/two"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_below="@id/one"-->
-            <!--android:background="@drawable/setting_section_drawable">-->
-
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentStart="true"-->
-                <!--android:layout_alignParentLeft="true"-->
-                <!--android:layout_alignParentTop="true"-->
-                <!--android:layout_marginLeft="15dp"-->
-
-                <!--android:text="Vibration"-->
-                <!--android:textAppearance="@style/TextAppearance.AppCompat.Button"-->
-                <!--android:textColor="#3F51B5"-->
-                <!--android:textSize="18sp" />-->
-
-            <!--<Switch-->
-                <!--android:id="@+id/imageMessageSwitch2"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentTop="true"-->
-                <!--android:layout_alignParentEnd="true"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:layout_marginTop="4dp"-->
-                <!--android:layout_marginRight="8dp" />-->
-
-
-
-
-        <!--</RelativeLayout>-->
 
 
     </RelativeLayout>
+
+
+
+
+
+
+
 
 
 </android.support.constraint.ConstraintLayout>
