@@ -161,7 +161,10 @@ public  class EchoWebSocketListener extends WebSocketListener {
 
 //                StaticModels.messageTime = tempMessage.getTime();
 
+                if(StaticModels.setting.isSound())
                 Sound.soundPlay(chatActivity);
+
+                if(StaticModels.setting.isVibration())
                 Vibrate.vibration(chatActivity);
             }
 

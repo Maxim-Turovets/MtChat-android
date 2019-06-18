@@ -33,7 +33,7 @@
 
         <!--MEDIA-->
         <RelativeLayout
-            android:id="@+id/setting"
+            android:id="@+id/settingMedia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/settingImage"
@@ -55,13 +55,13 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="12dp"
-                android:text="on/off"
+                android:text="off/on"
                 android:textColor="#0D26A3"
                 android:textSize="15sp"
                 android:textStyle="italic" />
             <!--1 ELEMENT-->
             <RelativeLayout
-                android:id="@+id/one"
+                android:id="@+id/settingSound"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="19dp">
@@ -79,7 +79,7 @@
                     android:textSize="18sp" />
 
                 <Switch
-                    android:id="@+id/imageMessageSwitch"
+                    android:id="@+id/settingSoundSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -93,10 +93,10 @@
 
             <!--2 ELEMENT-->
             <RelativeLayout
-                android:id="@+id/two"
+                android:id="@+id/settingVibration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/one">
+                android:layout_below="@id/settingSound">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -111,7 +111,7 @@
                     android:textSize="18sp" />
 
                 <Switch
-                    android:id="@+id/imageMessageSwitch2"
+                    android:id="@+id/settingVibrationSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -124,12 +124,12 @@
             </RelativeLayout>
         </RelativeLayout>
 
-
+        <!--DATA-->
         <RelativeLayout
             android:id="@+id/settingData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/setting"
+            android:layout_below="@id/settingMedia"
             android:layout_marginTop="15dp"
             android:background="@drawable/setting_section_drawable">
 
@@ -146,7 +146,7 @@
 
             <!--1 ELEMENT-->
             <RelativeLayout
-                android:id="@+id/fg"
+                android:id="@+id/settingRememberMyData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp">
@@ -164,7 +164,7 @@
                     android:textSize="18sp" />
 
                 <Switch
-                    android:id="@+id/imageMessageSwitcgh"
+                    android:id="@+id/settingRememberNyDataSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -178,11 +178,11 @@
 
             <!--2 ELEMENT-->
             <RelativeLayout
-                android:id="@+id/fg2"
+                android:id="@+id/settingRememberInterlocutor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_below="@id/fg">
+                android:layout_below="@id/settingRememberMyData">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -197,7 +197,7 @@
                     android:textSize="18sp" />
 
                 <Switch
-                    android:id="@+id/imageMessageSwitcghf"
+                    android:id="@+id/settingRememberInterlocutorSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"

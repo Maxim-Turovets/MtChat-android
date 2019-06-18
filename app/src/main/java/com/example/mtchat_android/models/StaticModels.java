@@ -17,4 +17,5 @@ public class StaticModels {
     public  static LoadingAnimationActivity loadingAnimationActivity;
     public  static StringBuffer imageStringBuffer;
     public  static boolean isAnonimGender;
+    public  static Setting setting = new Setting();
 }

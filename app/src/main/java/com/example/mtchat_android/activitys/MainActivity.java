@@ -8,8 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.mtchat_android.R;
-
-
+import com.example.mtchat_android.activitys.settingActivity.SettingActivity;
+import com.example.mtchat_android.models.StaticModels;
+import com.example.mtchat_android.saveDeleteSetting.SettingInfo;
 
 
 public class  MainActivity extends AppCompatActivity {
@@ -38,7 +39,8 @@ public class  MainActivity extends AppCompatActivity {
             }
         }.start();
 
-
+        // init setting
+      StaticModels.setting = SettingInfo.getSetting(this);
 
 
 
@@ -48,7 +50,7 @@ public class  MainActivity extends AppCompatActivity {
     public  void  nextLayout()
     {
         this.finish();
-        Intent intent = new Intent(this, SettingActivity.class);
+        Intent intent = new Intent(this, ChatTypeActivity.class);
         startActivity(intent);
     }
 

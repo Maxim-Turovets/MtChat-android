@@ -53,7 +53,7 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".activitys.SettingActivity"
+            android:name=".activitys.settingActivity.SettingActivity"
             android:windowSoftInputMode="adjustResize" />
 
         <meta-data

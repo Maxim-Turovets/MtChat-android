@@ -23,7 +23,7 @@ import com.example.mtchat_android.activitys.ChatTypeActivity;
 import com.example.mtchat_android.activitys.EchoWebSocketListener;
 import com.example.mtchat_android.activitys.InterlocutorInfoActivity;
 import com.example.mtchat_android.activitys.LoadingAnimationActivity;
-import com.example.mtchat_android.activitys.SettingActivity;
+import com.example.mtchat_android.activitys.settingActivity.SettingActivity;
 import com.example.mtchat_android.activitys.interlocutionActivity.flowing.Flowing;
 import com.example.mtchat_android.activitys.interlocutionActivity.flowing.SwitchServise;
 import com.example.mtchat_android.activitys.interlocutionActivity.keyboards.KeyboardServise;
