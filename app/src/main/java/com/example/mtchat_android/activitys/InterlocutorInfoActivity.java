@@ -45,16 +45,25 @@ public class InterlocutorInfoActivity  extends AppCompatActivity {
         interlocutorInfoLayout = findViewById(R.id.interlocutor_info_container);
         StaticModels.interlocutorInfo = new InterlocutorInfo();
         StaticModels.interlocutorInfo.setObjectType("InterlocutorInfo");
-        isAnonimGender();
 
 
 
-        if(StaticModels.setting.isRememberInterlocutor())
-        {
-            StaticModels.interlocutorInfo = SettingInfo.getInterlocutorData(this);
-            sendInfoToServer();
-            goToNextLayout();
+
+        if(StaticModels.setting.isGoToChat()) {
+                StaticModels.interlocutorInfo = SettingInfo.getInterlocutorData(this);
+                genderChoose= true;
+                sendInfoToServer();
+                goToNextLayout();
         }
+        else if (StaticModels.setting.isRememberInterlocutor()) {
+            StaticModels.interlocutorInfo = SettingInfo.getInterlocutorData(this);
+            inpTo.setText(StaticModels.interlocutorInfo.getAgeTo());
+            inpFrom.setText(StaticModels.interlocutorInfo.getAgeFrom());
+            genderChoose = true;
+            editColorgender(StaticModels.interlocutorInfo.getGender());
+        }
+
+        isAnonimGender();
     }
 
 
@@ -200,6 +209,32 @@ public class InterlocutorInfoActivity  extends AppCompatActivity {
         }
         inpFrom.setEnabled(status);
         inpTo.setEnabled(status);
+
+    }
+
+
+    private void   editColorgender(String gender)
+    {
+        if(gender.equals("male"))
+        {
+            interlocutorMaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+            interlocutorFemaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+            interlocutorAnonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+        }
+        if(gender.equals("female"))
+        {
+            interlocutorFemaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+            interlocutorAnonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+            interlocutorMaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+        }
+        if (gender.equals("anonim"))
+        {
+            //active
+            interlocutorAnonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+            // not active
+            interlocutorMaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+            interlocutorFemaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+        }
 
     }
 

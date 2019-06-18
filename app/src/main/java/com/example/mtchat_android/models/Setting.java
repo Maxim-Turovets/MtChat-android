@@ -1,10 +1,19 @@
 package com.example.mtchat_android.models;
 
 public class Setting {
+    private boolean goToChat;
     private boolean sound;
     private boolean vibration;
     private boolean rememberMyData;
     private boolean rememberInterlocutor;
+
+    public boolean isGoToChat() {
+        return goToChat;
+    }
+
+    public void setGoToChat(boolean goToChat) {
+        this.goToChat = goToChat;
+    }
 
     public boolean isSound() {
         return sound;

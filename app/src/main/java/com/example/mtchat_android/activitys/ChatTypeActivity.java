@@ -14,6 +14,7 @@ import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.saveDeleteSetting.SettingInfo;
 import com.example.mtchat_android.serverobjects.ConnectInfo;
 import com.example.mtchat_android.serverobjects.InterlocutorInfo;
+import com.example.mtchat_android.serverobjects.UserInfo;
 
 public class ChatTypeActivity extends AppCompatActivity {
 
@@ -37,8 +38,7 @@ public class ChatTypeActivity extends AppCompatActivity {
     }
 
 
-
-    public  void privateBtnPress(View view)  {
+    public void privateBtnPress(View view) {
         // active
         privateBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
 
@@ -47,15 +47,21 @@ public class ChatTypeActivity extends AppCompatActivity {
         StaticModels.connectInfo = new ConnectInfo();
         StaticModels.connectInfo.setObjectType("ConnectInfo");
         StaticModels.connectInfo.setChatType("pair");
+        StaticModels.isPrivateChat = true;
 
-            if (StaticModels.setting.isRememberMyData()) {
+        if (StaticModels.setting.isGoToChat()) {
                 StaticModels.userInfo = SettingInfo.getUserData(this);
                 this.finish();
                 Intent intent = new Intent(this, InterlocutorInfoActivity.class);
                 startActivity(intent);
-            }
-        else
-            {
+        }
+        else if (StaticModels.setting.isRememberMyData()) {
+            StaticModels.userInfo = SettingInfo.getUserData(this);
+            this.finish();
+            Intent intent = new Intent(this, UserInfoActivity.class);
+            startActivity(intent);
+        }
+        else {
             this.finish();
             Intent intent = new Intent(this, UserInfoActivity.class);
             startActivity(intent);
@@ -64,7 +70,7 @@ public class ChatTypeActivity extends AppCompatActivity {
 
     }
 
-    public  void generalBtnPress(View view) {
+    public void generalBtnPress(View view) {
         // active
         generalBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
 
@@ -77,13 +83,13 @@ public class ChatTypeActivity extends AppCompatActivity {
         StaticModels.connectInfo = new ConnectInfo();
         StaticModels.connectInfo.setObjectType("ConnectInfo");
         StaticModels.connectInfo.setChatType("pair");
+        StaticModels.isPrivateChat = false;
         StartSocketConnection.startSocketConnection("chat");
         StartSocketConnection.sendTestJson();
+
 //        StaticModels.connectInfo = new ConnectInfo();
 //        StaticModels.connectInfo.setObjectType("ConnectInfo");
 //        StaticModels.connectInfo.setChatType("general");
-
-
 
 
         this.finish();
@@ -93,7 +99,7 @@ public class ChatTypeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-            this.finish();
-            System.exit(0);
+        this.finish();
+        System.exit(0);
     }
 }

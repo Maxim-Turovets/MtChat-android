@@ -16,6 +16,7 @@ import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
+import com.example.mtchat_android.saveDeleteSetting.SettingInfo;
 import com.example.mtchat_android.serverobjects.InterlocutorInfo;
 import com.example.mtchat_android.serverobjects.UserInfo;
 
@@ -44,14 +45,23 @@ public class UserInfoActivity extends AppCompatActivity {
         userInfoLayout = findViewById(R.id.user_info_container);
         StaticModels.userInfo = new UserInfo();
         StaticModels.userInfo.setObjectType("UserInfo");
+
+
+        if(StaticModels.setting.isRememberMyData())
+        {
+            StaticModels.userInfo = SettingInfo.getUserData(this);
+            inpName.setText(StaticModels.userInfo.getName());
+            inpAge.setText(StaticModels.userInfo.getAge());
+            genderChoose = true;
+            editColorgender(StaticModels.userInfo.getGender());
+
+        }
     }
 
 
     public void femaleButtonPress(View view) {
         // active
-        femaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
-        inpName.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-        inpAge.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+        editColorgender("female");
         inpName.setEnabled(true);
         inpAge.setEnabled(true);
         inpName.setHint("Enter your name");
@@ -67,9 +77,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
     public void maleButtonPress(View view) {
         // active
-        maleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
-        inpName.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-        inpAge.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+        editColorgender("male");
         inpName.setEnabled(true);
         inpAge.setEnabled(true);
         inpName.setHint("Enter your name");
@@ -81,15 +89,13 @@ public class UserInfoActivity extends AppCompatActivity {
         //gender
         StaticModels.userInfo.setGender("male");
         genderChoose = true;
+
+
+
     }
 
     public void anonButtonPress(View view) {
-        //active
-        anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
-        StaticModels.userInfo.setGender("anonim");
-        // not active
-        femaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-        maleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+        editColorgender("anonim");
         // input field
         inpName.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
         inpAge.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
@@ -165,6 +171,33 @@ public class UserInfoActivity extends AppCompatActivity {
             Intent intent = new Intent(this, InterlocutorInfoActivity.class);
             startActivity(intent);
         }
+    }
+
+
+    private void   editColorgender(String gender)
+    {
+        if(gender.equals("male"))
+        {
+            maleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+            femaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+            anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+        }
+        if(gender.equals("female"))
+        {
+            femaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+            maleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+            anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+        }
+        if (gender.equals("anonim"))
+        {
+            //active
+            anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+            StaticModels.userInfo.setGender("anonim");
+            // not active
+            femaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+            maleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+        }
+
     }
 }
 

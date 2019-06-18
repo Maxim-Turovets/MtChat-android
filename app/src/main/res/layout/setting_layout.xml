@@ -211,6 +211,63 @@
 
         </RelativeLayout>
 
+        <!--CHAT-->
+        <RelativeLayout
+            android:id="@+id/settingChat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/settingData"
+            android:background="@drawable/setting_section_drawable">
+
+            <!--TEXT-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="12dp"
+                android:text="Chat view"
+                android:textColor="#0D26A3"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <!--1 ELEMENT-->
+            <RelativeLayout
+                android:id="@+id/settingGoToChat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="remember my details and go to chat immediately"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:textColor="#3F51B5"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/settingGoToChatSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="8dp" />
+
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
 

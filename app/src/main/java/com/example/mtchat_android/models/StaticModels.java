@@ -18,4 +18,5 @@ public class StaticModels {
     public  static StringBuffer imageStringBuffer;
     public  static boolean isAnonimGender;
     public  static Setting setting = new Setting();
+    public  static boolean isPrivateChat;
 }
