@@ -11,7 +11,9 @@ import android.widget.ImageButton;
 import com.example.mtchat_android.R;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
+import com.example.mtchat_android.saveDeleteSetting.SettingInfo;
 import com.example.mtchat_android.serverobjects.ConnectInfo;
+import com.example.mtchat_android.serverobjects.InterlocutorInfo;
 
 public class ChatTypeActivity extends AppCompatActivity {
 
@@ -46,10 +48,20 @@ public class ChatTypeActivity extends AppCompatActivity {
         StaticModels.connectInfo.setObjectType("ConnectInfo");
         StaticModels.connectInfo.setChatType("pair");
 
-        this.finish();
-        Intent intent = new Intent(this, UserInfoActivity.class);
-        startActivity(intent);
+        if(StaticModels.setting.isRememberMyData())
+        {
+            StaticModels.userInfo = SettingInfo.getUserData(this);
+            this.finish();
+            Intent intent = new Intent(this, InterlocutorInfoActivity.class);
+            startActivity(intent);
 
+        }
+        else
+            {
+            this.finish();
+            Intent intent = new Intent(this, UserInfoActivity.class);
+            startActivity(intent);
+        }
 
 
     }

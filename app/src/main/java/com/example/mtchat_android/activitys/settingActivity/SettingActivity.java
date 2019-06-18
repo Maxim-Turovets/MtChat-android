@@ -33,9 +33,12 @@ public class SettingActivity extends AppCompatActivity {
 
         switchSound.setChecked(StaticModels.setting.isSound());
         switchVibration.setChecked(StaticModels.setting.isVibration());
+        switchRememberMyData.setChecked(StaticModels.setting.isRememberMyData());
+        switchRememberInterlocutor.setChecked(StaticModels.setting.isRememberInterlocutor());
 
         new SoundSwitchServise(switchSound,this);
         new VibrationSwitchServise(switchVibration,this);
+        new RememberMyDataSwitchServise(switchRememberMyData,this);
     }
 
 

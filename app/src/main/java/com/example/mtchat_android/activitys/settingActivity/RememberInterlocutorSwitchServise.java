@@ -7,24 +7,24 @@ import android.widget.Switch;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.saveDeleteSetting.SettingInfo;
 
-public class RememberMyDataSwitchServise {
+public class RememberInterlocutorSwitchServise {
     private Switch aSwitch;
     private Context context;
 
 
-    public RememberMyDataSwitchServise(Switch imageMessageSwitch , final Context context) {
+    public RememberInterlocutorSwitchServise(Switch imageMessageSwitch , final Context context) {
         this.aSwitch = imageMessageSwitch;
         this.context = context;
         this.aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    StaticModels.setting.setRememberMyData(true);
+                    StaticModels.setting.setRememberInterlocutor(true);
                     SettingInfo.setSetting(context);
-                    SettingInfo.setUserData(context);
+                    SettingInfo.setInterlocutorData(context);
                 }
                 if (isChecked == false) {
-                    StaticModels.setting.setRememberMyData(false);
+                    StaticModels.setting.setRememberInterlocutor(false);
                     SettingInfo.setSetting(context);
                 }
             }
