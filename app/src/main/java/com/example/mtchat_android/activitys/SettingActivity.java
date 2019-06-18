@@ -7,13 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.mtchat_android.R;
-
-
+import com.example.mtchat_android.dao.DBHelper;
 
 
 public class SettingActivity extends AppCompatActivity {
 
     View view ;
+    DBHelper dbHelper = null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,5 +23,8 @@ public class SettingActivity extends AppCompatActivity {
    //     view.setBackground(ContextCompat.getDrawable(this, R.drawable.gender_active_drawable));
 
 
+     dbHelper = new DBHelper(this);
     }
+
+
 }
