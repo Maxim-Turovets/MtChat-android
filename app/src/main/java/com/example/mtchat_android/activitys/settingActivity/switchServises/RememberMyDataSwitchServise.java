@@ -12,7 +12,7 @@ public class RememberMyDataSwitchServise {
     private Context context;
 
 
-    public RememberMyDataSwitchServise(Switch imageMessageSwitch , final Context context) {
+    public RememberMyDataSwitchServise(Switch imageMessageSwitch , final Context context, final Switch goToChat) {
         this.aSwitch = imageMessageSwitch;
         this.context = context;
         this.aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -25,6 +25,8 @@ public class RememberMyDataSwitchServise {
                 }
                 if (isChecked == false) {
                     StaticModels.setting.setRememberMyData(false);
+                    goToChat.setChecked(false);
+                    StaticModels.setting.setGoToChat(false);
                     SettingInfo.setSetting(context);
                 }
             }

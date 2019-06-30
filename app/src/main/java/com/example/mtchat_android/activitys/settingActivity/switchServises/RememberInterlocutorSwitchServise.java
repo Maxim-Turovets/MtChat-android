@@ -9,11 +9,13 @@ import com.example.mtchat_android.saveDeleteSetting.SettingInfo;
 
 public class RememberInterlocutorSwitchServise {
     private Switch aSwitch;
+    private Switch goToChat;
     private Context context;
 
 
-    public RememberInterlocutorSwitchServise(Switch imageMessageSwitch , final Context context) {
+    public RememberInterlocutorSwitchServise(Switch imageMessageSwitch , final Context context, final Switch goToChat) {
         this.aSwitch = imageMessageSwitch;
+        this.goToChat = goToChat;
         this.context = context;
         this.aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -25,6 +27,8 @@ public class RememberInterlocutorSwitchServise {
                 }
                 if (isChecked == false) {
                     StaticModels.setting.setRememberInterlocutor(false);
+                    goToChat.setChecked(false);
+                    StaticModels.setting.setGoToChat(false);
                     SettingInfo.setSetting(context);
                 }
             }

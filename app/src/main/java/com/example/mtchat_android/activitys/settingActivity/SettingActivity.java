@@ -59,8 +59,8 @@ public class SettingActivity extends AppCompatActivity {
         new SoundSwitchServise(switchSound, this);
         new GoToChatSwitchServise(switchgoToChat, this);
         new VibrationSwitchServise(switchVibration, this);
-        new RememberMyDataSwitchServise(switchRememberMyData, this);
-        new RememberInterlocutorSwitchServise(switchRememberInterlocutor, this);
+        new RememberMyDataSwitchServise(switchRememberMyData, this,switchgoToChat);
+        new RememberInterlocutorSwitchServise(switchRememberInterlocutor, this,switchgoToChat);
     }
 
 

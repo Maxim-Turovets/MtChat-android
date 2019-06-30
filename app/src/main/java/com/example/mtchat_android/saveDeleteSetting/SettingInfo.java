@@ -56,12 +56,14 @@ public class SettingInfo {
             String text = new String (bytes);
             Setting setting = new Setting();
             setting = (Setting) ObjectType.getObject(text,setting);
+
+
             return  setting;
 
         }
         catch(IOException ex) {
           ToastAllert.toatallert(context,"Error get setting");
-          return  null;
+          return  new Setting();
         }
         finally{
 
