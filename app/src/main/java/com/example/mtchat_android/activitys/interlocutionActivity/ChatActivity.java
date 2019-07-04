@@ -348,6 +348,8 @@ public class ChatActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
+
+        settingButton.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
     }
 
 

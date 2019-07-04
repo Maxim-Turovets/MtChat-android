@@ -39,8 +39,8 @@ public class  MainActivity extends AppCompatActivity {
             }
         }.start();
 
-         // init setting
 
+         // init setting and get setting to setting file
       StaticModels.setting = SettingInfo.getSetting(this);
 
 

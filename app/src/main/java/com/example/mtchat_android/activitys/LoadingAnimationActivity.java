@@ -3,37 +3,24 @@ package com.example.mtchat_android.activitys;
         import android.content.Intent;
         import android.os.Bundle;
         import android.os.CountDownTimer;
-        import android.os.Handler;
         import android.support.v7.app.AppCompatActivity;
-        import android.view.View;
+        import android.util.Log;
         import android.webkit.WebView;
-        import android.widget.Toast;
 
         import com.example.mtchat_android.R;
         import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
         import com.example.mtchat_android.models.StartSocketConnection;
         import com.example.mtchat_android.models.StaticModels;
-        import com.example.mtchat_android.serverobjects.InterlocutorInfo;
-
-        import net.bohush.geometricprogressview.GeometricProgressView;
-
-        import java.util.Timer;
-        import java.util.TimerTask;
-
-        import me.itangqi.waveloadingview.WaveLoadingView;
+        import com.example.mtchat_android.toasts.ToastAllert;
 
 public class LoadingAnimationActivity extends AppCompatActivity {
 
 
-    int countClickedBackButton = 0;
-    int countProgress = 0;
-    WebView myBrowser;
+   private int countClickedBackButton = 0;
+   private WebView myBrowser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
             super.onCreate(savedInstanceState);
             setContentView(R.layout.loadind_animation_layout);
 
@@ -41,27 +28,6 @@ public class LoadingAnimationActivity extends AppCompatActivity {
             myBrowser = (WebView) findViewById(R.id.web_view);
             myBrowser.loadUrl("file:///android_asset/animation/animation.html");
 
-
-            class UpdateTimeTask extends TimerTask {
-                public void run() {
-
-                }
-            }
-
-
-
-
-
-        new CountDownTimer(50_000,1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                countProgress+=2;
-            }
-            @Override
-            public void onFinish() {
-
-            }
-        }.start();
 
     }
 
@@ -76,15 +42,18 @@ public class LoadingAnimationActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         countClickedBackButton++;
-        if(countClickedBackButton==2)
-        {
-            this.finish();
-            StartSocketConnection.webSocket.close(4999,"Back to intelocutor info activity");
-            Intent intent = new Intent(this, InterlocutorInfoActivity.class);
-            startActivity(intent);
+        if(countClickedBackButton==2) {
+            if (StaticModels.setting.isGoToChat()) {
+                closeConnection();
+                goToChatTypeActivity();
+            }
+            else{
+                closeConnection();
+                goToInterlocutorInfoActivity();
+            }
         }
-        Toast toast = Toast.makeText(this, "Press again to back", Toast.LENGTH_SHORT);
-        toast.show();
+
+        ToastAllert.toatallert(this,"Press again to back");
 
         new CountDownTimer(2_000,1000) {
             @Override
@@ -96,6 +65,40 @@ public class LoadingAnimationActivity extends AppCompatActivity {
             }
         }.start();
 
+    }
+
+
+    private  void goToInterlocutorInfoActivity()
+    {
+        this.finish();
+        Intent intent = new Intent(this, InterlocutorInfoActivity.class);
+        startActivity(intent);
+    }
+
+    private  void goToChatTypeActivity()
+    {
+        this.finish();
+        Intent intent = new Intent(this, ChatTypeActivity.class);
+        startActivity(intent);
+    }
+
+
+    /**
+     * If user pressed button "back", then close connection
+     * @return close connection status
+     */
+    private boolean closeConnection()
+    {
+        try {
+            this.finish();
+            StartSocketConnection.webSocket.close(4999, "Back to intelocutor info activity");
+            return true;
+        }
+        catch (Exception e)
+        {
+            Log.d("Connection","Error close connection");
+            return false;
+        }
     }
 }
 

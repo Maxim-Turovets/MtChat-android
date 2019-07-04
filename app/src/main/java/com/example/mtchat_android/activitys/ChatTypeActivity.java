@@ -42,7 +42,7 @@ public class ChatTypeActivity extends AppCompatActivity {
         // active
         privateBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
 
-        // socket send message
+        // init static object
 
         StaticModels.connectInfo = new ConnectInfo();
         StaticModels.connectInfo.setObjectType("ConnectInfo");
@@ -74,11 +74,7 @@ public class ChatTypeActivity extends AppCompatActivity {
         // active
         generalBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
 
-//        UserGeneralInfo userGeneralInfo = new UserGeneralInfo();
-//        userGeneralInfo.setObjectType("UserGeneralInfo");
-//        userGeneralInfo.setName("MAXIM");
-//        StartSocketConnection.startSocketConnection("generalChat");
-//        StartSocketConnection.webSocket.send(ObjectType.getJson(userGeneralInfo));
+
         // test
         StaticModels.connectInfo = new ConnectInfo();
         StaticModels.connectInfo.setObjectType("ConnectInfo");
@@ -87,9 +83,6 @@ public class ChatTypeActivity extends AppCompatActivity {
         StartSocketConnection.startSocketConnection("chat");
         StartSocketConnection.sendTestJson();
 
-//        StaticModels.connectInfo = new ConnectInfo();
-//        StaticModels.connectInfo.setObjectType("ConnectInfo");
-//        StaticModels.connectInfo.setChatType("general");
 
 
         this.finish();

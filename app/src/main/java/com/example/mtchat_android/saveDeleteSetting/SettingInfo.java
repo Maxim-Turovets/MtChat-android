@@ -31,7 +31,6 @@ public class SettingInfo {
             ToastAllert.toatallert(context,"setting is Save");
         }
         catch(IOException ex) {
-
             ToastAllert.toatallert(context,"error");
         } finally{
             try{

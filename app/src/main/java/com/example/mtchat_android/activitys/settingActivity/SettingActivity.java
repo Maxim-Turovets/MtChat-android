@@ -20,7 +20,7 @@ public class SettingActivity extends AppCompatActivity {
     View view;
 
     Switch switchSound;
-    Switch switchgoToChat;
+    Switch switchGoToChat;
     Switch switchVibration;
     Switch switchRememberMyData;
     Switch switchRememberInterlocutor;
@@ -38,7 +38,7 @@ public class SettingActivity extends AppCompatActivity {
         settingData = findViewById(R.id.settingData);
         settingChat = findViewById(R.id.settingChat);
         switchSound = findViewById(R.id.settingSoundSwitch);
-        switchgoToChat = findViewById(R.id.settingGoToChatSwitch);
+        switchGoToChat = findViewById(R.id.settingGoToChatSwitch);
         switchVibration = findViewById(R.id.settingVibrationSwitch);
         switchRememberMyData = findViewById(R.id.settingRememberNyDataSwitch);
         switchRememberInterlocutor = findViewById(R.id.settingRememberInterlocutorSwitch);
@@ -51,16 +51,16 @@ public class SettingActivity extends AppCompatActivity {
             settingData.setVisibility(View.GONE);
         }
         switchSound.setChecked(StaticModels.setting.isSound());
-        switchgoToChat.setChecked(StaticModels.setting.isGoToChat());
+        switchGoToChat.setChecked(StaticModels.setting.isGoToChat());
         switchVibration.setChecked(StaticModels.setting.isVibration());
         switchRememberMyData.setChecked(StaticModels.setting.isRememberMyData());
         switchRememberInterlocutor.setChecked(StaticModels.setting.isRememberInterlocutor());
 
         new SoundSwitchServise(switchSound, this);
-        new GoToChatSwitchServise(switchgoToChat, this);
+        new GoToChatSwitchServise(switchGoToChat, this);
         new VibrationSwitchServise(switchVibration, this);
-        new RememberMyDataSwitchServise(switchRememberMyData, this,switchgoToChat);
-        new RememberInterlocutorSwitchServise(switchRememberInterlocutor, this,switchgoToChat);
+        new RememberMyDataSwitchServise(switchRememberMyData, this, switchGoToChat);
+        new RememberInterlocutorSwitchServise(switchRememberInterlocutor, this, switchGoToChat);
     }
 
 
