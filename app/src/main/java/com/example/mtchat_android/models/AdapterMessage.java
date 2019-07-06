@@ -59,7 +59,7 @@ public class AdapterMessage extends BaseAdapter {
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
 
-        MergedMessage message = mergedMessages.get(i);
+        final MergedMessage message = mergedMessages.get(i);
         //TEXT MESSAGE
         if (message.getTextMessage() != null) {
             MessageViewHolder holder = new MessageViewHolder();
@@ -97,20 +97,22 @@ public class AdapterMessage extends BaseAdapter {
 //            byte [] ar = message.getImageMessage().getByteArray();
 
 
+            final Bitmap[] link = {null};
 
-            byte[] decodedString = Base64.decode(message.getImageMessage().getImage().toString().getBytes(), Base64.DEFAULT);
-            final Bitmap bmp  = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    byte[] decodedString = Base64.decode(message.getImageMessage().getImage().toString().getBytes(), Base64.DEFAULT);
+                    final Bitmap bmp  = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    link[0] = bmp;
+                }
+            }).run();
 
 
-            if (bmp!=null) {
 
-                final ByteArrayOutputStream out = new ByteArrayOutputStream();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        bmp.compress(Bitmap.CompressFormat.JPEG, 10, out);
-                    }
-                }).start();
+            if (link[0] !=null) {
+
+
 
 
 
@@ -124,25 +126,30 @@ public class AdapterMessage extends BaseAdapter {
                 //holder.messageBody.setImageBitmap(bmp);
 
 
-                 Bitmap bmHalf = null;
 
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-                        //Вычисляем ширину и высоту изображения
-                        double width = bmp.getWidth();
-                        double height = bmp.getHeight();
+
+
+                        final double width = link[0].getWidth();
+                        double height = link[0].getHeight();
 
                         double koef = height / 1000;
-                        int newWidht = (int) (width / koef);
-                        int newheight = (int) (height / koef);
-
-                        bmHalf = Bitmap.createScaledBitmap(bmp, newWidht, newheight, false);
+                        final int newWidht = (int) (width / koef);
+                        final int newheight = (int) (height / koef);
 
 
-//                    }
-//                }).start();
-                holder.messageBody.setImageBitmap(bmHalf);
+
+                new Thread(new Runnable() {
+                    public void run() {
+                        final  Bitmap bmHalf = Bitmap.createScaledBitmap(link[0], newWidht, newheight, false);
+
+                                holder.messageBody.setImageBitmap(bmHalf);
+
+                    }
+                }).run();
+
+
+
+
 
 
 

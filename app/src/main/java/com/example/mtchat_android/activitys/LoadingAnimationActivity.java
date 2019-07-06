@@ -34,6 +34,7 @@ public class LoadingAnimationActivity extends AppCompatActivity {
 
 
     public void goToChat() {
+        this.finish();
         Intent intent = new Intent(this, ChatActivity.class);
         startActivity(intent);
     }
@@ -55,15 +56,21 @@ public class LoadingAnimationActivity extends AppCompatActivity {
 
         ToastAlert.toastAlert(this,"Press again to back");
 
-        new CountDownTimer(2_000,1000) {
+        new Thread(new Runnable() {
             @Override
-            public void onTick(long millisUntilFinished) {
+            public void run() {
+                new CountDownTimer(2_000,1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                    }
+                    @Override
+                    public void onFinish() {
+                        countClickedBackButton=0;
+                    }
+                }.start();
             }
-            @Override
-            public void onFinish() {
-                countClickedBackButton=0;
-            }
-        }.start();
+        }).run();
+
 
     }
 

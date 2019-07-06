@@ -47,4 +47,10 @@ public class ChatCloseActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ChatTypeActivity.class);
         startActivity(intent);
     }
+//    @Override
+//    public void onBackPressed() {
+//        this.finish();
+//        Intent intent = new Intent(this, ChatTypeActivity.class);
+//        startActivity(intent);
+//    }
 }

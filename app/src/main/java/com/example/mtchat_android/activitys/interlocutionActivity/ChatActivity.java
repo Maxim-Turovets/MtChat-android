@@ -23,6 +23,7 @@ import com.example.mtchat_android.activitys.ChatTypeActivity;
 import com.example.mtchat_android.activitys.EchoWebSocketListener;
 import com.example.mtchat_android.activitys.InterlocutorInfoActivity;
 import com.example.mtchat_android.activitys.LoadingAnimationActivity;
+import com.example.mtchat_android.activitys.UserInfoActivity;
 import com.example.mtchat_android.activitys.settingActivity.SettingActivity;
 import com.example.mtchat_android.activitys.interlocutionActivity.flowing.Flowing;
 import com.example.mtchat_android.activitys.interlocutionActivity.flowing.SwitchServise;
@@ -78,8 +79,16 @@ public class ChatActivity extends AppCompatActivity {
         {
             this.finish();
             StartSocketConnection.webSocket.close(4999, "Recconect");
-            Intent intent = new Intent(this, InterlocutorInfoActivity.class);
-            startActivity(intent);
+            if(StaticModels.setting.isGoToChat())
+            {
+                Intent intent = new Intent(this, ChatTypeActivity.class);
+                startActivity(intent);
+            }
+            else {
+                Intent intent = new Intent(this, UserInfoActivity.class);
+                startActivity(intent);
+            }
+
         }
         Toast toast = Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT);
         toast.show();
