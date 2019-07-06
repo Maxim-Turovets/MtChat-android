@@ -58,8 +58,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            >
 
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="15dp">
             <ImageButton
                 android:id="@+id/interlocutorFemaleBtn"
                 android:layout_width="90dp"
@@ -86,20 +93,20 @@
                 android:onClick="interlocutorMaleButtonPress"
                 android:padding="15dp"
                 android:src="@mipmap/icons8_user_64" />
-
-            <ImageButton
-                android:id="@+id/interlocutorAnonBtn"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_alignTop="@id/interlocutorMaleBtn"
-                android:layout_alignBottom="@id/interlocutorMaleBtn"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/interlocutorMaleBtn"
-                android:background="@drawable/gender_white_color_drawable"
-                android:gravity="center"
-                android:onClick="interlocutorAnonButtonPress"
-                android:padding="15dp"
-                android:src="@mipmap/anon_64"></ImageButton>
+            </RelativeLayout>
+            <!--<ImageButton-->
+                <!--android:id="@+id/interlocutorAnonBtn"-->
+                <!--android:layout_width="90dp"-->
+                <!--android:layout_height="90dp"-->
+                <!--android:layout_alignTop="@id/interlocutorMaleBtn"-->
+                <!--android:layout_alignBottom="@id/interlocutorMaleBtn"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_toRightOf="@+id/interlocutorMaleBtn"-->
+                <!--android:background="@drawable/gender_white_color_drawable"-->
+                <!--android:gravity="center"-->
+                <!--android:onClick="interlocutorAnonButtonPress"-->
+                <!--android:padding="15dp"-->
+                <!--android:src="@mipmap/anon_64"></ImageButton>-->
 
 
 

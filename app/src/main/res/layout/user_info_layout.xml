@@ -60,6 +60,11 @@
                 android:layout_height="150dp"
                 android:layout_marginTop="30dp">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="15dp">
                 <ImageButton
                     android:id="@+id/femaleBtn"
                     android:layout_width="90dp"
@@ -70,7 +75,6 @@
                     android:layout_toLeftOf="@+id/maleBtn"
                     android:background="@drawable/gender_white_color_drawable"
                     android:onClick="femaleButtonPress"
-                    android:padding="5dp"
                     android:src="@mipmap/icons8_person_female_64">
 
                 </ImageButton>
@@ -82,24 +86,24 @@
                     android:layout_centerInParent="true"
                     android:layout_margin="10dp"
                     android:background="@drawable/gender_white_color_drawable"
-                    android:gravity="center"
                     android:onClick="maleButtonPress"
                     android:padding="15dp"
                     android:src="@mipmap/icons8_user_64" />
+                </RelativeLayout>
 
-                <ImageButton
-                    android:id="@+id/anonBtn"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:layout_alignTop="@id/maleBtn"
-                    android:layout_alignBottom="@id/maleBtn"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/maleBtn"
-                    android:background="@drawable/gender_white_color_drawable"
-                    android:gravity="center"
-                    android:onClick="anonButtonPress"
-                    android:padding="15dp"
-                    android:src="@mipmap/anon_64"></ImageButton>
+                <!--<ImageButton-->
+                    <!--android:id="@+id/anonBtn"-->
+                    <!--android:layout_width="90dp"-->
+                    <!--android:layout_height="90dp"-->
+                    <!--android:layout_alignTop="@id/maleBtn"-->
+                    <!--android:layout_alignBottom="@id/maleBtn"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_toRightOf="@+id/maleBtn"-->
+                    <!--android:background="@drawable/gender_white_color_drawable"-->
+                    <!--android:gravity="center"-->
+                    <!--android:onClick="anonButtonPress"-->
+                    <!--android:padding="15dp"-->
+                    <!--android:src="@mipmap/anon_64"></ImageButton>-->
 
 
                 <TextView

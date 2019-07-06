@@ -39,7 +39,7 @@ public class UserInfoActivity extends AppCompatActivity {
         // Initialization
         femaleBtn = findViewById(R.id.femaleBtn);
         maleBtn = findViewById(R.id.maleBtn);
-        anonBtn = findViewById(R.id.anonBtn);
+        //anonBtn = findViewById(R.id.anonBtn);
         inpName = findViewById(R.id.inpName);
         inpAge = findViewById(R.id.inpAge);
         userInfoLayout = findViewById(R.id.user_info_container);
@@ -69,7 +69,7 @@ public class UserInfoActivity extends AppCompatActivity {
         StaticModels.isAnonimGender = false;
         // not active
         maleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-        anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+//        anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
         //gender
         StaticModels.userInfo.setGender("female");
         genderChoose = true;
@@ -85,7 +85,7 @@ public class UserInfoActivity extends AppCompatActivity {
         StaticModels.isAnonimGender = false;
         // not active
         femaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-        anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+    //    anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
         //gender
         StaticModels.userInfo.setGender("male");
         genderChoose = true;
@@ -94,19 +94,19 @@ public class UserInfoActivity extends AppCompatActivity {
 
     }
 
-    public void anonButtonPress(View view) {
-        editColorgender("anonim");
-        // input field
-        inpName.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
-        inpAge.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
-        inpName.setEnabled(false);
-        inpAge.setEnabled(false);
-        StaticModels.isAnonimGender = true;
-        inpName.setHint("Anonim");
-        inpAge.setHint("Anonim");
-
-        // genderChoose = true;
-    }
+//    public void anonButtonPress(View view) {
+//        editColorgender("anonim");
+//        // input field
+//        inpName.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+//        inpAge.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+//        inpName.setEnabled(false);
+//        inpAge.setEnabled(false);
+//        StaticModels.isAnonimGender = true;
+//        inpName.setHint("Anonim");
+//        inpAge.setHint("Anonim");
+//
+//        // genderChoose = true;
+//    }
 
     public void userInfoNextBtnPress(View view) {
         if(StaticModels.isAnonimGender)
@@ -180,23 +180,23 @@ public class UserInfoActivity extends AppCompatActivity {
         {
             maleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
             femaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-            anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+//            anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
         }
         if(gender.equals("female"))
         {
             femaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
             maleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-            anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+       //     anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
         }
-        if (gender.equals("anonim"))
-        {
-            //active
-            anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
-            StaticModels.userInfo.setGender("anonim");
-            // not active
-            femaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-            maleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
-        }
+//        if (gender.equals("anonim"))
+//        {
+//            //active
+//            anonBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_active_drawable));
+//            StaticModels.userInfo.setGender("anonim");
+//            // not active
+//            femaleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+//            maleBtn.setBackground(this.getResources().getDrawable(R.drawable.gender_white_color_drawable));
+//        }
 
     }
 }
