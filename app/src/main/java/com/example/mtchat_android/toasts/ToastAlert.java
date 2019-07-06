@@ -10,4 +10,9 @@ public    class ToastAlert {
         Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
         toast.show();
     }
+    public  static  void toastAlert(Context context, String message, int time)
+    {
+        Toast toast = Toast.makeText(context, message,time);
+        toast.show();
+    }
 }

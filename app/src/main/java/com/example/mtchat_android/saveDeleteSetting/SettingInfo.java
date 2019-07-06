@@ -28,7 +28,7 @@ public class SettingInfo {
             String text = ObjectType.getJson(StaticModels.setting);
             fos = context.openFileOutput(FILE_NAME,MODE_PRIVATE);
             fos.write(text.getBytes());
-            ToastAlert.toastAlert(context,"setting is Save");
+            ToastAlert.toastAlert(context,"setting is Save",100);
         }
         catch(IOException ex) {
             ToastAlert.toastAlert(context,"error");
@@ -61,7 +61,7 @@ public class SettingInfo {
 
         }
         catch(IOException ex) {
-          ToastAlert.toastAlert(context,"Error get setting");
+          ToastAlert.toastAlert(context,"Error get setting",300);
           return  new Setting();
         }
         finally{
@@ -84,7 +84,7 @@ public class SettingInfo {
             String text = ObjectType.getJson(StaticModels.userInfo);
             fos = context.openFileOutput(FILE_USER,MODE_PRIVATE);
             fos.write(text.getBytes());
-            ToastAlert.toastAlert(context,"your data is Save");
+            ToastAlert.toastAlert(context,"your data is Save",100);
         }
         catch(IOException ex) {
 
@@ -140,7 +140,7 @@ public class SettingInfo {
             String text = ObjectType.getJson(StaticModels.interlocutorInfo);
             fos = context.openFileOutput(FILE_INTERLOCUTOR,MODE_PRIVATE);
             fos.write(text.getBytes());
-            ToastAlert.toastAlert(context,"your partner data is Save");
+            ToastAlert.toastAlert(context,"your partner data is Save",100);
         }
         catch(IOException ex) {
 

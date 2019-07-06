@@ -133,7 +133,7 @@ public class ChatActivity extends AppCompatActivity {
         // левая шторка
         new Flowing(mDrawer);
         // switch
-        new SwitchServise(imageMessageSwitch);
+        new SwitchServise(imageMessageSwitch,this);
 
     }
 

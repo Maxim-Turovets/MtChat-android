@@ -12,4 +12,12 @@ public class Sound {
         messageSound.start();
     }
 
+    public static void soundImageOpenPlay(Context context) {
+        MediaPlayer  messageSound = MediaPlayer.create(context, R.raw.imageopen);
+        messageSound.start();
+    }
+    public static void soundImageClosePlay(Context context) {
+        MediaPlayer  messageSound = MediaPlayer.create(context, R.raw.imageclose);
+        messageSound.start();
+    }
 }

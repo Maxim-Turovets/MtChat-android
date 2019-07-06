@@ -7,6 +7,7 @@ import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.ImageMessage;
 import com.example.mtchat_android.models.MergedMessage;
 import com.example.mtchat_android.models.StaticModels;
+import com.example.mtchat_android.saveDeleteSetting.SettingInfo;
 import com.example.mtchat_android.serverobjects.IfRoomCreated;
 import com.example.mtchat_android.serverobjects.ImageCanSend;
 import com.example.mtchat_android.serverobjects.ImageFrame;
@@ -82,26 +83,36 @@ public  class EchoWebSocketListener extends WebSocketListener {
                 imageCanSend = (ImageCanSend) ObjectType.getObject(text, imageCanSend);
 
                 if (imageCanSend.isAvailable()) {
-                    chatActivity.hideButtonImageSend();
-
-                    Message myMessage = new Message();
-                    myMessage.setName("fict");
-                    myMessage.setObjectType("Message");
-                    myMessage.setText("you are allowed to send imageStringBuffer");
-//                    myMessage.setTime("");
-                    MergedMessage mergedMessage = new MergedMessage(myMessage);
-                    chatActivity.onMessage(mergedMessage);
-                }
-                if (imageCanSend.isAvailable() == false) {
                     chatActivity.showButtonImageSend();
 
                     Message myMessage = new Message();
                     myMessage.setName("fict");
                     myMessage.setObjectType("Message");
-                    myMessage.setText("you are not allowed to send imageStringBuffer");
-//                    myMessage.setTime("");
+                    myMessage.setText("you are allowed to send image");
                     MergedMessage mergedMessage = new MergedMessage(myMessage);
                     chatActivity.onMessage(mergedMessage);
+
+                    if(StaticModels.setting.isSound())
+                    {
+                        Sound.soundImageOpenPlay(chatActivity);
+                    }
+
+                }
+                if (!imageCanSend.isAvailable()) {
+                    chatActivity.hideButtonImageSend();
+
+                    Message myMessage = new Message();
+                    myMessage.setName("fict");
+                    myMessage.setObjectType("Message");
+                    myMessage.setText("you are not allowed to send image");
+                    MergedMessage mergedMessage = new MergedMessage(myMessage);
+                    chatActivity.onMessage(mergedMessage);
+
+
+                    if(StaticModels.setting.isSound())
+                    {
+                        Sound.soundImageClosePlay(chatActivity);
+                    }
                 }
 
             }

@@ -9,12 +9,11 @@ import com.example.mtchat_android.saveDeleteSetting.SettingInfo;
 
 public class RememberMyDataSwitchServise {
     private Switch aSwitch;
-    private Context context;
+
 
 
     public RememberMyDataSwitchServise(Switch imageMessageSwitch , final Context context, final Switch goToChat) {
         this.aSwitch = imageMessageSwitch;
-        this.context = context;
         this.aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
