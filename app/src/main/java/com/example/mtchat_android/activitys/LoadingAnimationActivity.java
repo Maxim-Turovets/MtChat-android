@@ -11,7 +11,7 @@ package com.example.mtchat_android.activitys;
         import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
         import com.example.mtchat_android.models.StartSocketConnection;
         import com.example.mtchat_android.models.StaticModels;
-        import com.example.mtchat_android.toasts.ToastAllert;
+        import com.example.mtchat_android.toasts.ToastAlert;
 
 public class LoadingAnimationActivity extends AppCompatActivity {
 
@@ -53,7 +53,7 @@ public class LoadingAnimationActivity extends AppCompatActivity {
             }
         }
 
-        ToastAllert.toatallert(this,"Press again to back");
+        ToastAlert.toastAlert(this,"Press again to back");
 
         new CountDownTimer(2_000,1000) {
             @Override

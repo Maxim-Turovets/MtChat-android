@@ -2,24 +2,20 @@ package com.example.mtchat_android.activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.constraint.motion.MotionLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.mtchat_android.R;
-import com.example.mtchat_android.activitys.interlocutionActivity.ChatActivity;
 import com.example.mtchat_android.jsonservises.ObjectType;
 import com.example.mtchat_android.models.StartSocketConnection;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.saveDeleteSetting.SettingInfo;
 import com.example.mtchat_android.serverobjects.InterlocutorInfo;
-import com.example.mtchat_android.serverobjects.UserInfo;
-import com.example.mtchat_android.toasts.ToastAllert;
+import com.example.mtchat_android.toasts.ToastAlert;
 
 public class InterlocutorInfoActivity  extends AppCompatActivity {
 
@@ -153,7 +149,7 @@ public class InterlocutorInfoActivity  extends AppCompatActivity {
                 if (localFromInteger > 100 || localFromInteger < 1 || localToInteger > 100 || localToInteger < 1 || localFromInteger >= localToInteger) {
                     interlocutorInfoLayout.transitionToStart();
                     interlocutorInfoLayout.transitionToEnd();
-                    ToastAllert.toatallert(this,"Возвраст может быть от 1 то 100");
+                    ToastAlert.toastAlert(this,"Возвраст может быть от 1 то 100");
                 } else {
                     // info normal
 
@@ -165,7 +161,7 @@ public class InterlocutorInfoActivity  extends AppCompatActivity {
             } else {
                 interlocutorInfoLayout.transitionToStart();
                 interlocutorInfoLayout.transitionToEnd();
-                ToastAllert.toatallert(this,"Укажите все параметры ");
+                ToastAlert.toastAlert(this,"Укажите все параметры ");
             }
         }
 

@@ -36,7 +36,7 @@ import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.models.TypeWriter;
 import com.example.mtchat_android.serverobjects.ImageFrame;
 import com.example.mtchat_android.serverobjects.Message;
-import com.example.mtchat_android.toasts.ToastAllert;
+import com.example.mtchat_android.toasts.ToastAlert;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import java.io.ByteArrayOutputStream;
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
@@ -250,11 +250,11 @@ public class ChatActivity extends AppCompatActivity {
                  MergedMessage mergedMessage = new MergedMessage(myImageMessage);
                  onMessage(mergedMessage);
              } else {
-                 ToastAllert.toatallert(this,"Select please a photo");
+                 ToastAlert.toastAlert(this,"Select please a photo");
              }
          }
          catch (Exception e){
-             ToastAllert.toatallert(this,"Error format image");
+             ToastAlert.toastAlert(this,"Error format image");
          }
     }
 

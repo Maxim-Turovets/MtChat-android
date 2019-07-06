@@ -7,7 +7,7 @@ import com.example.mtchat_android.models.Setting;
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.serverobjects.InterlocutorInfo;
 import com.example.mtchat_android.serverobjects.UserInfo;
-import com.example.mtchat_android.toasts.ToastAllert;
+import com.example.mtchat_android.toasts.ToastAlert;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -28,17 +28,17 @@ public class SettingInfo {
             String text = ObjectType.getJson(StaticModels.setting);
             fos = context.openFileOutput(FILE_NAME,MODE_PRIVATE);
             fos.write(text.getBytes());
-            ToastAllert.toatallert(context,"setting is Save");
+            ToastAlert.toastAlert(context,"setting is Save");
         }
         catch(IOException ex) {
-            ToastAllert.toatallert(context,"error");
+            ToastAlert.toastAlert(context,"error");
         } finally{
             try{
                 if(fos!=null)
                     fos.close();
             }
             catch(IOException ex){
-                ToastAllert.toatallert(context,"error");
+                ToastAlert.toastAlert(context,"error");
             }
         }
     }
@@ -61,7 +61,7 @@ public class SettingInfo {
 
         }
         catch(IOException ex) {
-          ToastAllert.toatallert(context,"Error get setting");
+          ToastAlert.toastAlert(context,"Error get setting");
           return  new Setting();
         }
         finally{
@@ -84,18 +84,18 @@ public class SettingInfo {
             String text = ObjectType.getJson(StaticModels.userInfo);
             fos = context.openFileOutput(FILE_USER,MODE_PRIVATE);
             fos.write(text.getBytes());
-            ToastAllert.toatallert(context,"your data is Save");
+            ToastAlert.toastAlert(context,"your data is Save");
         }
         catch(IOException ex) {
 
-            ToastAllert.toatallert(context,"error");
+            ToastAlert.toastAlert(context,"error");
         } finally{
             try{
                 if(fos!=null)
                     fos.close();
             }
             catch(IOException ex){
-                ToastAllert.toatallert(context,"error");
+                ToastAlert.toastAlert(context,"error");
             }
         }
     }
@@ -116,7 +116,7 @@ public class SettingInfo {
 
         }
         catch(IOException ex) {
-            ToastAllert.toatallert(context,"Error get your data");
+            ToastAlert.toastAlert(context,"Error get your data");
             return  null;
         }
         finally{
@@ -140,18 +140,18 @@ public class SettingInfo {
             String text = ObjectType.getJson(StaticModels.interlocutorInfo);
             fos = context.openFileOutput(FILE_INTERLOCUTOR,MODE_PRIVATE);
             fos.write(text.getBytes());
-            ToastAllert.toatallert(context,"your partner data is Save");
+            ToastAlert.toastAlert(context,"your partner data is Save");
         }
         catch(IOException ex) {
 
-            ToastAllert.toatallert(context,"error");
+            ToastAlert.toastAlert(context,"error");
         } finally{
             try{
                 if(fos!=null)
                     fos.close();
             }
             catch(IOException ex){
-                ToastAllert.toatallert(context,"error");
+                ToastAlert.toastAlert(context,"error");
             }
         }
     }
@@ -172,7 +172,7 @@ public class SettingInfo {
 
         }
         catch(IOException ex) {
-            ToastAllert.toatallert(context,"Error get interlocutor data");
+            ToastAlert.toastAlert(context,"Error get interlocutor data");
             return  null;
         }
         finally{

@@ -6,7 +6,7 @@ import android.widget.Switch;
 
 import com.example.mtchat_android.models.StaticModels;
 import com.example.mtchat_android.saveDeleteSetting.SettingInfo;
-import com.example.mtchat_android.toasts.ToastAllert;
+import com.example.mtchat_android.toasts.ToastAlert;
 
 public class GoToChatSwitchServise {
     private Switch aSwitch;
@@ -25,7 +25,7 @@ public class GoToChatSwitchServise {
                         SettingInfo.setSetting(context);
                     }
                     else {
-                        ToastAllert.toatallert(context,"\n" +
+                        ToastAlert.toastAlert(context,"\n" +
                                 "you have not saved data");
                         aSwitch.setChecked(false);
                     }
